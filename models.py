@@ -6,7 +6,7 @@ from django.db import models
 #from os import sys
 #print >> sys.stderr, "ciao"
 
-class Member(models.Model):
+class Associate(models.Model):
 	username	= models.CharField(max_length=100)
 	email		= models.EmailField()
 	first_name	= models.CharField(max_length=200)
@@ -21,7 +21,7 @@ class Member(models.Model):
 class Membership(models.Model):
 	start_date	= models.DateField(auto_now_add=True)
 	end_date	= models.DateField()
-	member		= models.ForeignKey(Member)
+	member		= models.ForeignKey(Associate)
 	
 	def __unicode__(self):
 		return self.member.username + ': '+ self.start_date.isoformat() + ' '+ self.end_date.isoformat()

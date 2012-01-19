@@ -127,8 +127,9 @@ INSTALLED_APPS = (
 	# Moudulo per gestire i menu e i breadcrumb
 #	'sitetree',
 	# Applicazioni dell'associazione
+	'south',
 	'op_associazione',
-	'op_associazione.easycms'
+	'op_associazione.easycms',
 )
 
 # A sample logging configuration. The only tangible logging

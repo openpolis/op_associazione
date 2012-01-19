@@ -1,5 +1,12 @@
 .DS_Store
 *.pyc
 static/*
+
+op_associazione.db.000
 op_associazione.db
+data.json
+
+easycms/migrations/
+migrations/
+
 site-packages
