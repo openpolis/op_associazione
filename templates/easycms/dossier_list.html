@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<header>
+	<h1>Lista dei Dossier</h1>
+</header>
+
+<dl>
+	{% for d in dossier_list %}
+	<dd><a href="{{ d.get_absolute_url }}">{{ d.title }}</a></dd>
+	<dt>{{ d.sub_title }}</dt>
+	{% endfor %}
+</dl>
+{% endblock %}

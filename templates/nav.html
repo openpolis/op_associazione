@@ -1,0 +1,33 @@
+{% load cms_extras %}
+<section id="navigation" class="container">        
+    <div class="row">
+        <nav class="prefixone eightcol">
+            <ul id="menu">
+                <li><a href="{% url about-us %}"{% is_active "about-us" "current" %}>Chi siamo</a></li>
+                <li>
+                    <a href="#"{% is_active "progetti" "current" %}>Progetti</a>
+                    <ul>
+						{% for p in projects %}
+						{% if progetto  %}
+                        <li><a href="{{ p.get_absolute_url }}" class="current">{{ p.title }}</a></li>
+						{% else %}
+						<li><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></li>
+						{% endif %}
+						{% endfor %}
+                    </ul>
+                </li>
+                <li><a href="{% url dossiers %}"{% is_active "dossiers" "current" %}>Dossier</a></li>
+                <li><a href="http://blog.openpolis.it">Openblog</a></li>
+                <li><a href="{% url sostienici %}"{% is_active "sostienici" "current" %}><img src="/static/img/icons/love.png" class="sostienici" />Sostienici</a></li>
+            </ul>
+        </nav>
+
+        <section id="search-box" class="threecol last">
+            <form action="/ricerca" method="POST">
+                <input type="search" name="search" placeholder="Cerca nel sito" />
+                <input type="submit" value="Cerca" />
+				{% csrf_token %}
+            </form>					
+        </section>            
+    </div>
+</section>

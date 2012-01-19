@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Risultati della ricerca</h1>
+<em>Testo ricercato : {{ request.POST.search }}</em>
+
+<ul>
+	{% for res in search_results %}
+	<li>{{ res }}</li>
+	{% endfor %}
+</ul>
+{% endblock %}

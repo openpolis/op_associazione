@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% load cms_extras %}
+	
+{% block content %}
+	<header>
+		{% block content_header %}
+		<h1><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></h1>
+		{% endblock %}
+		{% if page.sub_title %}
+		<h2>{{ page.sub_title }}</h2>
+		{% endif %}
+	</header>
+
+	<div>{{ page.text_html|shortcodes|safe }}</div>
+	
+{% endblock %}
+
+{% block sidebar %}
+	<aside>
+		<ul>
+			{% for aside in asides %}
+			<li>
+				<em>{{ aside.text }}</em>
+				<span class="author">{{ aside.author }}</span>
+			</li>
+			{% endfor %}
+		</ul>
+	</aside>
+{% endblock %}

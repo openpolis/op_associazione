@@ -1,0 +1,9 @@
+{% extends "easycms/page.html" %}
+
+{% block content_header %}
+	{% if page.logo %}
+	<a href="{{ page.get_absolute_url }}/"><img src="{{ page.logo.url }}" alt="{{ page.title }}" /></a>
+	{% else %}
+	<h1>{{ page.title }}</h1>
+	{% endif %}
+{% endblock %}
