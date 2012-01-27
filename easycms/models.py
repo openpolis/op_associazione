@@ -16,7 +16,7 @@ class Page(OrderedModel):
 		return self.title
 	
 	def get_absolute_url(self):
-		return self.title_slug
+		return '/' + self.title_slug
 		
 	def save(self):
 	        self.text_html = markdown(self.text)
@@ -28,8 +28,8 @@ class Page(OrderedModel):
 
 class PageAside(OrderedModel):
 	text		= models.TextField('Text')
-	author		= models.CharField('Author', max_length=200)
-	url			= models.URLField('Url', blank=True)
+	author		= models.CharField('Author', max_length=200, blank=True)
+	url			= models.CharField('Url', max_length=300, blank=True)
 	page		= models.ForeignKey(Page, related_name='asides')
 	def __unicode__(self):
 		return self.author
@@ -62,15 +62,15 @@ class Dossier(Page):
 	        super(Dossier, self).save()
 	
 class DossierLink(OrderedModel):
-	GREEN_ICON = 1
-	BLUE_ICON = 2
+	GREEN_ICON = 'download'
+	BLUE_ICON = 'forward'
 	ICON_CHOICES = (
 		( GREEN_ICON , 'Download' ),
 		( BLUE_ICON , 'Link')
 	)
 	
 	url			= models.URLField(verify_exists=True)
-	icon		= models.IntegerField(choices=ICON_CHOICES, default=GREEN_ICON )
+	icon		= models.CharField(choices=ICON_CHOICES, default=GREEN_ICON, max_length=20 )
 	text		= models.CharField('Link Text', max_length=200)
 	dossier		= models.ForeignKey(Dossier, related_name='links')
 	

@@ -41,11 +41,8 @@ class DossierLinkAdmin(admin.ModelAdmin):
 class PageAsideAdmin(admin.ModelAdmin):
 	list_display = ('author', 'url', 'order', 'order_link')
 
-#admin.site.register(Member) 
-#admin.site.register(Membership)
 admin.site.register(Page, PageAdmin) 
-admin.site.register(PageAside) 
-#admin.site.register(Person)
+admin.site.register(PageAside, PageAsideAdmin) 
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Dossier, DossierAdmin)
 admin.site.register(DossierLink, DossierLinkAdmin)

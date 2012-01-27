@@ -1,0 +1,28 @@
+{% extends "subscribe/associate_form.html" %}
+
+{% block associate_extra %}
+
+<h2>Dati dell'Organizzazione</h2>
+
+<div class="fieldWrapper">
+	<label for="{{ associate_form.denomination.html_name }}">*{{ associate_form.denomination.label }}</label>
+	<p>{{ associate_form.denomination }}</p>
+	{{ associate_form.denomination.errors }}
+</div>
+
+<div class="fieldWrapper">
+	<label for="{{ associate_form.type_of_organization.html_name }}">{{ associate_form.type_of_organization.label }}</label>
+	<p>{{ associate_form.type_of_organization }}</p>
+	{{ associate_form.type_of_organization.errors }}
+</div>
+
+<div class="fieldWrapper">
+	<label for="{{ associate_form.vat_code.html_name }}">*{{ associate_form.vat_code.label }}</label>
+	<p>{{ associate_form.vat_code }}</p>
+	{{ associate_form.vat_code.errors }}
+</div>
+
+{% endblock %}
+
+{% block associate_details_title %}Dati personali del rappresentante legale{% endblock %}
+{% block main_address_title %}Indirizzo (sede legale){% endblock%}

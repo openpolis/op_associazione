@@ -1,0 +1,11 @@
+{% extends "subscribe/associate_form.html" %}
+
+{% block associate_contact_extra %}
+
+<div class="fieldWrapper">
+	<label for="{{ associate_form.charge.html_name }}">{{ associate_form.charge.label }}</label>
+	<p>{{ associate_form.charge }}</p>
+	{{ associate_form.charge.errors }}
+</div>
+
+{% endblock %}

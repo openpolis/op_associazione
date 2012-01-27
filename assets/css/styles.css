@@ -1,11 +1,11 @@
 /* ============================== */
 /* ! Layout for desktop version   */
 /* ============================== */
-
+	* { outline:none; }
 	body {
 		margin: 0;
         padding: 0;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Georgia;
         font-size: 13px; 
         background-color: #fff;
     }
@@ -38,10 +38,15 @@
 /*------------------------------------*\
 	GLOBALS
 \*------------------------------------*/
+
     /* list separator: http://www.alistapart.com/articles/taminglists/*/
+	ul {list-style: none;}
     ul.inline-list li:before { content: "\0020 \0020 \0020 \007C \0020"; }	
-    ul.inline-list li.first:before { content: " "; }
-    
+    ul.inline-list li.first:before, ul#breadcrumb li.first:before { content: " "; }
+	ul#breadcrumb li:before { content: "\0020 \0020 \0020 \002F \0020"; }	
+	ul#breadcrumb { color: #999; margin-top: 5px; font-size:0.9em; } 
+	ul#breadcrumb li { margin-right:0;  display: inline-block; font-weight: bold; }
+		
     #op-logo { vertical-align: bottom; }
     header.container { margin-bottom: 10px; margin-top: 10px; }
     /* access menu */
@@ -54,7 +59,7 @@
     header.container ul li a { }
     
     /* fixed height for navigation menu */
-    section#navigation .row { min-height: 36px; overflow: visible; }
+    section#navigation .row { min-height: 35px; overflow: visible; }
     
     /* search box */
     section#navigation #search-box { padding-top: 4px; text-align: right; }
@@ -64,19 +69,58 @@
     section#payoff { padding-bottom: 20px; padding-top: 20px; }
     
     /* content */
-    article#main { padding-bottom: 20px; padding-top: 20px; }
+	/*h1, h2, h3 { font-family: 'Merriweather', serif; }*/
+	h1 { font-family: arial, verdana, sans-serif; font-weight: normal; letter-spacing: -1px; }
+	h2, h3, h4 { font-family: Georgia; font-weight: normal; }
+	
+    article#main { padding-bottom: 20px; padding-top: 20px; color:#333; }
 	article#main p { padding: 10px 0; }
-	article#main h1 { font-size: 1.4em; color: #000; }
-	article#main h2 { font-size: 1.2em; color: #CDCDCD; }
-    
+	article#main h1, article#main header h2 { font-size: 1.6em; color: #000; margin-top:15px; }
+	article#main h2 { font-size: 1.4em; color: #454545; }
+	
+	article#main h1 { font-size: 28px; line-height: 24px; }
+	article#main aside p {  font-family: arial, verdana, sans-serif;  }
+	
+    article ul { margin-bottom:8px; line-height: 1.5em; }
+	article ul li, article dd { padding-left: 1em; background: transparent url('../img/dot-big.png') 0 .6em no-repeat; }
+	
+	article em { font-style: normal; text-decoration: underline; }
+	
+	article #dossier-logo { float:left; margin-right: 10px; }
+	article #project-logo { margin: 10px 0; }
+	article#main header h2 { font-size: 1.2em; margin-top: 5px; }
+	
+	article aside { margin: 0 auto; }
+	article aside li { background: none; }
+	article aside header { font-size: 0.7em; margin-bottom:30px;  }
+	article aside li { color: #989797; margin-bottom: 20px; }
+	article aside li .author { display:block; text-align:right; color: #333; }
+	
+	article dl { font-size: 1.5em; }
+	article dt { margin: 0 0 10px 40px;  }
+	
+	a.button-download, a.button-forward {
+		background: transparent left center no-repeat;
+		padding: 10px 30px 0 60px;
+		min-height: 50px;
+		display: inline-block;
+		font-size: 14px;
+		font-weight: bold;
+		float:left;
+		text-decoration: underline;
+	}
+	a.button-download { color:#147542 !important; background-image: url(/static/img/icons/button-green.png); }
+	a.button-forward { color: #296db3 !important; background-image: url(/static/img/icons/button-blue.png); }
+	
     /* global styles : FORMs */
-    input {
+    input, select {
         color: #444444; background: #F3F3F3;
         font: bold 11px/23px Helvetica,Arial,sans-serif;
         text-decoration: none; text-shadow: 0 1px 0 #FFFFFF;
         border: 1px solid #D9D9D9;
         padding:0; margin: 0;
     }
+	select,
     input[type="text"], input[type="search"],input[type="email"], 
     button, input[type="reset"], input[type="button"], input[type="submit"]
     {
@@ -107,7 +151,7 @@
         #sub-footer { text-align: center; margin-top: 25px; }
         #sub-footer ul { list-style: none inside; }
         #sub-footer ul li { display: inline-block;}
-	
+
 	footer ul, ul.dotted-list { list-style-type:none; }	
 	footer ul li, ul.dotted-list li { padding-left: 0.6em; background: transparent url('../img/dot.png') 0 .6em no-repeat; }
 	footer p, footer ul { margin-bottom:8px; line-height: 1.5em; }
@@ -137,8 +181,24 @@
     span.wordpress {          background-position: -150px -0px;   }
     span.wordpress:hover {    background-position: -150px -27px;  }
     
-    
-    
+    /* http://flowplayer.org/tools/demos/tooltip/form.html
+     * simple css-based tooltip */
+	.tooltip {
+		background-color:#000;
+		border:1px solid #fff;
+		padding:10px 15px;
+		width:200px;
+		display:none;
+		color:#fff;
+		text-align:left;
+		font-size:12px;
+
+		/* outline radius for mozilla/firefox only */
+		-moz-box-shadow:0 0 10px #000;
+		-webkit-box-shadow:0 0 10px #000;
+	}
+	
+	
 
 /* ============================= */
 /* ! Layout for mobile version   */

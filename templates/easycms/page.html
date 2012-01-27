@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 {% load cms_extras %}
+{% load markup %}
 	
 {% block content %}
-	<header>
+	<header class="clearfix">
 		{% block content_header %}
-		<h1><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></h1>
+		<h1>{{ page.title }}</h1>
 		{% endblock %}
+		
 		{% if page.sub_title %}
 		<h2>{{ page.sub_title }}</h2>
 		{% endif %}
@@ -13,17 +15,39 @@
 
 	<div>{{ page.text_html|shortcodes|safe }}</div>
 	
+	{% block content_footer %}{% endblock %}
+	
 {% endblock %}
 
 {% block sidebar %}
 	<aside>
+		{% if page.asides.all|length > 0 %}
+		{% block sidebar_header %}{% endblock %}
 		<ul>
-			{% for aside in asides %}
-			<li>
-				<em>{{ aside.text }}</em>
-				<span class="author">{{ aside.author }}</span>
+			{% for aside in page.asides.all %}
+			<li>{{ aside.text|markdown }}
+				{% if aside.author %}
+				<span class="author">- {{ aside.author }}</span>
+				{% endif %}
 			</li>
 			{% endfor %}
 		</ul>
+		{% else %}
+		<header>
+			<h1>Su di noi</h1>
+			<h2>Il dossier ripreso dai media</h2>
+		</header>
+		<ul>
+			<li><p>"According to Openpolis, 
+a research group, the average age of the cabinet is, at 64, 
+the highest in the European Union and also in the history 
+of the Italian republic."</p>
+				<span class="author">- The Economist</span>
+			</li>
+			<li><p>"Il governo più vecchio della Storia repubblicana e dell’Europa dei 27, lontano dalla parità di rappresentanza fra uomini e donne e che include tre fra i dieci ministri più anziani dell’Unione. E’ quanto emerge da “I tecno-professori – il rapporto sulla composizione del Governo Monti per età e genere realizzato dall’associazione Openpolis."</p>
+				<span class="author">- Il Fatto quotidiano</span>
+			</li>
+		</ul>
+		{% endif %}
 	</aside>
 {% endblock %}

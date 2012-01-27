@@ -16,14 +16,26 @@
 						{% endfor %}
                     </ul>
                 </li>
-                <li><a href="{% url dossiers %}"{% is_active "dossiers" "current" %}>Dossier</a></li>
+                <li>
+					<a href="#"{% is_active "dossier" "current" %}>Dossier</a>
+					<ul>
+						{% for d in dossiers %}
+						{% if dossier  %}
+                        <li><a href="{{ d.get_absolute_url }}" class="current">{{ d.title }}</a></li>
+						{% else %}
+						<li><a href="{{ d.get_absolute_url }}">{{ d.title }}</a></li>
+						{% endif %}
+						{% endfor %}
+                    </ul>
+	
+				</li>
                 <li><a href="http://blog.openpolis.it">Openblog</a></li>
-                <li><a href="{% url sostienici %}"{% is_active "sostienici" "current" %}><img src="/static/img/icons/love.png" class="sostienici" />Sostienici</a></li>
+                <li><a href="{% url subscribe %}"{% is_active "subscribe" "current" %}{% is_active "subscribe-module" "current" %}><img src="/static/img/icons/love.png" class="sostienici" />Sostienici</a></li>
             </ul>
         </nav>
 
         <section id="search-box" class="threecol last">
-            <form action="/ricerca" method="POST">
+            <form action="/ricerca/" method="POST">
                 <input type="search" name="search" placeholder="Cerca nel sito" />
                 <input type="submit" value="Cerca" />
 				{% csrf_token %}

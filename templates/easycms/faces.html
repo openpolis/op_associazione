@@ -1,0 +1,47 @@
+{% extends "easycms/page.html" %}
+{% load cms_extras %}
+	
+{% block sidebar %}
+	<aside id="accordion">
+		{% for aside in asides %}
+		<h3><a href="#"><img src="{{ aside.url }}" alt="{{ aside.author }}" /></a></h3>
+		<div><p>{{ aside.text }}</p></div>
+		{% endfor %}
+	</aside>
+{% endblock %}
+
+{% block js_footer %}
+	{{ block.super }}
+	<script type="text/javascript" src="/static/js/jquery-ui-1.8.17.accordion.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.tools.min.js"></script>
+	
+	<script>
+	$(function() {
+		$( "#accordion" ).accordion({
+			event: "mouseover",
+			collapsible: true,
+			active: false
+		}).mouseleave(function(){ $(this).accordion( "activate" , false ) });
+		$('.tips').tooltip({ 
+			// place tooltip on the right edge
+			position: "center right",
+
+			// a little tweaking of the position
+			offset: [10, 10],
+
+			// use the built-in fadeIn/fadeOut effect
+			effect: "slide",
+
+			// custom opacity setting
+			opacity: 0.8});
+	});
+	</script>
+{% endblock %}
+
+{% block css_styles %}
+<style type="text/css">
+#accordion { width:222px; }
+#accordion div { background-color: #fbec6d;  }
+#accordion div p { padding: 5px; }
+</style>
+{% endblock %}

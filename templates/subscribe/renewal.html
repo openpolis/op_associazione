@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+	<div class="yellow">
+		<h1>Rinnova l'associazione ad Openpolis</h1>
+		
+		{% if associate %}
+		<p>
+			{{ associate.first_name|capfirst }}, grazie. Ora poi versare la quota associativa di <strong>{{ associate_fee }} euro</strong>
+			<br />
+			C'è ancora un passo da fare e riguarda il metodo di pagamento.
+			<br />
+			Puoi scegliere tra il bonifico bancario e Paypal/carta di credito.
+		</p>
+
+		<aside class="orange">
+			<h2>Bonifico bancario</h2>
+			<small>(metodo preferito perché senza commissioni)</small>
+
+			<blockquote>
+				Associazione Openpolis<br /> 
+				Banca Popolare Etica scarl<br />
+				IT47 C050 1803 2000 0000 0131 034
+			</blockquote>
+
+		</aside>
+
+		<aside class="orange">
+			<h2>Carta di credito o Paypal</h2>
+			<small>Paga la quota associativa tramite il tuo conto Paypal o carta di credito</small>
+
+			PAGA ADESSO
+		</aside>
+		
+		{% else %}
+		
+		<form action="{% url subscribe-renewal-request %}" method="POST" id="renewal_request_form">
+			{% csrf_token %}
+			<div>
+				<label for="email">Inserisci la tua email</label>
+				{{ form.email }}
+				{{ form.email.errors }}
+			</div>
+			<small>Una volta inviato il modulo riceverai una email con il collegamento per effettuare il rinnovo</small>
+			<br /><br />
+			<input type="submit" value="Invia" id="submit_button" />
+			
+		</form>
+		
+		{% endif %}
+	</div>
+
+{% endblock %}
+
+{% block css_styles %}
+<style type="text/css">
+	#renewal_request_form div { margin: 10px 20px;}
+	#renewal_request_form .errorlist li { background: none; color: red;}
+	#submit_button { font-size:1.1em; padding: 5px 10px; height:auto;}
+	article aside blockquote { font-family: Arial; font-size:1.3em; font-weight:bold; }
+	article .yellow { padding: 20px; background-color:#fbee7d; }
+	article aside.orange {
+		background-color: #fcf7c8;
+		margin: 15px 0;
+		padding: 5px 10px;
+	}
+</style>
+{% endblock %}

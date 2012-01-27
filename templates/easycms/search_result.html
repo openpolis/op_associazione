@@ -1,12 +1,15 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Risultati della ricerca</h1>
-<em>Testo ricercato : {{ request.POST.search }}</em>
+<header>
+	<h1>Risultati della ricerca : <em class="search-text">{{ search_text }}</em></h1>
+</header>
 
-<ul>
+<dl>
 	{% for res in search_results %}
-	<li>{{ res }}</li>
+	<dd><a href="{{ res.get_absolute_url }}">{{ res.title }}</a></dd>
+	<dt>{{ res.sub_title }}</dt>
 	{% endfor %}
-</ul>
+</dl>
+
 {% endblock %}

@@ -75,7 +75,7 @@
 {    
     padding: 10px;
 	height: 10px;
-	width: 170px;
+	min-width: 170px;
 	height: auto;
     line-height: 1;
     display: block;
@@ -96,7 +96,7 @@
 
 #menu ul a:hover
 {
-    background-color: #DEDEDE;
+    background-color: #FFF;
 }
 
 #menu ul li:first-child > a
@@ -115,7 +115,7 @@
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 8px solid #DEDEDE;
+    border-bottom: 8px solid #FFF;
 }
 
 #menu ul ul li:first-child a:after
@@ -127,17 +127,17 @@
     border-left: 0;	
     border-bottom: 5px solid transparent;
     border-top: 5px solid transparent;
-    border-right: 8px solid #DEDEDE;
+    border-right: 8px solid #FFF;
 }
 
 #menu ul li:first-child a:hover:after
 {
-    border-bottom-color: #DEDEDE; 
+    border-bottom-color: #FFF; 
 }
 
 #menu ul ul li:first-child a:hover:after
 {
-    border-right-color: #DEDEDE; 
+    border-right-color: #FFF; 
     border-bottom-color: transparent; 	
 }
 

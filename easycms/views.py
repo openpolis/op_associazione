@@ -12,11 +12,13 @@ class SearchForm(forms.Form):
 	search = forms.CharField(max_length=30, min_length=3)
 
 def search_result(request):
+	from django.db.models import Q
+	
 	if request.method == 'POST' :
 		form = SearchForm(request.POST)
 		if form.is_valid() :
 			# Process the data in form.cleaned_data
-			results = Page.objects.filter(text__icontains=form.cleaned_data['search'])
+			results = Page.objects.filter(Q(text__icontains=form.cleaned_data['search']) | Q(title__icontains=form.cleaned_data['search']))
 			return render_to_response('easycms/search_result.html', {
 				'search_text' : form.cleaned_data['search'],
 				'search_results' : results
@@ -28,23 +30,16 @@ def page(request, page_slug=None):
 	try:
 		page = Page.objects.get(title_slug=page_slug)
 	except Page.DoesNotExist:
-		return render_to_response('easycms/home.html', {
-			
-		},context_instance=RequestContext(request))
-#		raise Http404
-#	page = get_object_or_404(Page, title_slug=page_slug)
-	return render_to_response('easycms/page.html', 	{
+		return render_to_response('easycms/home.html', {},context_instance=RequestContext(request))
+	template = 'page'
+	if ( page.template != 'default' ):
+		template = 'easycms/' + page.template + '.html'
+	return render_to_response( template , 	{
 			'page_slug' : page_slug,
 			'page' : page,
 			'asides' : page.asides.all()
 		},context_instance=RequestContext(request))
-#	t = loader.get_template('easycms/page.html')
-#	c = Context({
-#		'page_slug' : page_slug,
-#		'page' : page,
-#		'asides' : page.asides.all()
-#	})
-#	return HttpResponse(t.render(c))
+
 
 def dossier( request, page_slug=None ):
 	page = get_object_or_404(Dossier, title_slug=page_slug)

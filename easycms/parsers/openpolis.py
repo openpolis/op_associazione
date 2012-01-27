@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+#from op_associazione.tools import op_realtime
+
 def parse(kwargs):
 	id = kwargs.get('id')
 	align = kwargs.get('align', 'left')
@@ -24,7 +26,7 @@ def parse(kwargs):
 	}
 	table_rows = ''
 	for field, nb in stats.iteritems():
-		table_rows += u'<tr><th>%s</th><td>%s</td></tr>' % (field, format(nb, ',d'))
+		table_rows += u'<tr title="titolo" class="tips"><th>%s</th><td>%s</td></tr>' % (field, format(nb, ',d'))
 	
 	html_table = u"""
 		<table id="op_realtime">
@@ -38,8 +40,3 @@ def parse(kwargs):
 		</table>
 	""" % table_rows
 	return css_styles + html_table
-	
-#		html += u'<tr style=""><td style="background-color:#e8da65;padding:15px 5px;">'+ field +'</td><td style="background-color:#fbec6d">'+ format(nb, ',d') +'</td></tr>'
-	
-#	html += '</tbody></table>'
-	return css_styles + (html_table + table_rows)

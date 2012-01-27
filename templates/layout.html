@@ -10,8 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
-    <!-- HTML5 ✰ Boilerplate resetter -->
+	
+	<!-- HTML5 ✰ Boilerplate resetter -->
     <link rel="stylesheet" href="/static/css/reset.css" />
 
     <!-- 1140px Grid styles for IE -->
@@ -23,6 +23,8 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="/static/css/styles.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/static/css/menu.css" type="text/css" media="screen" />
+	<!-- Google Font -->
+	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,900' rel='stylesheet' type='text/css'>
 
     <!--css3-mediaqueries-js - http://code.google.com/p/css3-mediaqueries-js/ - Enables media queries in some unsupported browsers-->
     <script type="text/javascript" src="/static/js/css3-mediaqueries.js"></script>
@@ -30,10 +32,11 @@
     <!--modernizr-2.0.6.js - http://www.modernizr.com -  is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites. -->
     <script type="text/javascript" src="/static/js/modernizr-2.0.6.js"></script>
 
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="/static/favicon.ico" />
     
     <!--  Skeleton styles  -->
     <style type="text/css">
+		/*a, a:visited { color: #d10423; }*/
 		a, a:visited { color: #d10423; }
 		a:hover { text-decoration: underline; }
         #navigation.container { background-color: #d10423; }
@@ -78,47 +81,34 @@
 		
 		#payoff { color: #FFF; }
 		#payoff #splash { margin-bottom: 20px; }
-		#payoff .sublogo { margin-bottom: 5px; }
+		#payoff .sublogo { margin-bottom: 10px; }
 		#payoff .arrow { float:right; margin: 5px; }
+		#payoff p { padding-right: 10px; }
 		
 		#extra ul { margin-bottom: 10px; }
-		#extra li { list-style-type: none;
-		list-style-position: inside;  border-bottom: 1px solid #afac55; padding:5px 0;  }
+		#extra ul li { list-style-type: none; list-style-position: inside;  border-bottom: 1px solid #afac55; padding:5px 0;  }
 		#extra p { line-height: 30px; }
-        /*section.container .row p {
-            background: none repeat scroll 0 0 #DEDEDE;
-            color: gray;
-            line-height: 100px;
-            margin: 20px 0 0;
-            text-align: center;
-            font-weight: bold;
-            font-size: 25px;
-        }*/
+		#breadcrumb li { border-bottom:0; }
     </style>
+	{%  block css_styles %}{% endblock %}
+
 </head>
 <body><section class="wrapper">    
     
     <!-- Main Header -->
     <header class="container">        
         <div class="row">            
-            <h1 class="ninecol">
+            <h1 class="twelvecol">
                 <a href="/"><img src="/static/img/logo.png" alt="Titolo" id="logo" /></a>
-            </h1>            
-            <ul class="threecol last inline-list">
-                <li class="first"><a href="#">Entra</a></li><li><a href="#">Registrati</a></li>
-            </ul>            
+            </h1>                  
         </div>
     </header>
     <!-- /Main Header -->
     
-    <!-- Main Navigation -->
     {% include "nav.html"%}
-    <!-- /Main Navigation -->
-
-    <!--  Payoff Container  -->
+   
     {% block payoff %}{% endblock %}
-    <!--  /Payoff Container  -->
-
+    
 	{% block article %}
     <!--  Main Content -->
     <article id="main" class="container">       
@@ -130,13 +120,15 @@
     <!--  /Main Content -->
 	{% endblock %}
     
-	<!--  Extra Content -->
     {% block extra_content %}{% endblock %}
-	<!--  /Extra Content -->
 	
-	<!--  Main Footer -->
-    {% include "footer.html"%}
-	<!--  /Main Footer -->
+	{% include "footer.html"%}
 	
-</section></body>
+</section>
+	
+	{% block js_footer %}
+	<script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+	{% endblock %}
+	
+</body>
 </html>

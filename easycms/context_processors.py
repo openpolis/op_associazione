@@ -1,9 +1,10 @@
 from django.template import RequestContext
 from django.core.urlresolvers import resolve
-from op_associazione.easycms.models import Project
+from op_associazione.easycms.models import Project, Dossier
 
 def navigation(request):
-    return {
+	return {
         'projects' : Project.objects.all(),
-		'current_route_name' : resolve(request.get_full_path()).url_name
+		'dossiers' : Dossier.objects.all(),
+		'current_route_name' : resolve(request.path).url_name
     }

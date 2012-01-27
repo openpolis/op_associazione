@@ -1,14 +1,36 @@
 {% extends "easycms/page.html" %}
 
 {% block content_header %}
-	<img src="/static/img/icons/minidossier.png" alt="MiniDossier di OpenPolis" />
+	<img src="/static/img/icons/minidossier.png" id="dossier-logo" alt="MiniDossier di OpenPolis" />
 	<h1><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></h1>
 {% endblock %}
 
-{% block sidebar %}
-<h1>Su di noi</h1>
-<h2>Il dossier ripreso dai media</h2>
+{% block sidebar_header %}
+<header>
+	<h1>Su di noi</h1>
+	<h2>Il dossier ripreso dai media</h2>
+</header>
+{% endblock %}
 
-{{ block.super }}
+
+
+{% block payoff %}
+<div class="container">
+	<div class="row">
+		<div class="twelvecol">
+			<ul id="breadcrumb">
+				<li class="first">Dossier</li>
+				<li>{{ page.title }}</li>
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block content_footer %}
+
+	{% for link in page.links.all %}
+	<a href="{{ link.url }}" class="button-{{ link.icon }}">{{ link.text|safe }}</a>
+	{% endfor %}
 
 {% endblock %}
