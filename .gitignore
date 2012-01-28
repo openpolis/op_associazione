@@ -9,7 +9,11 @@ data.json
 easycms/migrations/
 migrations/
 
-settings_*
-urls_*
+settings_staging.py
+settings_local.py
+settings_prod.py
+urls_staging.py
+urls_local.py
+urls_prod.py
 apache
 site-packages
