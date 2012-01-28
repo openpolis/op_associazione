@@ -32,7 +32,7 @@ def renewal_request(request):
 		if form.is_valid() :
 			email = form.cleaned_data.get("email")
 			associate = form.associate
-			last_membership = associate.membership_set.()
+			last_membership = associate.membership_set()
 			membership = Membership()
 			
 	else : 
