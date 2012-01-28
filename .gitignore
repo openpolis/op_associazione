@@ -1,6 +1,6 @@
 .DS_Store
 *.pyc
-static/*
+web/static/*
 
 op_associazione.db.000
 op_associazione.db
@@ -9,4 +9,11 @@ data.json
 easycms/migrations/
 migrations/
 
+settings_staging.py
+settings_local.py
+settings_prod.py
+urls_staging.py
+urls_local.py
+urls_prod.py
+apache
 site-packages
