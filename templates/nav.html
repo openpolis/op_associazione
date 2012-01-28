@@ -30,7 +30,14 @@
 	
 				</li>
                 <li><a href="http://blog.openpolis.it">Openblog</a></li>
-                <li><a href="{% url subscribe %}"{% is_active "subscribe" "current" %}{% is_active "subscribe-module" "current" %}><img src="/static/img/icons/love.png" class="sostienici" />Sostienici</a></li>
+                <li>
+					<a href="#"{% is_active "subscribe" "current" %}><img src="/static/img/icons/love.png" class="sostienici" />Sostienici</a>
+					<ul>
+						<li><a href="{% url subscribe %}">Diventa socio</a></li>
+						<li><a href="{% url subscribe-other page_slug='dona' %}">Fai una donazione</a></li>
+						<li><a href="{% url subscribe-other page_slug='collabora' %}">Collabora con noi</a></li>
+					</ul>
+				</li>
             </ul>
         </nav>
 

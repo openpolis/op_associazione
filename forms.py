@@ -1,57 +1,77 @@
+# -*- coding: utf-8 -*-
 from django import forms
 from op_associazione.models import Address, Membership, Citizen, Politician, Organization, Associate
 
 class AddressForm(forms.ModelForm):
-	class Meta:
-		model = Address
+    class Meta:
+        model = Address
+        widgets = {
+            'civic_nb': forms.TextInput(attrs={'size': 10}),
+            'zip_code': forms.TextInput(attrs={'size': 10})
+        }
 
 class MembershipForm(forms.ModelForm):
-	class Meta:
-		model = Membership
-		fields = ('fee', 'public_subscription', 'type_of_membership')	
+    class Meta:
+        model = Membership
+        fields = ('fee', 'public_subscription', 'type_of_membership')
+        
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        fee = cleaned_data.get("fee")
+        member_type = cleaned_data.get("type_of_membership")
+        minimum_fee = Membership.get_minimum_fee(member_type)
+        
+        if fee and member_type :
+            if fee < minimum_fee:
+                msg = u"L'importo minimo come %s è di %d euro" % (Membership.get_typename(member_type), minimum_fee)
+                self._errors["fee"] = self.error_class([msg])
+                del cleaned_data["fee"]
+        return cleaned_data  
 
-# generic META for Associates form
+# generic Associates form
 class AssociateForm(forms.ModelForm):
-#	formfield_callback = make_custom_datefield
-	accept_policy = forms.BooleanField(help_text='Approvazione statuto')
-	accept_privacy_policy = forms.BooleanField(help_text='Approvazione trattamento dati personali')
-#	membership_type = forms.IntegerField(widget=forms.Select(choices=Membership.MEMBER_TYPE[1:3]))
-	class Meta():
-		widgets = {
-				'gender': forms.RadioSelect(),
-				'notes': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
-				'charge': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
-				'birth_date': forms.DateInput(format='%d/%m/%Y', attrs={'class':'datepicker', 'readonly':'true'}),
-			}
-		exclude = ('legal_address', 'expedition_address')
-	
+    accept_policy = forms.BooleanField(help_text='Approvazione statuto')
+    accept_privacy_policy = forms.BooleanField(help_text='Approvazione trattamento dati personali')
+    
+    def clean_fiscal_code(self):
+        import re
+        cc = self.cleaned_data.get('fiscal_code').upper().replace(' ', '')
+        pattern = r'^[A-Z]{6}[\d]{2}[A-Z][\d]{2}[A-Z][\d]{3}[A-Z]$'
+        
+        if not re.match(pattern, cc):
+            raise forms.ValidationError("Il codice fiscale inserito non è valido")
+        self.cleaned_data['fiscal_code'] = cc
+        return cc
+    
+    
+    class Meta():
+        widgets = {
+            'gender': forms.RadioSelect(),
+            'notes': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
+            'charge': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
+            'birth_date': forms.DateInput(format='%d/%m/%Y', attrs={'class':'datepicker', 'readonly':'true'}),
+        }
+        exclude = ('legal_address', 'expedition_address', 'hash_key')
+
 class CitizenForm(AssociateForm):
-	class Meta(AssociateForm.Meta):
-		model = Citizen
-#		exclude = ('phone_number', 'email', 'wants_newsletter', 'legal_address', 'expedition_address')
-		
+    class Meta(AssociateForm.Meta):
+        model = Citizen
+
 class PoliticianForm(AssociateForm):
-	class Meta(AssociateForm.Meta):
-		model = Politician
-	
+    class Meta(AssociateForm.Meta):
+        model = Politician
+
 class OrganizationForm(AssociateForm):
-	class Meta(AssociateForm.Meta):
-		model = Organization
+    class Meta(AssociateForm.Meta):
+        model = Organization
 
-class RenewalForm(forms.Form):
-	email = forms.EmailField()
-	def clean_email(self):
-		email = self.cleaned_data['email']
-		try :
-			self.associate = Associate.objects.get(email=email)
-		except Associate.DoesNotExist:
-			raise forms.ValidationError("Email non associata a nessun utente.")
-		return email
-
-class ContactForm(forms.Form):
-	email = forms.EmailField()
-	email_login = forms.BooleanField(help_text='Uso questo indirizzo per effettuare il login nei siti openpolis.it e openparlamento.it', required=False)
-	phone_number = forms.CharField(max_length=100,min_length=3)
-	wants_newsletter = forms.BooleanField(required=False, help_text='Voglio ricevere la newsletter via email')
-	policy_accept = forms.BooleanField(help_text='Approvo i principi e le regole dello statuto dell\'Associazione Openpolis')
-	privacy_accept = forms.BooleanField(help_text='Autorizzo l\'Associazione Openpolis al trattamento dei miei dati personali per gli scopi indicati nell\'apposita informativa')
+# Form per la richiesta di rinnovo
+class RenewalRequestForm(forms.Form):
+    email = forms.EmailField()
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        try :
+            self.associate = Associate.objects.get(email=email)
+        except Associate.DoesNotExist:
+            raise forms.ValidationError("Email non associata a nessun utente.")
+        return email

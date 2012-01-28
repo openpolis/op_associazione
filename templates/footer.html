@@ -4,14 +4,14 @@
         <nav class="threecol">
             <h3>L'Associazione Openpolis</h3>
             <ul>
-                <li><a href="http://www.openpolis.it/chisiamo">Chi siamo e cosa facciamo</a></li>
+                <li><a href="http://www.openpolis.it/chi-siamo/">Chi siamo e cosa facciamo</a></li>
                 <li><a href="http://www.openpolis.it/faq">FAQ</a></li>
             </ul>
             <h3>Sostienici</h3>
             <ul>
-                <li><a href="http://associazione.openpolis.it/contribuisci/diventa-socio">Diventa socio</a></li>
-                <li><a href="http://associazione.openpolis.it/contribuisci/fai-una-donazione">Fai una donazione</a></li>
-                <li><a href="http://associazione.openpolis.it/contribuisci/collabora-con-noi">Collabora con noi</a></li>
+                <li><a href="http://www.openpolis.it/sostienici/">Diventa socio</a></li>
+                <li><a href="http://www.openpolis.it/sostienici/dona/">Fai una donazione</a></li>
+                <li><a href="http://www.openpolis.it/sostienici/collabora/">Collabora con noi</a></li>
             </ul>
         </nav>
         <nav class="threecol">
@@ -59,37 +59,5 @@
             <li><a href="http://indice.openpolis.it/"><img src="/static/img/footers/indiceproduttivita.png" alt="L'Indice di Produttività Parlamentare" title="L'Indice di Produttività Parlamentare" /></a></li>
         </ul>            
     </nav>
-	
-	{% if debug %}
-	<div id="debug">
-	  <h2>Queries</h2>
-	  <p>
-	    {{ sql_queries|length }} Quer{{ sql_queries|pluralize:"y,ies" }}
-	    {% ifnotequal sql_queries|length 0 %}
-	    (<span style="cursor: pointer;" onclick="var s=document.getElementById('debugQueryTable').style;s.display=s.display=='none'?'':'none';this.innerHTML=this.innerHTML=='Show'?'Hide':'Show';">Show</span>)
-	    {% endifnotequal %}
-	  </p>
-	  <table id="debugQueryTable" style="display: none;">
-	    <col width="1"></col>
-	    <col></col>
-	    <col width="1"></col>
-	    <thead>
-	    <tr>
-	      <th scope="col">#</th>
-	      <th scope="col">SQL</th>
-	      <th scope="col">Time</th>
-	    </tr>
-	    </thead>
-	    <tbody>
-	    {% for query in sql_queries %}<tr class="{% cycle odd,even %}">
-	      <td>{{ forloop.counter }}</td>
-	      <td>{{ query.sql|escape }}</td>
-	      <td>{{ query.time }}</td>
-	    </tr>{% endfor %}
-	    </tbody>
-	  </table>
-	</div>
-	{% endif %}
-	
 </footer>
 <!--  /Main Footer -->

@@ -45,7 +45,7 @@
     ul.inline-list li.first:before, ul#breadcrumb li.first:before { content: " "; }
 	ul#breadcrumb li:before { content: "\0020 \0020 \0020 \002F \0020"; }	
 	ul#breadcrumb { color: #999; margin-top: 5px; font-size:0.9em; } 
-	ul#breadcrumb li { margin-right:0;  display: inline-block; font-weight: bold; }
+	ul#breadcrumb li { margin-right:0;  display: inline-block; font-weight: bold; border-bottom:0 !important; }
 		
     #op-logo { vertical-align: bottom; }
     header.container { margin-bottom: 10px; margin-top: 10px; }

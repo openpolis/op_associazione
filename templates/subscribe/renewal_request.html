@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+	<div class="yellow">
+		<h1>Rinnova l'associazione ad Openpolis</h1>
+		
+		{% if associate %}
+		
+		<p>Ti abbiamo inviato una email contenente l'indirizzo per poter rinnovare l'associazione ad Openpolis</p>
+		
+		{% else %}
+		
+		<form action="{% url subscribe-renewal-request %}" method="POST" id="renewal_request_form">
+			{% csrf_token %}
+			<div>
+				<label for="email">Inserisci la tua email</label>
+				{{ form.email }}
+				{{ form.email.errors }}
+			</div>
+			<small>Una volta inviato il modulo riceverai una email con il collegamento per effettuare il rinnovo</small>
+			<br /><br />
+			<input type="submit" value="Invia" id="submit_button" />
+			
+		</form>
+		
+		{% endif %}
+	</div>
+
+{% endblock %}
+
+{% block css_styles %}
+<style type="text/css">
+	#renewal_request_form div { margin: 10px 20px;}
+	#renewal_request_form .errorlist li { background: none; color: red;}
+	#submit_button { font-size:1.1em; padding: 5px 10px; height:auto;}
+	article aside blockquote { font-family: Arial; font-size:1.3em; font-weight:bold; }
+	article .yellow { padding: 20px; background-color:#fbee7d; }
+	article aside.orange {
+		background-color: #fcf7c8;
+		margin: 15px 0;
+		padding: 5px 10px;
+	}
+	form#subscribe_form h2 { clear:left; padding-top:20px; }
+	.fieldWrapper { min-height: 30px; padding: 5px; clear:both; margin-bottom:10px;  }
+	article#main .fieldWrapper > p { padding: 4px 0 ;}
+	.fieldWrapper label { float:left; width:150px; line-height:15px; font-weight: bold; }
+	.fieldWrapper.gray, .fieldWrapper.orange { padding: 10px 0; }
+	.fieldWrapper.gray { background-color: #e9e8e8; }
+	.fieldWrapper.orange { background-color: #fcf8c5; }
+	.fieldWrapper p { float:left; font-size: 0.9em; width:210px; }
+	.fieldWrapper input[type='checkbox'] { float: left; margin: 5px; }
+
+	.fieldWrapper ul li label { width:103px; }
+	.errorlist { color:red; }
+	.errorlist li { background:none; }
+</style>
+{% endblock %}

@@ -3,6 +3,7 @@ import os.path
 from django.conf import global_settings
 
 BASE_PATH = os.path.dirname(__file__)
+ADMIN_EMAIL = 'info@openpolis.it'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -23,6 +24,10 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

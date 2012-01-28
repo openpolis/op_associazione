@@ -7,14 +7,12 @@ admin.autodiscover()
 urlpatterns = patterns('',
     
 	url(r'^(?P<page_slug>statuto|privacy)/','op_associazione.views.static_page', name='static-page'),
-
+    
 	# Subscribe urls
 	url(r'^sostienici/(?P<member_type>politico|cittadino|organizzazione)/$', 'op_associazione.views.subscribe_module', {}, name="subscribe-module"),
-	#url(r'^sostienici/cittadino/$', 'op_associazione.views.subscribe_citizen', {}, name="subscribe"),
-	#url(r'^sostienici/politico/$', 'op_associazione.views.subscribe_politician', {}, name="subscribe"),
-	#url(r'^sostienici/organizzazione/$', 'op_associazione.views.subscribe_organization', {}, name="subscribe"),
 	url(r'^sostienici/completa-associazione/$', 'op_associazione.views.payment', {}, name="subscribe-pay"),
 	url(r'^sostienici/$', 'op_associazione.views.subscribe', {}, name="subscribe"),
+	url(r'^sostienici/(?P<page_slug>dona|collabora)/','op_associazione.views.static_page', name='subscribe-other'),
 	url(r'^rinnovo-iscrizione/$', 'op_associazione.views.renewal_request', {}, name="subscribe-renewal-request"),
 	url(r'^rinnovo-iscrizione/(?P<user_hash>[-\w]+)/$', 'op_associazione.views.renewal', {}, name="subscribe-renewal"),
 	

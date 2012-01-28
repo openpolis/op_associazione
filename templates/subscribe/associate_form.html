@@ -161,7 +161,9 @@
 					dateFormat: 'dd/mm/yy', 
 					changeMonth: true,
 					changeYear: true,
-					yearRange: "-100:-10"
+					/*minDate: new Date("1900-01-01"),
+					maxDate: "-10Y",*/
+					yearRange: "1900:+0"
 			});
 			
 			$( '#address-box' ).click(function() {
@@ -172,4 +174,6 @@
 		});
 	</script>
 {% endblock %}
+
+
 

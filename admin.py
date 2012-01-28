@@ -9,12 +9,12 @@ class LegalAddressInline(admin.TabularInline):
 	model = Address
 #	fk_name = 'legal_address'
 	
-class MembershipInline(admin.TabularInline):
+class MembershipInline(admin.StackedInline):
 	model = Membership
-	extra = 1 
+	extra = 0
 	
 class AssociateAdmin(admin.ModelAdmin):
-	inlines = [MembershipInline,LegalAddressInline,]
+	inlines = [MembershipInline,]
 	
 class MembershipAdmin(admin.ModelAdmin):
 	fields = ['type_of_membership']

@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Fai una donazione</h1>
+<p>
+	Se non vuoi <a href="{% url subscribe %}">diventare socio</a> dell'associazione, ma vuoi contribuire economicamente per il mantenimento e lo sviluppo di nuovi progetti nella garanzia della totale indipendenza, puoi effettuare una donazione una tantum o ogni mese.
+</p>
+<p>
+	Per effettuare la donazione puoi utilizzare:
+</p>
+<p>
+	<strong>Bonifico bancario</strong> <small></small>(metodo preferito perché senza commissioni) <br />
+	Intestazione del conto: associazione openpolis <br />
+	BANCA POPOLARE ETICA SCARL <br />
+	IBAN:IT47 C050 1803 2000 0000 0131 034 <br />
+</p>
+<p>
+	<strong>Carta di credito o PayPal</strong> <small>(transazione sicura online)</small>
+</p>
+{% endblock %}
+
+{% block payoff %}
+<section id="extra" class="container">      
+    <div class="row">
+        <div class="twelvecol">
+			<ul id="breadcrumb">
+				<li class="first">Sostienici</li>
+				<li>Dona</li>
+			</ul>
+		</div>
+    </div>
+	<div class="row"><img src="/static/img/payoff/slogan_cittadino_consapevole.png" /></div>
+</section>
+{% endblock %}

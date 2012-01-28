@@ -1,54 +1,54 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
+{% url subscribe-renewal user_hash=associate.hash_key as renewal_url %}
 	<div class="yellow">
 		<h1>Rinnova l'associazione ad Openpolis</h1>
-		
-		{% if associate %}
-		<p>
-			{{ associate.first_name|capfirst }}, grazie. Ora poi versare la quota associativa di <strong>{{ associate_fee }} euro</strong>
-			<br />
-			C'è ancora un passo da fare e riguarda il metodo di pagamento.
-			<br />
-			Puoi scegliere tra il bonifico bancario e Paypal/carta di credito.
-		</p>
-
-		<aside class="orange">
-			<h2>Bonifico bancario</h2>
-			<small>(metodo preferito perché senza commissioni)</small>
-
-			<blockquote>
-				Associazione Openpolis<br /> 
-				Banca Popolare Etica scarl<br />
-				IT47 C050 1803 2000 0000 0131 034
-			</blockquote>
-
-		</aside>
-
-		<aside class="orange">
-			<h2>Carta di credito o Paypal</h2>
-			<small>Paga la quota associativa tramite il tuo conto Paypal o carta di credito</small>
-
-			PAGA ADESSO
-		</aside>
-		
-		{% else %}
-		
-		<form action="{% url subscribe-renewal-request %}" method="POST" id="renewal_request_form">
-			{% csrf_token %}
-			<div>
-				<label for="email">Inserisci la tua email</label>
-				{{ form.email }}
-				{{ form.email.errors }}
-			</div>
-			<small>Una volta inviato il modulo riceverai una email con il collegamento per effettuare il rinnovo</small>
-			<br /><br />
-			<input type="submit" value="Invia" id="submit_button" />
 			
+		<p>
+			Ciao {{ associate.first_name|capfirst }}, 
+			<br />
+			ci richiedi il rinnovo dell’associazione ad Openpolis fino al <strong>{{ next_expire|date:'d F Y' }}</strong>
+			<br />
+			come socio ordinario. La quota da versare è di {{ last_membership.fee }} euro.
+		</p>
+		
+		<form action="{{ renewal_url }}" method="POST">
+			{% csrf_token %}
+			<input type="hidden" name="{{ form.type_of_membership.html_name }}" value="{{ form.type_of_membership.value }}" />
+			<input type="hidden" name="{{ form.fee.html_name }}" value="{{ form.fee.value|safe }}" />
+			<input type="hidden" name="{{ form.public_subscription.html_name }}" value="{{ form.public_subscription.value }}" />
+			<input type="submit" value="Conferma" />
 		</form>
 		
-		{% endif %}
+	</div>
+	<div>
+		<h2>Oppure modifica il tipo di iscrizione</h2>
+		<small>Scegli una nuova tipologia di associazione per modificare la tua iscrizione.</small>
+		
+		<form action="{{ renewal_url }}" method="POST">
+			{% csrf_token %}
+			
+			<div class="fieldWrapper">
+				{{ form.type_of_membership.label_tag }}
+				<p>{{ form.type_of_membership }}</p>
+			</div>
+
+			<div class="fieldWrapper">
+				<label for="{{ membership_form.fee.html_name }}">*{{ form.fee.label }}</label>
+				<p>{{ form.fee }}</p>
+				{{ form.fee.errors }}
+			</div>
+
+			<div class="fieldWrapper gray">
+				{{ form.public_subscription }}
+				<div>{{ form.public_subscription.help_text }}</div>
+			</div>
+			
+			<input type="submit" value="Invia" />
+		</form>
+		
+		
 	</div>
 
 {% endblock %}
@@ -59,11 +59,24 @@
 	#renewal_request_form .errorlist li { background: none; color: red;}
 	#submit_button { font-size:1.1em; padding: 5px 10px; height:auto;}
 	article aside blockquote { font-family: Arial; font-size:1.3em; font-weight:bold; }
-	article .yellow { padding: 20px; background-color:#fbee7d; }
+	article .yellow { padding: 20px; background-color:#fbee7d; margin-bottom: 15px; }
 	article aside.orange {
 		background-color: #fcf7c8;
 		margin: 15px 0;
 		padding: 5px 10px;
 	}
+	form#subscribe_form h2 { clear:left; padding-top:20px; }
+	.fieldWrapper { min-height: 30px; padding: 5px; clear:both; margin-bottom:10px;  }
+	article#main .fieldWrapper > p { padding: 4px 0 ;}
+	.fieldWrapper label { float:left; width:150px; line-height:15px; font-weight: bold; }
+	.fieldWrapper.gray, .fieldWrapper.orange { padding: 10px 0; }
+	.fieldWrapper.gray { background-color: #e9e8e8; }
+	.fieldWrapper.orange { background-color: #fcf8c5; }
+	.fieldWrapper p { float:left; font-size: 0.9em; width:210px; }
+	.fieldWrapper input[type='checkbox'] { float: left; margin: 5px; }
+
+	.fieldWrapper ul li label { width:103px; }
+	.errorlist { color:red; }
+	.errorlist li { background:none; }
 </style>
 {% endblock %}

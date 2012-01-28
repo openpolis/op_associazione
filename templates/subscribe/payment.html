@@ -1,8 +1,12 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
+	
+	{% if renewal %}
+	<h1>Rinnova l'associazione ad Openpolis</h1>
+	{% else %}
 	<h1>La quota associativa</h1>
+	{% endif %}
 	
 	<p>
 		{{ associate_name|capfirst }}, grazie. Ora poi versare la quota associativa di <strong>{{ associate_fee }} euro</strong>
