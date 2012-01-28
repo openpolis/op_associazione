@@ -16,19 +16,16 @@ urlpatterns = patterns('',
 	url(r'^rinnovo-iscrizione/$', 'op_associazione.views.renewal_request', {}, name="subscribe-renewal-request"),
 	url(r'^rinnovo-iscrizione/(?P<user_hash>[-\w]+)/$', 'op_associazione.views.renewal', {}, name="subscribe-renewal"),
 	
-	# Media uploaded file
-	(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/Users/daniele/Workspace/op_associazione/web/media'}),
-	
 	# Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+        url(r'^admin/', include(admin.site.urls)),
 	
-    # Uncomment the admin/doc line below to enable admin documentation:
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+        # Uncomment the admin/doc line below to enable admin documentation:
+        url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 	
 	# Ordering models
 	url(r'^admin/orderedmove/(?P<direction>up|down)/(?P<model_type_id>\d+)/(?P<model_id>\d+)/$', 'op_associazione.views.admin_move_ordered_model', name="admin-move"),
 
-    # EasyCMS urls
+        # EasyCMS urls
 	url(r'^', include('op_associazione.easycms.urls')),
 )
 
