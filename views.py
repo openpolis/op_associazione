@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
+import hashlib
+
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
-from models import OrderedModel
 from django.db import transaction
-
-from op_associazione import forms
-from op_associazione.models import Membership, Associate
 from django.template import  RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
-
 from django.template.loader import get_template
+
+from op_associazione.models import OrderedModel, Membership, Associate
+from op_associazione import forms
+from op_associazione import notifications
+
+
 def static_page(request, page_slug):
     return render_to_response('statics/'+ page_slug +'.html', {},context_instance=RequestContext(request))
 
@@ -30,10 +33,10 @@ def renewal(request, user_hash):
     try:
         last_membership = associate.membership_set.latest('expire_at')
     except Membership.DoesNotExist:
-        return HttpResponseRedirect(reverse('subscribe-renewal-request')) # Redirect
+        return HttpResponseRedirect(reverse('subscribe-renewal-request')) # Problems! Redirect to mail form
     
     if not last_membership.is_active:
-        return HttpResponseRedirect(reverse('subscribe-renewal-request')) # Redirect
+        return HttpResponseRedirect(reverse('subscribe-renewal-request')) # Problems! Redirect to mail form
     
     from datetime import timedelta
     next_expire = last_membership.expire_at + timedelta(days=365)
@@ -45,6 +48,9 @@ def renewal(request, user_hash):
             new_membership = form.save(commit=False)
             new_membership.associate = associate
             new_membership.save()
+            
+            notifications.subscription_received(new_membership, 'renew')
+            
             request.session['associate-name'] = associate.first_name
             request.session['associate-fee'] = new_membership.fee
             request.session['associate-renewal'] = next_expire
@@ -59,23 +65,6 @@ def renewal(request, user_hash):
         'next_expire' : next_expire,
     },context_instance=RequestContext(request))
 
-def send_renewal_email(associate):
-    from django.core.mail import EmailMultiAlternatives
-    from django.template.loader import get_template
-    from django.template import Context
-    from op_associazione import settings
-    
-    plaintext = get_template('email/renewal_email.txt')
-    htmly     = get_template('email/renewal_email.html')
-
-    d = Context({ 'renewal_url': reverse('subscribe-renewal', args=[associate.hash_key]) })
-
-    subject, from_email, to = 'Rinnova l\'associazione ad Openpolis', 'no-reply@openpolis.it', associate.email
-    text_content = plaintext.render(d)
-    html_content = htmly.render(d)
-    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
 
 def renewal_request(request):
     associate = False
@@ -83,23 +72,24 @@ def renewal_request(request):
         form = forms.RenewalRequestForm(request.POST)
         if form.is_valid() :         
             associate = form.associate   
+
             # Send mail to confirm
-            send_renewal_email(associate)
+            notifications.send_renewal_email(associate)
     else : 
         form = forms.RenewalRequestForm()
-	
+    
     return render_to_response( 'subscribe/renewal_request.html' , {
         'form': form,
         'associate': associate
     },context_instance=RequestContext(request))
 
 def subscribe(request):
-	return render_to_response( 'subscribe/main.html' , {},context_instance=RequestContext(request))
+    return render_to_response( 'subscribe/main.html' , {},context_instance=RequestContext(request))
 
 def check_expedition_address(provided, form):
-	if provided :
-		return form.is_valid()
-	return True
+    if provided :
+        return form.is_valid()
+    return True
 
 def subscribe_module(request, member_type):
     associate_form = build_associate_form(request,member_type)
@@ -110,7 +100,7 @@ def subscribe_module(request, member_type):
         expedition_address_form = forms.AddressForm(data=request.POST,prefix='exp')
 
         if associate_form.is_valid() & membership_form.is_valid() & legal_address_form.is_valid() & check_expedition_address(exp_address_provided,expedition_address_form): # All validation rules pass
-			
+            
             associate = associate_form.save(commit=False)
             associate.legal_address = legal_address_form.save()
             # Check if Expedition Address is provided
@@ -120,7 +110,6 @@ def subscribe_module(request, member_type):
                 associate.expedition_address = associate.legal_address
 
             # Build the activation key for their account
-            import hashlib
             associate.hash_key = hashlib.sha1(associate.email).hexdigest()
             # Save it
             associate.save()
@@ -129,6 +118,8 @@ def subscribe_module(request, member_type):
             membership.associate = associate;
             membership.save()
 
+            notifications.subscription_received(membership, 'first')
+
             request.session['associate-name'] = associate.first_name
             request.session['associate-fee'] = membership.fee
 
@@ -136,7 +127,7 @@ def subscribe_module(request, member_type):
     else :
         legal_address_form = forms.AddressForm()
         expedition_address_form = forms.AddressForm(prefix='exp')
-		
+        
     return render_to_response('subscribe/'+ member_type +'_form.html', {
         'associate_form' : associate_form,
         'membership_form' : membership_form,
@@ -147,34 +138,34 @@ def subscribe_module(request, member_type):
     }, context_instance=RequestContext(request))
 
 def build_membership_form(request, member_type):
-	if request.method == 'POST' :
-		form = forms.MembershipForm(data=request.POST)
-	else :
-		form = forms.MembershipForm()
-	
-	if member_type == 'cittadino' :
-		form.fields['type_of_membership'].widget.choices = Membership.MEMBER_TYPE[1:4]
-	else :
-		form.fields['type_of_membership'].widget.choices = Membership.MEMBER_TYPE[1:3]
-		
-	return form
+    if request.method == 'POST' :
+        form = forms.MembershipForm(data=request.POST)
+    else :
+        form = forms.MembershipForm()
+    
+    if member_type == 'cittadino' :
+        form.fields['type_of_membership'].widget.choices = Membership.MEMBER_TYPE[1:4]
+    else :
+        form.fields['type_of_membership'].widget.choices = Membership.MEMBER_TYPE[1:3]
+        
+    return form
 
 def build_associate_form(request, member_type):
-	if request.method == 'POST' :
-		if member_type == 'cittadino':
-			form = forms.CitizenForm(data=request.POST)
-		elif member_type == 'politico':
-			form = forms.PoliticianForm(data=request.POST)
-		elif member_type == 'organizzazione':
-			form = forms.OrganizationForm(data=request.POST)
-	else :
-		if member_type == 'cittadino':
-			form = forms.CitizenForm()
-		elif member_type == 'politico':
-			form = forms.PoliticianForm()
-		elif member_type == 'organizzazione':
-			form = forms.OrganizationForm()
-	return form
+    if request.method == 'POST' :
+        if member_type == 'cittadino':
+            form = forms.CitizenForm(data=request.POST)
+        elif member_type == 'politico':
+            form = forms.PoliticianForm(data=request.POST)
+        elif member_type == 'organizzazione':
+            form = forms.OrganizationForm(data=request.POST)
+    else :
+        if member_type == 'cittadino':
+            form = forms.CitizenForm()
+        elif member_type == 'politico':
+            form = forms.PoliticianForm()
+        elif member_type == 'organizzazione':
+            form = forms.OrganizationForm()
+    return form
 
 @staff_member_required
 @transaction.commit_on_success

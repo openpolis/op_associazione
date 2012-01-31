@@ -1,18 +1,22 @@
+# -*- coding: utf-8 -*-
 # Django settings for op_associazione project.
 import os.path
 from django.conf import global_settings
 
 BASE_PATH = os.path.dirname(__file__)
-ADMIN_EMAIL = 'info@openpolis.it'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Guglielmo Celata', 'guglielmo@openpolis.it'),
 )
 
-MANAGERS = ADMINS
+MANAGERS = ADMINS + (
+    ('Daniele Faraglia', 'daniele@openpolis.it'),
+    ('Vincenzo Smaldore', 'vincenzo@openpolis.it'),
+    ('Mariachiara Manopulo', 'mariachiara@openpolis.it'),
+)
 
 DATABASES = {
     'default': {
@@ -32,6 +36,9 @@ EMAIL_PORT = 1025
 OP_BLOG_FEED = "http://feeds.feedburner.com/openpolis?format=xml"
 OP_TW_FEED = "https://twitter.com/statuses/user_timeline/83212310.rss"
 OP_FB_FEED = "http://www.facebook.com/feeds/page.php?id=129419747068352&format=rss20"
+
+SERVER_EMAIL = "noreply@openpolis.it"
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -103,7 +110,6 @@ SECRET_KEY = 'pid8f3e(&w&ut7wesn8$+uoh211d1ci9-x54q_yt9*nmvif^qa'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-    'django.template.loaders.app_directories.load_template_source',
 #     'django.template.loaders.eggs.Loader',
 )
 
@@ -177,7 +183,7 @@ LOGGING = {
 
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
