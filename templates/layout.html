@@ -71,7 +71,7 @@
         #menu img.sostienici { margin: 0 5px 0 0; vertical-align: baseline; }
         #menu li a.current { color: #000; }
         #menu ul { background-color: #d10423; }
-        #menu ul a { background-color: #FFF; color: #000; margin-bottom:1px; }
+        #menu ul a { background-color: #EEE; color: #000; margin-bottom:1px; }
         #menu ul a:hover { background-color: transparent; color: #000; }
         #menu ul li:first-child > a, #menu ul li:last-child > a
         {
@@ -132,6 +132,23 @@
     
     {% block js_footer %}
     <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.tools.min.js"></script>
+    <script>
+	$(function() {
+		$('.tips').tooltip({ 
+			// place tooltip on the right edge
+			//position: "center right",
+
+			// a little tweaking of the position
+			offset: [10, 10],
+
+			// use the built-in fadeIn/fadeOut effect
+			effect: "slide",
+
+			// custom opacity setting
+			opacity: 0.8});
+	});
+	</script>
     {% endblock %}
     
 </body>
