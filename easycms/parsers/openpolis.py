@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 #from op_associazione.tools import op_realtime
+from django.utils.html import strip_tags
+import urllib2
 
 def parse(kwargs):
     id = kwargs.get('id')
@@ -16,18 +18,24 @@ def parse(kwargs):
         </style>
     """ % align
     
-    stats = {
-        'Incarichi censiti' : 358968,
-        'Politici monitorati' : 224730,
-        'Emendamenti' : 148578,
-        'Dichiarazioni' : 16659,
-        "Votazioni d'aula" : 14723,
-        'Utenti registrati' : 18181
-    }
+
+    op_url = 'http://openpolis.it/'
+    opp_url = 'http://parlamento.openpolis.it/'
+    stats = (
+            ('Incarichi censiti', op_url + 'api/chargeNumber/', 'Incarichi censiti'),
+            ('Politici monitorati', op_url + 'api/politicianNumber/', 'Politici monitorati'),
+            ('Emendamenti', opp_url + 'api/getNumeroEmendamenti/', 'Emendamenti'),
+            ('Dichiarazioni', op_url + 'api/declarationNumber/', 'Dichiarazioni'),
+            ('Votazioni d\'aula', opp_url + 'api/getNumeroVotazioni/', 'Votazioni d\'aula'),
+            ('Utenti registrati', op_url + 'api/userNumber/', 'Utenti registrati'),
+        )
+
     table_rows = ''
-    
-    for field, nb in stats.iteritems():
-        table_rows += u'<tr title="titolo" class="tips"><th>%s</th><td>%s</td></tr>' % (field, nb)
+
+    for stat in stats:
+        f = urllib2.urlopen(stat[1])
+        value = strip_tags(f.read())
+        table_rows += u'<tr title="%s" class="tips"><th>%s</th><td>%s</td></tr>' % (stat[2], stat[0], value)
     
     html_table = u"""
         <table id="op_realtime">
@@ -41,3 +49,4 @@ def parse(kwargs):
         </table>
     """ % table_rows
     return css_styles + html_table
+    
