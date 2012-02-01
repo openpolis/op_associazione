@@ -1,22 +1,93 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Fai una donazione</h1>
+
 <p>
-	Se non vuoi <a href="{% url subscribe %}">diventare socio</a> dell'associazione, ma vuoi contribuire economicamente per il mantenimento e lo sviluppo di nuovi progetti nella garanzia della totale indipendenza, puoi effettuare una donazione una tantum o ogni mese.
+    Abbiamo scelto di non avere pubblicità né altre forme di promozione sui nostri siti e così essere realmente indipendenti. Pensiamo sia la cosa più corretta da fare e ogni giorno ne siamo ripagati da chi ci sceglie proprio per questo. Ma la nostra esistenza non è scontata, rinunciare alla pubblicità, mantenendo libero e gratuito l'accesso ai nostri servizi rende molto difficile l’andare avanti.
 </p>
+<h1>Dona ad Openpolis</h1>
 <p>
-	Per effettuare la donazione puoi utilizzare:
+    Sappiamo di essere tra i tanti che chiedono, tutti a parità di urgenza e importanza e non possiamo esercitare alcuna influenza se non ricordarti ancora una volta che donando ad Openpolis scegli di sostenere un grande progetto italiano di democrazia e trasparenza. Un progetto vero, sano, tangibile, fatto di persone e idee. La tua donazione contribuità a sostenere:
 </p>
+<ul>
+    <li>lo staff di dieci persone che ogni giorno lavorano per tenere insieme tutto questo</li>
+    <li>le tecnologie: i server, i computer, la connessione ad internet per lavorare</li>
+    <li>il nostro piccolo ufficio</li>
+</ul>
+<p>ma anche</p>
+<ul>
+    <li>la crescita delle piattaforme Open polis, Open parlamento, Voi siete qui</li>
+    <li>la realizzazione dei nuovi progetti Open municipio, Open bilanci, Open action</li>
+    <li>l’osservatorio civico della politica e i suoi progetti d’informazione: i dossier e Camere Aperte</li>
+</ul>
+
 <p>
-	<strong>Bonifico bancario</strong> <small></small>(metodo preferito perché senza commissioni) <br />
-	Intestazione del conto: associazione openpolis <br />
-	BANCA POPOLARE ETICA SCARL <br />
-	IBAN:IT47 C050 1803 2000 0000 0131 034 <br />
+    Puoi scegliere la forma e la misura con cui donare con la consapevolezza di fare una piccola cosa straordinariamante importante. Grazie.
 </p>
-<p>
-	<strong>Carta di credito o PayPal</strong> <small>(transazione sicura online)</small>
-</p>
+
+<h2>Carta di Credito o Paypal</h2>
+
+<section id="donate">
+    
+    
+    <p><strong>Donazione occasionale</strong><br />
+        Se vuoi puoi naturalmente cambiare l'importo, dona quello che puoi.
+    </p>
+
+    <form method="post" action="https://www.paypal.com/cgi-bin/webscr">
+        <input type="hidden" value="_xclick" name="cmd">
+        <input type="hidden" value="v.alvino@openpolis.it" name="business">
+        <input type="hidden" value="Donazione occasionale per l'associazione openpolis" name="item_name">
+        <strong>Donazione di euro:</strong>
+        <label for="importo"><input value="20" name="amount" size="5"></label> una tantum
+        <input type="hidden" value="openpolis" name="page_style">
+        <input type="hidden" value="1" name="no_shipping">
+        <input type="hidden" value="http://www.openpolis.it" name="return">
+        <input type="hidden" value="1" name="no_note">
+        <input type="hidden" value="EUR" name="currency_code">
+        <input type="hidden" value="0" name="tax">
+        <input type="hidden" value="IT" name="lc">
+        <input type="hidden" value="PP-DonationsBF" name="bn">
+         <p>
+                <input type="image" src="/static/img/icons/button-dona.png" border="0" name="submit" alt="PayPal - Il sistema di pagamento online più facile e sicuro!">
+                <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+            </p>
+    </form>
+
+    <p><strong>Donazione mensile per un anno</strong>
+        <br />
+        Ogni mese per un anno verrà prelevata la cifra da te indicata.<br />
+        (Potrai in ogni momento interrompere le donazioni mensili scrivendo una mail a associazione@openpolis.it).<br />
+        Se vuoi puoi naturalmente cambiare l'importo, dona quello che puoi.
+    </p>
+
+    <form method="post" action="https://www.paypal.com/cgi-bin/webscr">
+        <input type="hidden" value="_xclick-subscriptions" name="cmd">
+        <input type="hidden" value="v.alvino@openpolis.it" name="business">
+        <input type="hidden" value="Donazione mensile per l'associazione openpolis" name="item_name">
+        Donazione di euro:
+        <label for="importo"><input value="5" name="a3" size="5"></label> ogni mese
+        <input type="hidden" value="openpolis" name="page_style">
+        <input type="hidden" value="1" name="no_shipping">
+        <input type="hidden" value="http://www.openpolis.it" name="return">
+        <input type="hidden" value="1" name="no_note">
+        <input type="hidden" value="EUR" name="currency_code">
+        <input type="hidden" value="IT" name="lc">
+        <input type="hidden" value="PP-SubscriptionsBF" name="bn">
+        <input type="hidden" value="1" name="p3">
+        <input type="hidden" value="M" name="t3">
+        <input type="hidden" value="1" name="src">
+        <input type="hidden" value="1" name="sra">
+        
+        <p>
+            <input type="image" src="/static/img/icons/button-dona.png" border="0" name="submit" alt="PayPal - Il sistema di pagamento online più facile e sicuro!">
+            <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+        </p>  
+    </form>
+    
+</section>
+
+
 {% endblock %}
 
 {% block payoff %}
@@ -29,6 +100,17 @@
 			</ul>
 		</div>
     </div>
-	<div class="row"><img src="/static/img/payoff/slogan_cittadino_consapevole.png" /></div>
+	<div class="row"><img src="/static/img/payoff/slogan_donare.png" /></div>
 </section>
+{% endblock %}
+
+
+{% block css_styles %}
+<style type="text/css">
+    
+    #donate { width: 70%; }
+    #donate form { background-color: #f5f5f3; padding: 8px; }
+    #donate form input { padding-left:3px; border:0; background-color: white; }
+    #donate form p { padding-bottom: 0; text-align:center; }
+</style>
 {% endblock %}

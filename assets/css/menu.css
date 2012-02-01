@@ -29,7 +29,8 @@
 
 #menu li:hover > a
 {
-	color: #fafafa;
+	color: #000;
+	text-decoration: underline;
 }
 
 * html #menu li a:hover /* IE6 */
@@ -75,13 +76,15 @@
 {    
     padding: 10px;
 	height: 10px;
-	min-width: 170px;
+	min-width: 100px;
 	height: auto;
     line-height: 1;
     display: block;
     white-space: nowrap;
     float: none;
 	text-transform: none;
+	font-weight: normal;
+	text-decoration: none;
 }
 
 * html #menu ul a /* IE6 */

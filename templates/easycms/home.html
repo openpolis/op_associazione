@@ -5,40 +5,46 @@
 
     <div class="row">
         <div id="splash" class="prefixone elevencol">
+            <a href="{% url subscribe %}" id="subscribe_link"></a>
             <img src="/static/img/payoff/slogan_homepage.png" alt="Colleghiamo i dati per fare trasparenza, li distribuiamo per innescare partecipazione. 
-            Costruiamo strumenti liberi e gratuiti per 'aprire la politica'. Sostienici: associati ad Openpolis!" />
+            Costruiamo strumenti liberi e gratuiti per 'aprire la politica'. Associati ad Openpolis!" />
         </div>
     </div>        
     <div class="row">
         <div class="threecol">
-            <img src="/static/img/logos/logo-indice.png" alt="Indice di produttività parlamentare" class="sublogo" />
+            <a href="http://indice.openpolis.it"><img src="/static/img/logos/logo-indice.png" alt="Indice di produttività parlamentare" class="sublogo" /></a>
             <p>
             Quantità ed efficacia dell'attività dei parlamentari dall'inizio della legislatura ad oggi, nel <strong>rapporto annuale</strong> Camere aperte (2011).
-            <a href="http://indice.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-green.png" alt="" /></a>
             </p>
         </div>
         <div class="threecol">
-            <img src="/static/img/logos/logo-voisietequi.png" alt="Voi Siete Qui" class="sublogo" />
+            <a href="http://voisietequi.openpolis.it"><img src="/static/img/logos/logo-voisietequi.png" alt="Voi Siete Qui" class="sublogo" /></a>
             <p>
-            <strong>Test politico-elettorale</strong> per capire quali partiti rappresentano di più le proprie posizioni politiche in base ai programmi elettorali e alle dichiarazioni pubbliche dei leader prima delle elezioni.
-            <a href="http://voisietequi.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-red.png" alt="" /></a>
+            <a href="http://voisietequi.openpolis.it">Test politico-elettorale</a> per capire quali partiti rappresentano di più le proprie posizioni politiche in base ai programmi elettorali e alle dichiarazioni pubbliche dei leader prima delle elezioni.
+            
             </p>
         </div>
         <div class="threecol">
-            <img src="/static/img/logos/logo-assoc.png" alt="OpenPolis" class="sublogo" />
+            <a href="http://openpolis.it"><img src="/static/img/logos/logo-assoc.png" alt="OpenPolis" class="sublogo" /></a>
             <p>
-            La piattaforma per conoscere, monitorare e seguire i politici eletti, dal <strong>più piccolo comune al parlamento europeo</strong>. (Con dati ufficiali del Ministero dell'Interno, Parlamento italiano ecc)
-            <a href="http://www.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-orange.png" alt="" /></a>
+            <a href="http://openpolis.it">La piattaforma web</a> per conoscere, monitorare e seguire i politici eletti, dal <strong>più piccolo comune al parlamento europeo</strong>. (Con dati ufficiali del Ministero dell'Interno, Parlamento italiano)
+            
             </p>                        
         </div>
         <div class="threecol last">
-            <img src="/static/img/logos/logo-parlamento.png" alt="Open parlamento" class="sublogo" />
+            <a href="http://parlamento.openpolis.it"><img src="/static/img/logos/logo-parlamento.png" alt="Open parlamento" class="sublogo" /></a>
             <p>
-            La piattaforma per informarsi, monitorare e intervenire nei lavori quotidiani del <strong>parlamento italiano</strong>. 
+            <a href="http://parlamento.openpolis.it">La piattaforma web</a> per informarsi, monitorare e intervenire nei lavori quotidiani del <strong>parlamento italiano</strong>. 
         (Con dati ufficiali del Ministero dell’Interno, Camera e Senato) <br />
-            <a href="http://parlamento.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-fucsia.png" alt="" /></a>
+            
             </p>
         </div>
+    </div>
+    <div class="row">
+        <div class="threecol"><a href="http://indice.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-green.png" alt="Vai su Indice di Produttività parlamentare" /></a></div>
+        <div class="threecol"><a href="http://voisietequi.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-red.png" alt="Vai su Voi Siete Qui" /></a></div>
+        <div class="threecol"><a href="http://openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-orange.png" alt="Vai su OpenPolis" /></a></div>
+        <div class="threecol last"><a href="http://parlamento.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-fucsia.png" alt="Vai su OpenParlamento" /></a></div>
     </div>
 </section>
 {% endblock %}
@@ -57,7 +63,7 @@
                 </li>
               {% endfor %}
             </ul>
-            <p><a href="http://blog.openpolis.it" target="_blank"><span class="icon wordpress"></span>Vai al Blog</a></p>
+            
         </div>
         <div class="threecol">
             <ul class="feed">
@@ -69,7 +75,7 @@
                 </li>
               {% endfor %}
             </ul>
-            <p><a href="http://www.twitter.com/openpolis" target="_blank"><span class="icon twitter"></span>Twitter Entries</a></p>
+            
         </div>
         <div class="threecol last">
             <ul class="feed">
@@ -81,8 +87,29 @@
                 </li>
               {% endfor %}
             </ul>
-            <p><a href="http://www.facebook.com/openpolis" target="_blank"><span class="icon facebook"></span>Facebook Entries</a></p>
+            
         </div>
     </div>
+    <div class="row">
+        <div class="prefixthree threecol"><p><a href="http://blog.openpolis.it" target="_blank"><span class="icon wordpress"></span>Vai al Blog</a></p></div>
+        <div class="threecol"><p><a href="http://www.twitter.com/openpolis" target="_blank"><span class="icon twitter"></span>Twitter Entries</a></p></div>
+        <div class="threecol last"><p><a href="http://www.facebook.com/openpolis" target="_blank"><span class="icon facebook"></span>Facebook Entries</a></p></div>
+    </div>
 </section>
+{% endblock %}
+
+{% block css_styles %}
+<style type="text/css">
+    #payoff p { color: white; }
+    #payoff p a { font-weight: bold; color: white; }
+    #payoff p a:hover { text-decoration: underline; }
+    #splash { position: relative; }
+    #subscribe_link {
+        position: absolute;
+        height: 30px;
+        width: 340px;
+        top: 130px;
+    }
+    
+</style>
 {% endblock %}

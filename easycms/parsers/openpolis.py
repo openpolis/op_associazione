@@ -8,13 +8,14 @@ def parse(kwargs):
     align = kwargs.get('align', 'left')
     css_styles = """ 
         <style type=\"text/css\">
-        #op_realtime { min-width:300px; background-color: #FFF; text-align:left; margin: 15px; float:%s; }
-        #op_realtime caption { text-align:left; font-size:0.8em; }
-        #op_realtime caption strong { font-size:1.3em; }
-        #op_realtime tr { border-bottom:1px solid #FFF; background-color: #fbec6d; }
-        #op_realtime tr > * { padding: 10px 5px; }
-        #op_realtime tr th { background-color: #e8da65; }
-        #op_realtime tr td { text-align:right; }
+        div#op_realtime { font-family:Arial; width:270px; background-color: #FFF; text-align:left; margin: 15px; float:%s; }
+        div#op_realtime h1 { color:#333; font-family: Georgia; font-size: 24px; line-height: 30px; margin:0; }
+        div#op_realtime h2 { font-size: 14px; line-height: 16px; color:#333; margin:0; }
+        div#op_realtime table { width:100%% ; margin-top: 5px; }
+        div#op_realtime tr { border-bottom:1px solid #FFF; background-color: #fbec6d; }
+        div#op_realtime tr > * { padding: 0 5px; }
+        div#op_realtime tr th { font-size:12px; background-color: #e8da65; }
+        div#op_realtime tr td { font-weight:bold; line-height: 24px; font-size: 18px; text-align:right; }
         </style>
     """ % align
     
@@ -34,19 +35,24 @@ def parse(kwargs):
 
     for stat in stats:
         f = urllib2.urlopen(stat[1])
-        value = strip_tags(f.read())
-        table_rows += u'<tr title="%s" class="tips"><th>%s</th><td>%s</td></tr>' % (stat[2], stat[0], value)
+        value = strip_tags(f.read()).strip() # Remove xml tags and spaces
+        table_rows += u'<tr title="%s" class="tips"><th>%s</th><td>%s</td></tr>' % (stat[2], stat[0], splitthousands(value))
     
     html_table = u"""
-        <table id="op_realtime">
-            <caption>
-                <strong>Openpolis in tempo reale</strong><br />
-                Le attivit&agrave; nel nostro network mentre consulti questa pagina 
-            </caption>
-            <tbody>
-            %s
-            </tbody>
-        </table>
+        <div id="op_realtime">
+            <h1>Openpolis in tempo reale</h2>
+            <h2>Le attivit&agrave; nel nostro network mentre consulti questa pagina </h2>
+            <table>
+                <tbody>
+                %s
+                </tbody>
+            </table>
+        </div>
     """ % table_rows
     return css_styles + html_table
+    
+    
+def splitthousands(s, sep='.'):  
+    if len(s) <= 3: return s  
+    return splitthousands(s[:-3], sep) + sep + s[-3:]
     

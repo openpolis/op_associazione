@@ -36,8 +36,9 @@
     
     <!--  Skeleton styles  -->
     <style type="text/css">
-        a, a:visited { color: #333; }
-        a:hover { text-decoration: underline; }
+        a { color: #034b7e; }
+        a:visited { color: #666; }
+        a:hover { text-decoration: underline; color: #D10423; }
         #navigation.container { background-color: #d10423; }
         #payoff.container { 
             background: #286eb4; /* Old browsers */
@@ -71,7 +72,7 @@
         #menu li a.current { color: #000; }
         #menu ul { background-color: #d10423; }
         #menu ul a { background-color: #FFF; color: #000; margin-bottom:1px; }
-        #menu ul a:hover { background-color: transparent; color: #FFF; }
+        #menu ul a:hover { background-color: transparent; color: #000; }
         #menu ul li:first-child > a, #menu ul li:last-child > a
         {
             -moz-border-radius: 0;
@@ -79,15 +80,18 @@
         }
         
         #payoff { color: #FFF; }
-        #payoff #splash { margin-bottom: 20px; }
+        #payoff #splash { margin-bottom: 30px; }
         #payoff .sublogo { margin-bottom: 10px; }
         #payoff .arrow { float:right; margin: 5px; }
-        #payoff p { padding-right: 10px; }
+        #payoff p { padding-right: 10px; font-family: Arial; font-size:13px; line-height:16px; }
         
         #extra ul { margin-bottom: 10px; }
         #extra ul li { list-style-type: none; list-style-position: inside;  border-bottom: 1px solid #afac55; padding:5px 0;  }
         #extra p { line-height: 30px; }
+        #extra a { color: #222; }
         #breadcrumb li { border-bottom:0; }
+        
+        p { font-size: 15px; line-height: 20px; color: #333; }
     </style>
     {%  block css_styles %}{% endblock %}
 
@@ -110,7 +114,8 @@
     
     {% block article %}
     <!--  Main Content -->
-    <article id="main" class="container">       
+    <article id="main" class="container">
+        {% block article_head %}{% endblock %}       
         <div class="row">
             <div class="eightcol">{% block content %}{% endblock %}</div>
             <div class="fourcol last">{% block sidebar %}{% endblock %}</div>

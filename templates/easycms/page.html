@@ -1,17 +1,24 @@
 {% extends "layout.html" %}
 {% load cms_extras %}
 {% load markup %}
+
+{% block article_head %}
+    <div class="row">
+        
+        <header class="twelvecol">
+    		{% block content_header %}
+    		<h1>{{ page.title }}</h1>
+    		{% endblock %}
+
+    		{% if page.sub_title %}
+    		<h2>{{ page.sub_title }}</h2>
+    		{% endif %}
+    	</header>
+        
+    </div>
+{% endblock %}
 	
 {% block content %}
-	<header class="clearfix">
-		{% block content_header %}
-		<h1>{{ page.title }}</h1>
-		{% endblock %}
-		
-		{% if page.sub_title %}
-		<h2>{{ page.sub_title }}</h2>
-		{% endif %}
-	</header>
 
 	<div>{{ page.text_html|shortcodes|safe }}</div>
 	
@@ -22,7 +29,6 @@
 {% block sidebar %}
 	<aside>
 		{% if page.asides.all|length > 0 %}
-		{% block sidebar_header %}{% endblock %}
 		<ul>
 			{% for aside in page.asides.all %}
 			<li>{{ aside.text|markdown }}
@@ -33,10 +39,7 @@
 			{% endfor %}
 		</ul>
 		{% else %}
-		<header>
-			<h1>Su di noi</h1>
-			<h2>Il dossier ripreso dai media</h2>
-		</header>
+		
 		<ul>
 			<li><p>"According to Openpolis, 
 a research group, the average age of the cabinet is, at 64, 
