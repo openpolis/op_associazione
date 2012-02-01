@@ -4,20 +4,10 @@ from django.core.urlresolvers import reverse
 from django.db import models
 
 GENDERS = (
-	('M', 'Male'),
-	('F', 'Female'),
+    ('M', 'Male'),
+    ('F', 'Female'),
 )
 
-class Address(models.Model):	
-    street		= models.CharField('Via, viale, ecc', max_length=200)
-    civic_nb 	= models.CharField('Numero civico', max_length=20)
-    zip_code	= models.CharField('CAP', max_length=20)
-    location	= models.CharField('Città', max_length=100)
-    province	= models.CharField('Provincia', max_length=100)
-    country		= models.CharField('Nazione', max_length=100)
-    class Meta:
-        verbose_name = 'Indirizzo'
-        verbose_name_plural = 'Indirizzi'
 
 class Membership(models.Model):
     MEMBER_TYPE = (
@@ -26,18 +16,18 @@ class Membership(models.Model):
         ('ordinario', 'Socio ordinario'),
         ('studente', 'Socio studente')
     )
-    type_of_membership 	= models.CharField("Tipo di iscrizione",max_length=50,choices=MEMBER_TYPE, default='ordinario')
-    fee					= models.FloatField("Quota (euro)")
-    payed	 			= models.FloatField("Quota pagata",null=True, blank=True)
-    payed_at			= models.DateField("Data pagamento",null=True, blank=True)
-    expire_at			= models.DateField("Scadenza",null=True, blank=True)
-    sent_cart_at 		= models.DateField("Data invio",null=True, blank=True)
-    notes				= models.TextField("Note", blank=True)
-    is_active			= models.BooleanField("Attivato",default=False)
-    associate    		= models.ForeignKey('Associate')
-    public_subscription = models.BooleanField("Iscrizione pubblica",default=False, help_text='Voglio comparire tra i sostenitori dell\'associazione e desidero che la mia quota di sottoscrizione sia pubblicata insieme al mio nome')
-    created_at			= models.DateField(auto_now_add=True)
-    updated_at			= models.DateField(auto_now=True)
+    type_of_membership     = models.CharField("Tipo di iscrizione",max_length=50,choices=MEMBER_TYPE, default='ordinario')
+    fee                    = models.FloatField("Quota (euro)")
+    payed                  = models.FloatField("Quota pagata",null=True, blank=True)
+    payed_at               = models.DateField("Data pagamento",null=True, blank=True)
+    expire_at              = models.DateField("Scadenza",null=True, blank=True)
+    sent_card_at           = models.DateField("Data invio",null=True, blank=True)
+    notes                  = models.TextField("Note", blank=True)
+    is_active              = models.BooleanField("Attivato",default=False)
+    associate              = models.ForeignKey('Associate')
+    public_subscription    = models.BooleanField("Iscrizione pubblica",default=False, help_text='Voglio comparire tra i sostenitori dell\'associazione e desidero che la mia quota di sottoscrizione sia pubblicata insieme al mio nome')
+    created_at             = models.DateField(auto_now_add=False)
+    updated_at             = models.DateField(auto_now=False)
 
     @staticmethod
     def get_minimum_fee(member_type):
@@ -63,19 +53,29 @@ class Membership(models.Model):
         verbose_name_plural = 'Iscrizioni'
 
 class Associate(models.Model):
-    first_name			= models.CharField('Nome',max_length=200)
-    last_name			= models.CharField('Cognome',max_length=200)
-    birth_date			= models.DateField('Data di nascita')
-    gender 				= models.CharField('Sesso',max_length=1, choices=GENDERS, default='')
-    fiscal_code			= models.CharField('Codice fiscale',max_length=20)
-    phone_number 		= models.CharField('Telefono',max_length=200,blank=True, null=True)
-    wants_newsletter 	= models.BooleanField('Newsletter',help_text='Voglio ricevere la newsletter via email')
-    email				= models.EmailField(unique=True)
-    legal_address 		= models.OneToOneField(Address, related_name='+')
-    expedition_address 	= models.OneToOneField(Address, related_name='+')
-    hash_key            = models.CharField('HASH', max_length=40)
-    created_at			= models.DateField(auto_now_add=True)
-    updated_at			= models.DateField(auto_now=True)
+    first_name            = models.CharField('Nome',max_length=200)
+    last_name             = models.CharField('Cognome',max_length=200)
+    birth_date            = models.DateField('Data di nascita')
+    gender                = models.CharField('Sesso',max_length=1, choices=GENDERS, default='')
+    fiscal_code           = models.CharField('Codice fiscale',max_length=20)
+    phone_number          = models.CharField('Telefono',max_length=200,blank=True, null=True)
+    wants_newsletter      = models.BooleanField('Newsletter',help_text='Voglio ricevere la newsletter via email')
+    email                 = models.EmailField(unique=True)
+    street                = models.CharField('Via, viale, ecc', max_length=200)
+    civic_nb              = models.CharField('Numero civico', max_length=20)
+    zip_code              = models.CharField('CAP', max_length=20)
+    location              = models.CharField('Città', max_length=100)
+    province              = models.CharField('Provincia', max_length=100)
+    country               = models.CharField('Nazione', max_length=100)
+    exp_street            = models.CharField('Via, viale, ecc', max_length=200)
+    exp_civic_nb          = models.CharField('Numero civico', max_length=20)
+    exp_zip_code          = models.CharField('CAP', max_length=20)
+    exp_location          = models.CharField('Città', max_length=100)
+    exp_province          = models.CharField('Provincia', max_length=100)
+    exp_country           = models.CharField('Nazione', max_length=100)
+    hash_key              = models.CharField('HASH', max_length=40)
+    created_at            = models.DateField(auto_now_add=False)
+    updated_at            = models.DateField(auto_now=False)
 
     @property
     def memberships(self):
@@ -92,7 +92,7 @@ class Citizen(Associate):
     class Meta:
         verbose_name = 'Cittadino'
         verbose_name_plural = 'Cittadini'
-	
+    
 class Organization(Associate):
     ORG_TYPE = (
         ('no-profit', 'No profit'),
@@ -100,24 +100,24 @@ class Organization(Associate):
         ('pa', 'Pubblica Amministrazione'),
         ('other', 'Altro'),
     )
-    denomination 			= models.CharField('Denominazione',max_length=300)
-    type_of_organization 	= models.CharField('Tipo di Organizzazione',max_length=100, choices=ORG_TYPE)
-    vat_code				= models.CharField('Partita Iva',max_length=100)
-    #	location_address 		= models.OneToOneField(Address, related_name='+')
+    denomination             = models.CharField('Denominazione',max_length=300)
+    type_of_organization     = models.CharField('Tipo di Organizzazione',max_length=100, choices=ORG_TYPE)
+    vat_code                 = models.CharField('Partita Iva',max_length=100)
+    #    location_address         = models.OneToOneField(Address, related_name='+')
 
     def __unicode__(self):
-        return self.denomination
+        if self.denomination is not None and self.denomination != "":
+            return self.denomination
+        else:
+            return super(Organization, self).__unicode__()
 
     class Meta:
         verbose_name = 'Organizzazione'
         verbose_name_plural = 'Organizzazioni'
 
 class Politician(Associate):
-    charge 			= models.TextField('Incarichi', blank=True, null=True)
-    public_revenue 	= models.BooleanField('Redditi online', help_text='In quanto socio di openpolis con funzioni politiche, m\'impegno a fornire annualmente all\'Associazione openpolis la mia dichiarazione dei redditi, lo stato patrimoniale e le spese elettorali come previsto dalla legge 5 luglio 1982 n. 441, affinché  l\'associazione si occupi, direttamente o indirettamente, della pubblicazione in internet delle dichiarazioni stesse, senza alcuna limitazione.')
-
-    def __unicode__(self):
-        return self.charge + ' ' + super(Politician, self)
+    charge             = models.TextField('Incarichi', blank=True, null=True)
+    public_revenue     = models.BooleanField('Redditi online', help_text='In quanto socio di openpolis con funzioni politiche, m\'impegno a fornire annualmente all\'Associazione openpolis la mia dichiarazione dei redditi, lo stato patrimoniale e le spese elettorali come previsto dalla legge 5 luglio 1982 n. 441, affinché  l\'associazione si occupi, direttamente o indirettamente, della pubblicazione in internet delle dichiarazioni stesse, senza alcuna limitazione.')
 
     class Meta:
         verbose_name = 'Politico'
@@ -161,7 +161,7 @@ class OrderedModel(models.Model):
             
             higher_model.save()
             lower_model.save()
-			
+            
         except IndexError:
             pass
         except ModelClass.DoesNotExist:
