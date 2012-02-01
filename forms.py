@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from op_associazione.models import Address, Membership, Citizen, Politician, Organization, Associate
-
-class AddressForm(forms.ModelForm):
-    class Meta:
-        model = Address
-        widgets = {
-            'civic_nb': forms.TextInput(attrs={'size': 10}),
-            'zip_code': forms.TextInput(attrs={'size': 10})
-        }
+from op_associazione.models import Membership, Citizen, Politician, Organization, Associate
 
 class MembershipForm(forms.ModelForm):
     class Meta:
@@ -49,9 +41,9 @@ class AssociateForm(forms.ModelForm):
             'gender': forms.RadioSelect(),
             'notes': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
             'charge': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
-            'birth_date': forms.DateInput(format='%d/%m/%Y', attrs={'class':'datepicker', 'readonly':'true'}),
+            'birth_date': forms.DateInput(format='%d/%m/%Y', attrs={'class':'datepicker'}),
         }
-        exclude = ('legal_address', 'expedition_address', 'hash_key')
+        exclude = ('hash_key',)
 
 class CitizenForm(AssociateForm):
     class Meta(AssociateForm.Meta):

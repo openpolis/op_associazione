@@ -1,178 +1,267 @@
 {% extends "layout.html" %}
 {% load markup %}
 
-{% block content %}
+{% block article %}
 
-<h1>Richiesta di iscrizione all’associazione Openpolis come {{ member_type|capfirst }}</h1>
-<small>I Campi con * sono obbligatori</small>
+<article id="main" class="container">       
+    <div class="row">
 
-{% if membership_form.errors or associate_form.errors or legal_address_form.errors or expedition_address_form.errors %}
-<p class="errorlist">
-	Attenzione! C’è qualche errore nella compilazione del form. <br /> Controlla ciò che è segnalato in rosso.
-</p>
-{% endif %}
+      <h1>Richiesta di iscrizione all’associazione Openpolis come {{ member_type|capfirst }}</h1>
+      <small>I Campi con * sono obbligatori</small>
 
-<form action="{% url subscribe-module member_type=member_type %}" id="subscribe_form" method="post">
-	{% csrf_token %}
-	
-	<div class="fieldWrapper">
-		{{ membership_form.type_of_membership.label_tag }}
-		<p>{{ membership_form.type_of_membership }}</p>
-	</div>
+      {% if membership_form.errors or associate_form.errors or legal_address_form.errors or expedition_address_form.errors %}
+      <p class="errorlist">
+          Attenzione! C’è qualche errore nella compilazione del form. <br /> Controlla ciò che è segnalato in rosso.
+      </p>
+      {% endif %}
 
-	<div class="fieldWrapper">
-		<label for="{{ membership_form.fee.html_name }}">*{{ membership_form.fee.label }}</label>
-		<p>{{ membership_form.fee }}</p>
-		{{ membership_form.fee.errors }}
-	</div>
+      <form action="{% url subscribe-module member_type=member_type %}" id="subscribe_form" method="post">
+          {% csrf_token %}
 
-	<div class="fieldWrapper gray">
-		{{ membership_form.public_subscription }}
-		<div>{{ membership_form.public_subscription.help_text }}</div>
-	</div>
-	
-	{% block associate_extra %}{% endblock%}
+          <div class="fieldWrapper">
+              {{ membership_form.type_of_membership.label_tag }}
+              <p>
+                {{ membership_form.type_of_membership }}
+                <div>{{membership_form.type_of_membership.help_text}}</div>
+              </p>
+          </div>
 
-<h2>{% block associate_details_title %}Dati personali{% endblock %}</h2>
+          <div class="fieldWrapper">
+              <label for="id_{{ membership_form.fee.html_name }}">*{{ membership_form.fee.label }}</label>
+              <p>
+                {{ membership_form.fee }}
+                <div>{{membership_form.fee.help_text}}</div>
+              </p>
+              {{ membership_form.fee.errors }}
+          </div>
 
-	<div class="fieldWrapper">
-		<label for="{{ associate_form.first_name.html_name }}">*{{ associate_form.first_name.label }}</label>
-		<p>{{ associate_form.first_name }}</p>
-		{{ associate_form.first_name.errors }}
-	</div>
-	
-	<div class="fieldWrapper">
-		<label for="{{ associate_form.last_name.html_name }}">*{{ associate_form.last_name.label }}</label>
-		<p>{{ associate_form.last_name }}</p>
-		{{ associate_form.last_name.errors }}
-	</div>
-	
-	<div class="fieldWrapper">
-		<label for="{{ associate_form.birth_date.html_name }}">*{{ associate_form.birth_date.label }}</label>
-		<p>{{ associate_form.birth_date }}</p>
-		{{ associate_form.birth_date.errors }}
-	</div>
-	
-	<div class="fieldWrapper">
-		<label for="{{ associate_form.gender.html_name }}">*{{ associate_form.gender.label }}</label>
-		{{ associate_form.gender }}
-		{{ associate_form.gender.errors }}
-	</div>
-	
-	<div class="fieldWrapper">
-		<label for="{{ associate_form.fiscal_code.html_name }}">*{{ associate_form.fiscal_code.label }}</label>
-		<p>{{ associate_form.fiscal_code }}</p>
-		{{ associate_form.fiscal_code.errors }}
-	</div>
+          <div class="fieldWrapper gray">
+              {{ membership_form.public_subscription }}
+              <label style="width:80%; margin-top: 3px; font-weight: normal" for="id_{{ membership_form.public_subscription.html_name}}">{{ membership_form.public_subscription.help_text }}</label>
+          </div>
 
-<h2>{% block main_address_title %}Indirizzo Residenza{% endblock %}</h2>
+          {% block associate_extra %}{% endblock%}
 
-	{% for field in legal_address_form %}
-	    <div class="fieldWrapper">
-			<label for="{{ field.html_name }}">*{{ field.label }}</label>
-			<p>{{ field }}</p>
-			{{ field.errors }}
-	    </div>
-	{% endfor %}
-	
-<h2>Indirizzo di spedizione della tessera</h2>
-	<div class="fieldWrapper">
-		<input type="checkbox" name="expedition_address_provided" id="address-box"{% if expedition_address_provided %}checked="yes"{% endif %} />
-		<p>E' diverso dall'indirizzo di residenza</p>
-	</div>
-	
-	<div id="hiddenField" {% if not expedition_address_provided %}style="display:none;"{% endif %}>
-		{% for field in expedition_address_form %}
-		    <div class="fieldWrapper">
-				<label for="{{ field.html_name }}">*{{ field.label }}</label>
-				<p>{{ field }}</p>
-				{{ field.errors }}
-		    </div>
-		{% endfor %}
-		
-	</div>
+      <h2>{% block associate_details_title %}Dati personali{% endblock %}</h2>
 
-<h2>Contatti</h2>
+          <div class="fieldWrapper large">
+              <label for="id_{{ associate_form.first_name.html_name }}">*{{ associate_form.first_name.label }}</label>
+              <p>{{ associate_form.first_name }}</p>
+              {{ associate_form.first_name.errors }}
+          </div>
 
-	<div class="fieldWrapper">
-		<label for="{{ contact_form.email.html_name }}">*{{ associate_form.email.label }}</label>
-		<p>{{ associate_form.email }}</p>
-		{{ associate_form.email.errors }}
-	</div>
-	<div class="fieldWrapper">
-		{{ associate_form.wants_newsletter }}
-		<div>{{ associate_form.wants_newsletter.help_text }}</div>
-	</div>
-	<div class="fieldWrapper">
-		<label for="{{ contact_form.phone_number.html_name }}">{{ associate_form.phone_number.label }}</label>
-		<p>{{ associate_form.phone_number }}</p>
-	</div>
-	
-	{% block associate_contact_extra %}{% endblock%}
+          <div class="fieldWrapper large">
+              <label for="id_{{ associate_form.last_name.html_name }}">*{{ associate_form.last_name.label }}</label>
+              <p>{{ associate_form.last_name }}</p>
+              {{ associate_form.last_name.errors }}
+          </div>
 
-	<div class="fieldWrapper orange">
-		{{ associate_form.accept_policy }}
-		<div><strong>*{{ associate_form.accept_policy.help_text }}</strong> <br /> Approvo i principi e le regole dello <a href="{% url static-page page_slug='statuto' %}" target="_blank">statuto dell'Associazione Openpolis</a></div>
-		{{ associate_form.accept_policy.errors }}
-		
-		<br />
+          <div class="fieldWrapper">
+              <label for="id_{{ associate_form.birth_date.html_name }}">*{{ associate_form.birth_date.label }}</label>
+              <p>{{ associate_form.birth_date }}</p>
+              {{ associate_form.birth_date.errors }}
+          </div>
 
-		{{ associate_form.accept_privacy_policy }}
-		<div><strong>*{{ associate_form.accept_privacy_policy.help_text }}</strong> <br /> Autorizzo l'Associazione Openpolis al trattamento dei miei dati personali per gli scopi indicati nell'<a href="{% url static-page page_slug='privacy' %}" target="_blank">apposita informativa</a></div>
-		{{ associate_form.accept_privacy_policy.errors }}
-	</div>
+          <div class="fieldWrapper">
+              <label for="id_{{ associate_form.gender.html_name }}">*{{ associate_form.gender.label }}</label>
+              {{ associate_form.gender }}
+              {{ associate_form.gender.errors }}
+          </div>
 
-<input type="submit" value="Invia" id="submit_button" />
-</form>
+          <div class="fieldWrapper">
+              <label for="id_{{ associate_form.fiscal_code.html_name }}">*{{ associate_form.fiscal_code.label }}</label>
+              <p>
+                {{ associate_form.fiscal_code }}
+                <div>{{associate_form.fiscal_code.help_text}}</div>
+                </p>
+              {{ associate_form.fiscal_code.errors }}
+          </div>
+
+      <h2>{% block main_address_title %}Indirizzo Residenza{% endblock %}</h2>
+
+          <div class="fieldWrapper large">
+              <label for="id_{{ associate_form.street.html_name }}">*{{ associate_form.street.label }}</label>
+              <p>{{ associate_form.street }}</p>
+              {{ associate_form.street.errors }}
+          </div>
+          <div class="fieldWrapper small">
+              <label for="id_{{ associate_form.civic_nb.html_name }}">*{{ associate_form.civic_nb.label }}</label>
+              <p>{{ associate_form.civic_nb }}</p>
+              {{ associate_form.civic_nb.errors }}
+          </div>
+          <div class="fieldWrapper small">
+              <label for="id_{{ associate_form.zip_code.html_name }}">*{{ associate_form.zip_code.label }}</label>
+              <p>{{ associate_form.zip_code }}</p>
+              {{ associate_form.zip_code.errors }}
+          </div>
+          <div class="fieldWrapper">
+              <label for="id_{{ associate_form.location.html_name }}">*{{ associate_form.location.label }}</label>
+              <p>{{ associate_form.location }}</p>
+              {{ associate_form.location.errors }}
+          </div>
+          <div class="fieldWrapper">
+              <label for="{{ associate_form.province.html_name }}">*{{ associate_form.province.label }}</label>
+              <p>{{ associate_form.province }}</p>
+              {{ associate_form.province.errors }}
+          </div>
+          <div class="fieldWrapper">
+              <label for="{{ associate_form.country.html_name }}">*{{ associate_form.country.label }}</label>
+              <p>{{ associate_form.country }}</p>
+              {{ associate_form.country.errors }}
+          </div>
+
+      <h2>Indirizzo di spedizione della tessera</h2>
+          <div class="fieldWrapper">
+              <input type="checkbox" name="expedition_address_provided" id="address-box"{% if expedition_address_provided %}checked="yes"{% endif %} />
+              <p>E' diverso dall'indirizzo di residenza</p>
+          </div>
+
+          <div id="hiddenField" {% if not expedition_address_provided %}style="display:none;"{% endif %}>
+            <div class="fieldWrapper large">
+                <label for="{{ associate_form.exp_street.html_name }}">*{{ associate_form.exp_street.label }}</label>
+                <p>{{ associate_form.exp_street }}</p>
+                {{ associate_form.exp_street.errors }}
+            </div>
+            <div class="fieldWrapper small">
+                <label for="{{ associate_form.exp_civic_nb.html_name }}">*{{ associate_form.exp_civic_nb.label }}</label>
+                <p>{{ associate_form.exp_civic_nb }}</p>
+                {{ associate_form.exp_civic_nb.errors }}
+            </div>
+            <div class="fieldWrapper small">
+                <label for="{{ associate_form.exp_zip_code.html_name }}">*{{ associate_form.exp_zip_code.label }}</label>
+                <p>{{ associate_form.exp_zip_code }}</p>
+                {{ associate_form.exp_zip_code.errors }}
+            </div>
+            <div class="fieldWrapper">
+                <label for="{{ associate_form.exp_location.html_name }}">*{{ associate_form.exp_location.label }}</label>
+                <p>{{ associate_form.exp_location }}</p>
+                {{ associate_form.exp_location.errors }}
+            </div>
+            <div class="fieldWrapper">
+                <label for="{{ associate_form.exp_province.html_name }}">*{{ associate_form.exp_province.label }}</label>
+                <p>{{ associate_form.exp_province }}</p>
+                {{ associate_form.exp_province.errors }}
+            </div>
+            <div class="fieldWrapper">
+                <label for="{{ associate_form.exp_country.html_name }}">*{{ associate_form.exp_country.label }}</label>
+                <p>{{ associate_form.exp_country }}</p>
+                {{ associate_form.exp_country.errors }}
+            </div>
+          </div>
+
+
+      <h2>Contatti</h2>
+          <div class="fieldWrapper">
+              <label for="{{ contact_form.email.html_name }}">*{{ associate_form.email.label }}</label>
+              <p>{{ associate_form.email }}</p>
+              {{ associate_form.email.errors }}
+          </div>
+          <div class="fieldWrapper">
+              {{ associate_form.wants_newsletter }}
+              <div>{{ associate_form.wants_newsletter.help_text }}</div>
+          </div>
+          <div class="fieldWrapper">
+              <label for="{{ contact_form.phone_number.html_name }}">{{ associate_form.phone_number.label }}</label>
+              <p>{{ associate_form.phone_number }}</p>
+          </div>
+
+          {% block associate_contact_extra %}{% endblock%}
+
+          <div class="fieldWrapper orange">
+              {{ associate_form.accept_policy }}
+              <div><strong>*{{ associate_form.accept_policy.help_text }}</strong> <br /> Approvo i principi e le regole dello <a href="{% url static-page page_slug='statuto' %}" target="_blank">statuto dell'Associazione Openpolis</a></div>
+              {{ associate_form.accept_policy.errors }}
+
+              <br />
+
+              {{ associate_form.accept_privacy_policy }}
+              <div><strong>*{{ associate_form.accept_privacy_policy.help_text }}</strong> <br /> Autorizzo l'Associazione Openpolis al trattamento dei miei dati personali per gli scopi indicati nell'<a href="{% url static-page page_slug='privacy' %}" target="_blank">apposita informativa</a></div>
+              {{ associate_form.accept_privacy_policy.errors }}
+          </div>
+
+      <input type="submit" value="Invia" id="submit_button" />
+      </form>
+
+    </div>
+</article>
+
 
 {% endblock %}
 
 {% block css_styles %}
 <link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.8.17.custom.css" />
 <style type="text/css">
-	#submit_button { font-size:1.4em; padding: 5px 10px; height:auto;}
-	article#main h1 { font-size:1.4em; clear:left; }
-	form#subscribe_form h2 { clear:left; padding-top:20px; }
-	.fieldWrapper { min-height: 30px; padding: 5px; clear:both; margin-bottom:10px;  }
-	article#main .fieldWrapper > p { padding: 4px 0 ;}
-	.fieldWrapper label { float:left; width:150px; line-height:15px; font-weight: bold; }
-	.fieldWrapper.gray, .fieldWrapper.orange { padding: 10px 0; }
-	.fieldWrapper.gray { background-color: #e9e8e8; }
-	.fieldWrapper.orange { background-color: #fcf8c5; }
-	.fieldWrapper p { float:left; font-size: 0.9em; width:210px; }
-	.fieldWrapper input[type='checkbox'] { float: left; margin: 5px; }
+    #submit_button { font-size:1.4em; padding: 5px 10px; height:auto;}
+    article#main h1 { font-size:1.4em; clear:left; color: black; }
+    form#subscribe_form h2 { clear:left; padding-top:20px; font-size: 22px}
+    .fieldWrapper { min-height: 30px; padding: 5px; clear:both; margin-bottom:10px;  }
+    article#main .fieldWrapper > p { padding: 0;}
+    .fieldWrapper label { float:left; width:150px; line-height:15px; font-weight: bold; font-family: Arial, Helvetica, sans; font-size: 15px; }
+    .fieldWrapper.gray, .fieldWrapper.orange { padding: 10px 0; }
+    .fieldWrapper.gray { background-color: #e9e8e8; }
+    .fieldWrapper.orange { background-color: #fcf8c5; }
+    .fieldWrapper p { float:left; font-size: 0.9em; width:210px; }
+    .fieldWrapper input, .fieldWrapper select { font-size: 16px; font-weight: normal }
+    .fieldWrapper.large input { width: 400px; }
+    .fieldWrapper.large p { width:420px; }
+    .fieldWrapper.small input { width: 50px; }
+    .fieldWrapper.small p { width:80px; }
+    .fieldWrapper input[type='checkbox'] { float: left; margin: 5px; }
 
-	.fieldWrapper ul li label { width:103px; }
-	.errorlist { color:red; }
-	.errorlist li { background:none; }
-	
-	
+    .fieldWrapper ul li label { width:103px; }
+    .errorlist { color:red; }
+    .errorlist li { background:none; }
+    
+    
 </style>
 {% endblock %}
 
 
 {% block js_footer %}
-	{{ block.super }}
-	<script type="text/javascript" src="/static/js/jquery-ui-1.8.17.datepicker.min.js"></script>
-	
-	<script>
-	$(function() {
-			$( "input.datepicker" ).datepicker({ 
-					dateFormat: 'dd/mm/yy', 
-					changeMonth: true,
-					changeYear: true,
-					/*minDate: new Date("1900-01-01"),
-					maxDate: "-10Y",*/
-					yearRange: "1900:+0"
-			});
-			
-			$( '#address-box' ).click(function() {
-				$('#hiddenField').slideToggle();
-			});
-			
-			$( 'ul.errorlist' ).parent().children('label').css('color','red');
-		});
-	</script>
+    {{ block.super }}
+    <script type="text/javascript" src="/static/js/jquery-ui-1.8.17.datepicker.min.js"></script>
+    
+    <script>
+    /* Italian initialisation for the jQuery UI date picker plugin. */
+    /* Written by Antonello Pasella (antonello.pasella@gmail.com). */
+    $(function(){
+        $.datepicker.regional['it'] = {
+            closeText: 'Chiudi',
+            prevText: '&#x3c;Prec',
+            nextText: 'Succ&#x3e;',
+            currentText: 'Oggi',
+            monthNames: ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno',
+                'Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],
+            monthNamesShort: ['Gen','Feb','Mar','Apr','Mag','Giu',
+                'Lug','Ago','Set','Ott','Nov','Dic'],
+            dayNames: ['Domenica','Luned&#236','Marted&#236','Mercoled&#236','Gioved&#236','Venerd&#236','Sabato'],
+            dayNamesShort: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],
+            dayNamesMin: ['Do','Lu','Ma','Me','Gi','Ve','Sa'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''};
+        $.datepicker.setDefaults($.datepicker.regional['it']);
+    });
+    
+    $(function() {
+            $( "input.datepicker" ).datepicker({ 
+                    dateFormat: 'dd/mm/yy', 
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "1900:+0"
+            });
+            
+            $( 'ul.errorlist' ).parent().children('label').css('color','red');
+
+            $( '#address-box' ).click(function() {
+                $('#hiddenField').slideToggle();
+            });
+                  
+        });
+    </script>
 {% endblock %}
 
 

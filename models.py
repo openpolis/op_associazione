@@ -4,8 +4,8 @@ from django.core.urlresolvers import reverse
 from django.db import models
 
 GENDERS = (
-    ('M', 'Male'),
-    ('F', 'Female'),
+    ('M', 'Uomo'),
+    ('F', 'Donna'),
 )
 
 
@@ -16,14 +16,14 @@ class Membership(models.Model):
         ('ordinario', 'Socio ordinario'),
         ('studente', 'Socio studente')
     )
-    type_of_membership     = models.CharField("Tipo di iscrizione",max_length=50,choices=MEMBER_TYPE, default='ordinario')
-    fee                    = models.FloatField("Quota (euro)")
+    type_of_membership     = models.CharField("Tipo di iscrizione",max_length=50,choices=MEMBER_TYPE, default='ordinario', help_text="Seleziona il tipo di iscrizione")
+    fee                    = models.FloatField("Quota (euro)", help_text="Inserisci la quota che vuoi versare. Considera le quote minime: Ordinario: 50€ Sostenitore: 500€ Studente/Precario: 20€.")
     payed                  = models.FloatField("Quota pagata",null=True, blank=True)
     payed_at               = models.DateField("Data pagamento",null=True, blank=True)
     expire_at              = models.DateField("Scadenza",null=True, blank=True)
     sent_card_at           = models.DateField("Data invio",null=True, blank=True)
     notes                  = models.TextField("Note", blank=True)
-    is_active              = models.BooleanField("Attivato",default=False)
+    is_active              = models.BooleanField("Attivato", default=False)
     associate              = models.ForeignKey('Associate')
     public_subscription    = models.BooleanField("Iscrizione pubblica",default=False, help_text='Voglio comparire tra i sostenitori dell\'associazione e desidero che la mia quota di sottoscrizione sia pubblicata insieme al mio nome')
     created_at             = models.DateField(auto_now_add=False)
@@ -57,7 +57,7 @@ class Associate(models.Model):
     last_name             = models.CharField('Cognome',max_length=200)
     birth_date            = models.DateField('Data di nascita')
     gender                = models.CharField('Sesso',max_length=1, choices=GENDERS, default='')
-    fiscal_code           = models.CharField('Codice fiscale',max_length=20)
+    fiscal_code           = models.CharField('Codice fiscale',max_length=20, help_text="Inserisci codice fiscale (16 caratteri)")
     phone_number          = models.CharField('Telefono',max_length=200,blank=True, null=True)
     wants_newsletter      = models.BooleanField('Newsletter',help_text='Voglio ricevere la newsletter via email')
     email                 = models.EmailField(unique=True)
