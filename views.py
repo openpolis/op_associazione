@@ -11,6 +11,9 @@ from django.template import  RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 
+from copy import deepcopy
+import hashlib
+
 from django.template.loader import get_template
 def static_page(request, page_slug):
     return render_to_response('statics/'+ page_slug +'.html', {},context_instance=RequestContext(request))
@@ -117,10 +120,13 @@ def subscribe_module(request, member_type):
             if exp_address_provided:
                 associate.expedition_address = expedition_address_form.save()
             else :
-                associate.expedition_address = associate.legal_address
+                old_obj = deepcopy(associate.legal_address)
+                old_obj.id = None
+                old_obj.save()
+                associate.expedition_address = old_obj                
 
             # Build the activation key for their account
-            import hashlib
+            
             associate.hash_key = hashlib.sha1(associate.email).hexdigest()
             # Save it
             associate.save()
