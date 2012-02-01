@@ -1,18 +1,22 @@
+# -*- coding: utf-8 -*-
 # Django settings for op_associazione project.
 import os.path
 from django.conf import global_settings
 
 BASE_PATH = os.path.dirname(__file__)
-ADMIN_EMAIL = 'info@openpolis.it'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Guglielmo Celata', 'guglielmo@openpolis.it'),
 )
 
-MANAGERS = ADMINS
+MANAGERS = ADMINS + (
+    ('Daniele Faraglia', 'daniele@openpolis.it'),
+    ('Vincenzo Smaldore', 'vincenzo@openpolis.it'),
+    ('Mariachiara Manopulo', 'mariachiara@openpolis.it'),
+)
 
 DATABASES = {
     'default': {
@@ -27,6 +31,13 @@ DATABASES = {
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
+
+# rss feeds for openpolis blog, twitter account and facebook page
+OP_BLOG_FEED = "http://feeds.feedburner.com/openpolis?format=xml"
+OP_TW_FEED = "https://twitter.com/statuses/user_timeline/83212310.rss"
+OP_FB_FEED = "http://www.facebook.com/feeds/page.php?id=129419747068352&format=rss20"
+
+SERVER_EMAIL = "noreply@openpolis.it"
 
 
 # Local time zone for this installation. Choices can be found here:
@@ -81,7 +92,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	os.path.join(BASE_PATH, 'assets'),
+    os.path.join(BASE_PATH, 'assets'),
 )
 
 # List of finder classes that know how to find static files in
@@ -99,7 +110,6 @@ SECRET_KEY = 'pid8f3e(&w&ut7wesn8$+uoh211d1ci9-x54q_yt9*nmvif^qa'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-	'django.template.loaders.app_directories.load_template_source',
 #     'django.template.loaders.eggs.Loader',
 )
 
@@ -117,8 +127,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	os.path.join(BASE_PATH, 'templates'),
-#	'/Users/daniele/Workspace/op_associazione/templates/'
+    os.path.join(BASE_PATH, 'templates'),
+#    '/Users/daniele/Workspace/op_associazione/templates/'
 )
 
 INSTALLED_APPS = (
@@ -128,18 +138,25 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'django_extensions',
+    'django_extensions',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-	# Markup Ext
-	'django.contrib.markup',
-	# Applicazioni dell'associazione
-	'south',
-	'op_associazione',
-	'op_associazione.easycms',
+    # Markup Ext
+    'django.contrib.markup',
+    # Applicazioni dell'associazione
+    'south',
+    'op_associazione',
+    'op_associazione.easycms',
 )
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -166,13 +183,13 @@ LOGGING = {
 
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
-	'django.core.context_processors.static',
-	'django.contrib.messages.context_processors.messages',
-	'op_associazione.easycms.context_processors.navigation',
+    'django.core.context_processors.static',
+    'django.contrib.messages.context_processors.messages',
+    'op_associazione.easycms.context_processors.navigation',
 )
 
 

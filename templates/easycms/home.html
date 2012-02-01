@@ -6,39 +6,39 @@
     <div class="row">
         <div id="splash" class="prefixone elevencol">
             <img src="/static/img/payoff/slogan_homepage.png" alt="Colleghiamo i dati per fare trasparenza, li distribuiamo per innescare partecipazione. 
-			Costruiamo strumenti liberi e gratuiti per 'aprire la politica'. Sostienici: associati ad Openpolis!" />
+            Costruiamo strumenti liberi e gratuiti per 'aprire la politica'. Sostienici: associati ad Openpolis!" />
         </div>
     </div>        
     <div class="row">
-		<div class="threecol">
-			<img src="/static/img/logos/logo-indice.png" alt="Indice di produttività parlamentare" class="sublogo" />
-			<p>
-			Quantità ed efficacia dell'attività dei parlamentari dall'inizio della legislatura ad oggi, nel <strong>rapporto annuale</strong> Camere aperte (2011).
-			<a href="http://indice.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-green.png" alt="" /></a>
-			</p>
-		</div>
-		<div class="threecol">
-			<img src="/static/img/logos/logo-voisietequi.png" alt="Voi Siete Qui" class="sublogo" />
-			<p>
-			<strong>Test politico-elettorale</strong> per capire quali partiti rappresentano di più le proprie posizioni politiche in base ai programmi elettorali e alle dichiarazioni pubbliche dei leader prima delle elezioni.
-			<a href="http://voisietequi.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-red.png" alt="" /></a>
-			</p>
-		</div>
-		<div class="threecol">
-			<img src="/static/img/logos/logo-assoc.png" alt="OpenPolis" class="sublogo" />
-			<p>
-			La piattaforma per conoscere, monitorare e seguire i politici eletti, dal <strong>più piccolo comune al parlamento europeo</strong>. (Con dati ufficiali del Ministero dell'Interno, Parlamento italiano ecc)
-			<a href="http://www.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-orange.png" alt="" /></a>
-			</p>						
-		</div>
-		<div class="threecol last">
-			<img src="/static/img/logos/logo-parlamento.png" alt="Open parlamento" class="sublogo" />
-			<p>
-			La piattaforma per informarsi, monitorare e intervenire nei lavori quotidiani del <strong>parlamento italiano</strong>. 
-		(Con dati ufficiali del Ministero dell’Interno, Camera e Senato) <br />
-			<a href="http://parlamento.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-fucsia.png" alt="" /></a>
-			</p>
-		</div>
+        <div class="threecol">
+            <img src="/static/img/logos/logo-indice.png" alt="Indice di produttività parlamentare" class="sublogo" />
+            <p>
+            Quantità ed efficacia dell'attività dei parlamentari dall'inizio della legislatura ad oggi, nel <strong>rapporto annuale</strong> Camere aperte (2011).
+            <a href="http://indice.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-green.png" alt="" /></a>
+            </p>
+        </div>
+        <div class="threecol">
+            <img src="/static/img/logos/logo-voisietequi.png" alt="Voi Siete Qui" class="sublogo" />
+            <p>
+            <strong>Test politico-elettorale</strong> per capire quali partiti rappresentano di più le proprie posizioni politiche in base ai programmi elettorali e alle dichiarazioni pubbliche dei leader prima delle elezioni.
+            <a href="http://voisietequi.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-red.png" alt="" /></a>
+            </p>
+        </div>
+        <div class="threecol">
+            <img src="/static/img/logos/logo-assoc.png" alt="OpenPolis" class="sublogo" />
+            <p>
+            La piattaforma per conoscere, monitorare e seguire i politici eletti, dal <strong>più piccolo comune al parlamento europeo</strong>. (Con dati ufficiali del Ministero dell'Interno, Parlamento italiano ecc)
+            <a href="http://www.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-orange.png" alt="" /></a>
+            </p>                        
+        </div>
+        <div class="threecol last">
+            <img src="/static/img/logos/logo-parlamento.png" alt="Open parlamento" class="sublogo" />
+            <p>
+            La piattaforma per informarsi, monitorare e intervenire nei lavori quotidiani del <strong>parlamento italiano</strong>. 
+        (Con dati ufficiali del Ministero dell’Interno, Camera e Senato) <br />
+            <a href="http://parlamento.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-fucsia.png" alt="" /></a>
+            </p>
+        </div>
     </div>
 </section>
 {% endblock %}
@@ -48,29 +48,41 @@
 <section id="extra" class="container">      
     <div class="row">
         <div class="prefixthree threecol">
-			<ul>
-				<li>Il Governo Monti ha giurato di fronte al Presidente della Repubblica. Nessun politico, solo tecnici (18.11.2011)</li>
-				<li>Il testo del maxiemendamento della legge di stabilità 2012 (1.11.2011)</li>
-				<li>Quando non si vota la fiducia la maggioranza non c’è (10.10.2011)</li>
-			</ul>
-			<p><span class="icon wordpress"></span>Vai al Blog</p>
-		</div>
+            <ul class="feed">
+              {% for blog_entry in  blog_entries%}
+                <li>
+                  <a href="{{blog_entry.link}}" target="_blank">
+                    {{blog_entry.title}} ({{blog_entry.updated_parsed.tm_mday}}.{{blog_entry.updated_parsed.tm_mon}}.{{blog_entry.updated_parsed.tm_year}})
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+            <p><a href="http://blog.openpolis.it" target="_blank"><span class="icon wordpress"></span>Vai al Blog</a></p>
+        </div>
         <div class="threecol">
-			<ul>
-				<li>Il Governo Monti ha giurato di fronte al Presidente della Repubblica. Nessun politico, solo tecnici (18.11.2011)</li>
-				<li>Il testo del maxiemendamento della legge di stabilità 2012 (1.11.2011)</li>
-				<li>Quando non si vota la fiducia la maggioranza non c’è (10.10.2011)</li>
-			</ul>
-			<p><span class="icon twitter"></span>Twitter Entries</p>
-		</div>
+            <ul class="feed">
+              {% for tw_entry in  tw_entries%}
+                <li>
+                  <a href="{{tw_entry.link}}" target="_blank">
+                    {{tw_entry.title}} ({{tw_entry.updated_parsed.tm_mday}}.{{tw_entry.updated_parsed.tm_mon}}.{{tw_entry.updated_parsed.tm_year}})
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+            <p><a href="http://www.twitter.com/openpolis" target="_blank"><span class="icon twitter"></span>Twitter Entries</a></p>
+        </div>
         <div class="threecol last">
-			<ul>
-				<li>Il Governo Monti ha giurato di fronte al Presidente della Repubblica. Nessun politico, solo tecnici (18.11.2011)</li>
-				<li>Il testo del maxiemendamento della legge di stabilità 2012 (1.11.2011)</li>
-				<li>Quando non si vota la fiducia la maggioranza non c’è (10.10.2011)</li>
-			</ul>
-			<p><span class="icon facebook"></span>Facebook Entries</p>
-		</div>
+            <ul class="feed">
+              {% for fb_entry in  fb_entries%}
+                <li>
+                  <a href="{{fb_entry.link}}" target="_blank">
+                    {{fb_entry.title}} ({{fb_entry.updated_parsed.tm_mday}}.{{fb_entry.updated_parsed.tm_mon}}.{{fb_entry.updated_parsed.tm_year}})
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+            <p><a href="http://www.facebook.com/openpolis" target="_blank"><span class="icon facebook"></span>Facebook Entries</a></p>
+        </div>
     </div>
 </section>
 {% endblock %}

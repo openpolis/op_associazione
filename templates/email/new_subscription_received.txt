@@ -1,0 +1,10 @@
+E' arrivata una nuova richiesta di iscrizione all'Associazione Openpolis
+da parte dell'utente {{membership.associate}}. 
+
+Verifica i dati visitando questo link:
+http://www.openpolis.it/admin/TOBEDEFINED
+
+Verifica che abbia effettuato i pagamenti sull'account paypal o nel bonifico.
+
+Poi attivalo, visitando questo link:
+http://www.openpolis.it/admin/TOBEDEFINED
