@@ -98,21 +98,18 @@ def subscribe_module(request, member_type):
     membership_form = build_membership_form(request,member_type)
     exp_address_provided = request.POST.get('expedition_address_provided', False)
     if request.method == 'POST': # If the form has been submitted...
-        legal_address_form = forms.AddressForm(request.POST)
-        expedition_address_form = forms.AddressForm(data=request.POST,prefix='exp')
 
-        if associate_form.is_valid() & membership_form.is_valid() & legal_address_form.is_valid() & check_expedition_address(exp_address_provided,expedition_address_form): # All validation rules pass
+        if associate_form.is_valid() & membership_form.is_valid(): # All validation rules pass
             
             associate = associate_form.save(commit=False)
-            associate.legal_address = legal_address_form.save()
             # Check if Expedition Address is provided
-            if exp_address_provided:
-                associate.expedition_address = expedition_address_form.save()
-            else :
-                old_obj = deepcopy(associate.legal_address)
-                old_obj.id = None
-                old_obj.save()
-                associate.expedition_address = old_obj                
+            if not exp_address_provided:
+                associate.exp_street = associate.street
+                associate.exp_civic_nb = associate.civic_nb
+                associate.exp_zip_code = associate.zip_code
+                associate.exp_location = associate.location
+                associate.exp_province = associate.province
+                associate.exp_country = associate.country
 
             # Build the activation key for their account
             associate.hash_key = hashlib.sha1(associate.email).hexdigest()
@@ -129,15 +126,10 @@ def subscribe_module(request, member_type):
             request.session['associate-fee'] = membership.fee
 
             return HttpResponseRedirect(reverse('subscribe-pay')) # Redirect after POST
-    else :
-        legal_address_form = forms.AddressForm()
-        expedition_address_form = forms.AddressForm(prefix='exp')
         
     return render_to_response('subscribe/'+ member_type +'_form.html', {
         'associate_form' : associate_form,
         'membership_form' : membership_form,
-        'legal_address_form' : legal_address_form,
-        'expedition_address_form' : expedition_address_form,
         'expedition_address_provided' : exp_address_provided,
         'member_type' : member_type
     }, context_instance=RequestContext(request))
