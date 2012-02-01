@@ -29,7 +29,7 @@ class PageAdmin(admin.ModelAdmin):
 
 class ProjectAdmin(PageAdmin):
 	list_display = ('title', 'order', 'order_link')
-	fields = PageAdmin.fields + ['logo']
+	fields = PageAdmin.fields + ['logo', 'url']
 
 class DossierAdmin(PageAdmin):
 	list_display = ('title', 'order', 'order_link')
