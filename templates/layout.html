@@ -132,6 +132,23 @@
     
     {% block js_footer %}
     <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.tools.min.js"></script>
+    <script>
+	$(function() {
+		$('.tips').tooltip({ 
+			// place tooltip on the right edge
+			//position: "center right",
+
+			// a little tweaking of the position
+			offset: [10, 10],
+
+			// use the built-in fadeIn/fadeOut effect
+			effect: "slide",
+
+			// custom opacity setting
+			opacity: 0.8});
+	});
+	</script>
     {% endblock %}
     
 </body>

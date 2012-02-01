@@ -16,8 +16,7 @@
 {% block js_footer %}
 	{{ block.super }}
 	<script type="text/javascript" src="/static/js/jquery-ui-1.8.17.accordion.min.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.tools.min.js"></script>
-	
+
 	<script>
 	$(function() {
 		$( "#accordion" ).accordion({
@@ -25,18 +24,6 @@
 			collapsible: true,
 			active: false
 		}).mouseleave(function(){ $(this).accordion( "activate" , false ) });
-		$('.tips').tooltip({ 
-			// place tooltip on the right edge
-			position: "center right",
-
-			// a little tweaking of the position
-			offset: [10, 10],
-
-			// use the built-in fadeIn/fadeOut effect
-			effect: "slide",
-
-			// custom opacity setting
-			opacity: 0.8});
 	});
 	</script>
 {% endblock %}
