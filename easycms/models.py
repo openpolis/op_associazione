@@ -70,10 +70,10 @@ class DossierLink(OrderedModel):
         ( BLUE_ICON , 'Link')
     )
     
-    url            = models.URLField(verify_exists=True)
+    url         = models.URLField()
     icon        = models.CharField(choices=ICON_CHOICES, default=GREEN_ICON, max_length=20 )
     text        = models.CharField('Link Text', max_length=200)
-    dossier        = models.ForeignKey(Dossier, related_name='links')
+    dossier     = models.ForeignKey(Dossier, related_name='links')
     
     class Meta(OrderedModel.Meta):
         verbose_name = "Risorsa Dossier"
