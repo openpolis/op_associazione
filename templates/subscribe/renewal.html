@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 
+{% block title %} - Rinnovo associazione {% endblock %}
+
 {% block content %}
 {% url subscribe-renewal user_hash=associate.hash_key as renewal_url %}
     <div class="yellow">

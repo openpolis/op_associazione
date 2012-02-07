@@ -2,6 +2,8 @@
 {% load cms_extras %}
 {% load markup %}
 
+{% block title %} - {{page.title}} {% endblock %}
+
 {% block article_head %}
     <div class="row">
         
@@ -30,27 +32,13 @@
     <aside>
         {% if page.asides.all|length > 0 %}
             {% for aside in page.asides.all %}
-            <blockquote class="pull-right">
+            <blockquote>
             {{ aside.text|markdown }}
                 {% if aside.author %}
                   <small>{{ aside.author }}</small>
                 {% endif %}
             </blockquote>
             {% endfor %}
-        {% else %}
-        
-        <blockquote class="pull-right">
-          <p>&ldquo;According to Openpolis, 
-a research group, the average age of the cabinet is, at 64, 
-the highest in the European Union and also in the history 
-of the Italian republic.&rdquo;</p>
-          <small>The Economist</small>
-        </blockquote>
-        
-        <blockquote class="pull-right">
-          <p>&ldquo;Il governo pi&ugrave; vecchio della Storia repubblicana e dell’Europa dei 27, lontano dalla parit&agrave; di rappresentanza fra uomini e donne e che include tre fra i dieci ministri pi&ugrave; anziani dell’Unione. &Egrave; quanto emerge da "I tecno-professori" – il rapporto sulla composizione del Governo Monti per et&agrave; e genere realizzato dall’associazione Openpolis.&rdquo;</p>
-          <small>Il Fatto quotidiano</small>
-        </blockquote>
         {% endif %}
     </aside>
 {% endblock %}

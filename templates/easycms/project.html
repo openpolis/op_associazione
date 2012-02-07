@@ -1,5 +1,6 @@
 {% extends "easycms/page.html" %}
 
+{% block title %} - {{page.title}} {% endblock %}
 {% block content_header %}
     {% if page.logo %}
       <a href="{{ page.url }}/" target="_blank" id="project-logo"><img src="{{ page.logo.url }}" alt="{{ page.title }}" /></a>

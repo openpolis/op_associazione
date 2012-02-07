@@ -1,7 +1,13 @@
 {% extends "easycms/page.html" %}
 
+{% block title %} - {{page.title}} {% endblock %}
+
 {% block content_header %}
-    <img src="/static/img/icons/minidossier.png" id="dossier-logo" alt="MiniDossier di OpenPolis" />
+    {% if page.slug ==  'camere-aperte' %}
+      <img src="/static/img/icons/dossier_camere_aperte.png" id="dossier-logo" alt="Dossier Camere Aperte" />
+    {% else %}
+      <img src="/static/img/icons/minidossier.png" id="dossier-logo" alt="MiniDossier di OpenPolis" />
+    {% endif %}
     <h1>{{ page.title }}</h1>
 {% endblock %}
 

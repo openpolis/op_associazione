@@ -302,8 +302,11 @@ a.button-forward {
   padding: 5px;
 }
 
+blockquote {
+  border-left: 0;
+}
 blockquote p {
-  color: #999;
+  color: #989797;
 }
 
 blockquote small {
