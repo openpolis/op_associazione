@@ -4,13 +4,7 @@
   <div class="navbar-inner">
     <div class="container">
 
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      
-      <div class="nav-collapse offset1">
+      <div class="offset1">
         <ul class="nav" style="margin-left: -10px">
           <li{% is_active "about-us" "active" %}><a href="{% url about-us %}">Chi siamo</a></li>
           <li{% is_active "progetti" "dropdown active" "dropdown" %}>

@@ -24,40 +24,42 @@
     </div>
     <div style="padding: 1em;">
 
-      <fieldset>
+      <form action="{{ renewal_url }}" method="POST">
+        {% csrf_token %}
+        <fieldset>
 
-        <legend>Oppure modifica il tipo di iscrizione</legend>
+          <legend>Oppure modifica il tipo di iscrizione</legend>
 
-        <label>{{ form.type_of_membership.label_tag }}</label>
-        {{ form.type_of_membership }}
-        <span class="help-inline">Scegli una nuova tipologia di associazione per modificare la tua iscrizione.</span>
+          <label>{{ form.type_of_membership.label_tag }}</label>
+          {{ form.type_of_membership }}
+          <span class="help-inline">Scegli una nuova tipologia di associazione per modificare la tua iscrizione.</span>
 
-        <div class="control-group {% if form.fee.errors %}error{% endif %}">
-          <label for="id_{{ form.fee.html_name }}">*{{ form.fee.label }}</label>
-          {{ form.fee }}
-          <span class="help-inline">
-            {% if form.fee.errors %}
-              {% for error in form.fee.errors %}
-                  {{ error|escape }}
-              {% endfor %}
-            {% else %}
-              {{form.fee.help_text}}
-            {% endif %}
-          </span>
-        </div>
+          <div class="control-group {% if form.fee.errors %}error{% endif %}">
+            <label for="id_{{ form.fee.html_name }}">*{{ form.fee.label }}</label>
+            {{ form.fee }}
+            <span class="help-inline">
+              {% if form.fee.errors %}
+                {% for error in form.fee.errors %}
+                    {{ error|escape }}
+                {% endfor %}
+              {% else %}
+                {{form.fee.help_text}}
+              {% endif %}
+            </span>
+          </div>
 
-        <label class="checkbox" for="id_{{ form.public_subscription.html_name}}">
-          {{ form.public_subscription }}
-          {{ form.public_subscription.help_text }}
-        </label>
+          <label class="checkbox" for="id_{{ form.public_subscription.html_name}}">
+            {{ form.public_subscription }}
+            {{ form.public_subscription.help_text }}
+          </label>
 
-        <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Invia</button>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Invia</button>
 
-        </div>
+          </div>
 
-      </fieldset>
-
+        </fieldset>
+      </form>
 
         </form>
         

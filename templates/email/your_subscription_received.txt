@@ -1,6 +1,10 @@
 Ciao {{membership.associate.first_name|lower|capfirst}}, 
+{% if request_type == 'renew' %}
+siamo molto felici di averti ancora tra noi e speriamo di poter fare assieme tutto quello che ci siamo proposti.
+{% else %}
 questa e' innanzitutto un'email di benvenuto.
 Siamo molto felici di averti tra noi e speriamo di poter fare assieme tutto quello che ci siamo proposti.
+{% endif %}
 
 Nel caso non avessi ancora versato la tua quota associativa di {{membership.fee}} euro,
 ti ricordiamo che puoi fare un bonifico usando queste coordinate:
