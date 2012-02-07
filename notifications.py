@@ -19,12 +19,13 @@ def send_mail(subject, txt_content, from_address, to_addresses, html_content=Non
 
 def send_renewal_email(associate):
     d = Context({ 'current_site': Site.objects.get(id=settings.SITE_ID),
+                  'associate': associate,
                   'renewal_url': reverse('subscribe-renewal', args=[associate.hash_key]) })
     plaintext = get_template('email/renewal_email.txt')
     htmly     = get_template('email/renewal_email.html')
     
     send_mail(
-        '[openpolis] Rinnova la tua iscrizione!', 
+        '[openpolis] Resta qui', 
         plaintext.render(d), 
         settings.SERVER_EMAIL, 
         associate.email,
@@ -39,8 +40,13 @@ def subscription_received(membership, request_type):
     plaintext = get_template('email/your_subscription_received.txt')
     htmly     = get_template('email/your_subscription_received.html')
     
+    if  request_type == 'renew':
+        subject = '[openpolis] Ancora insieme'
+    else:
+        subject = '[openpolis] Benvenuto!'
+
     send_mail(
-        '[openpolis] Benvenuto!', 
+        subject, 
         plaintext.render(d), 
         settings.SERVER_EMAIL, 
         membership.associate.email,

@@ -43,7 +43,7 @@ def renewal(request, user_hash):
     from datetime import timedelta
     next_expire = last_membership.expire_at + timedelta(days=365)
     
-    form = build_membership_form(request, last_membership)
+    form = build_membership_form(request, membership=last_membership)
     if request.method == 'POST':
         if form.is_valid():
             # Create new Membership..
@@ -136,7 +136,7 @@ def build_membership_form(request, membership=None, member_type=None):
     if request.method == 'POST' :
         form = forms.MembershipForm(data=request.POST)
     else :
-        form = forms.MembershipForm()
+        form = forms.MembershipForm(instance=membership)
     
     
     if member_type is not None:

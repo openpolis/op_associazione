@@ -24,12 +24,18 @@ def parse(kwargs):
     op_url = 'http://openpolis.it/'
     opp_url = 'http://parlamento.openpolis.it/'
     stats = (
-            ('Incarichi censiti', op_url + 'api/chargeNumber/', 'Suggerimento incarichi censiti'),
-            ('Politici monitorati', op_url + 'api/politicianNumber/', 'Suggerimento politici monitorati'),
-            ('Emendamenti', opp_url + 'api/getNumeroEmendamenti/', 'Suggerimento emendamenti'),
-            ('Dichiarazioni', op_url + 'api/declarationNumber/', 'Suggerimento dichiarazioni'),
-            ('Votazioni d\'aula', opp_url + 'api/getNumeroVotazioni/', 'Suggerimento votazioni d\'aula'),
-            ('Utenti registrati', op_url + 'api/userNumber/', 'Suggerimento utenti registrati'),
+            ('Incarichi censiti', op_url + 'api/chargeNumber/', 
+             '&Egrave; il numero delle cariche istituzionali presenti e passate che sono memorizzate nei nostri database.'),
+            ('Politici monitorati', op_url + 'api/politicianNumber/', 
+             '&Egrave; il numero dei politici censiti, dal piccolo comune fino al parlamento europeo.'),
+            ('Emendamenti', opp_url + 'api/getNumeroEmendamenti/', 
+             '&Egrave; il numero di emendamenti presentati in Parlamento nella XVI Legislatura. Di ognuno forniamo tutti i dettagli.'),
+            ('Dichiarazioni', op_url + 'api/declarationNumber/', 
+             '&Egrave; il numero delle dichiarazioni dei politici pubblicate dai nostri utenti. Tutte le dichiarazioni hanno il link alla fonte, per avere memoria collettiva delle cose dette e promesse.'),
+            ('Votazioni d\'aula', opp_url + 'api/getNumeroVotazioni/', 
+             '&Egrave; il numero di votazioni elettroniche d\'aula svolte in Parlamento della XVI Legislatura. Di ognuna forniamo tutti i dettagli.'),
+            ('Utenti registrati', op_url + 'api/userNumber/', 
+             'Sono i numeri della nostra community. Senza, openpolis non esisterebbe.'),
         )
 
     table_rows = ''

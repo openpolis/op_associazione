@@ -1,6 +1,11 @@
-Ciao {{membership.associate.first_name|lower|capfirst}},<br/>
+Ciao, <strong>{{membership.associate.first_name|lower|capfirst}}</strong>,<br/>
+
+{% if request_type == 'renew' %}
+siamo molto felici di averti ancora tra noi e speriamo di poter fare assieme tutto quello che ci siamo proposti.<br/>  
+{% else %}
 questa e' innanzitutto un'email di benvenuto.<br/>
 Siamo molto felici di averti tra noi e speriamo di poter fare assieme tutto quello che ci siamo proposti.<br/>
+{% endif %}
 <br/>
 Nel caso non avessi ancora versato la tua quota associativa di {{membership.fee}} euro,<br/>
 ti ricordiamo che puoi fare un bonifico usando queste coordinate:<br/>
@@ -16,7 +21,7 @@ Attiveremo la tua iscrizione non appena verificati i dati e gli estremi del paga
 Riceverai un’email con la conferma dell'attivazione e successivamente tessera e gadget.<br/>
 <br/>
 Grazie di cuore.<br/>
-Lo staff di Openpolis<br/>
+L'associazione Openpolis<br/>
 <br/>
 --
 <br/>
@@ -27,5 +32,5 @@ http://associazione.openpolis.it<br/>
 
 <br/>
 Openpolis. Fatti di trasparenza.<br/>
-http://openpolis.it | http://openparlamento.it | http://voisietequi.it <br/>
+http://openpolitici.it | http://openparlamento.it | http://voisietequi.it <br/>
 

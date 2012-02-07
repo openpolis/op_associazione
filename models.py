@@ -11,8 +11,8 @@ class Membership(models.Model):
         ('studente', 'Socio studente')
     )
     type_of_membership     = models.CharField("Tipo di iscrizione",max_length=50,choices=MEMBER_TYPE, default='ordinario', help_text="Seleziona il tipo di iscrizione")
-    fee                    = models.FloatField("Quota (euro)", help_text="Inserisci la quota che vuoi versare. Considera le quote minime: Ordinario: 50€ Sostenitore: 500€ Studente/Precario: 20€.")
-    payed                  = models.FloatField("Quota pagata",null=True, blank=True)
+    fee                    = models.IntegerField("Quota (euro)", help_text="Inserisci la quota che vuoi versare. Considera le quote minime: Ordinario: 50€ Sostenitore: 500€ Studente/Precario: 20€.")
+    payed                  = models.IntegerField("Quota pagata",null=True, blank=True)
     payed_at               = models.DateField("Data pagamento",null=True, blank=True)
     expire_at              = models.DateField("Scadenza",null=True, blank=True)
     sent_card_at           = models.DateField("Data invio",null=True, blank=True)
@@ -20,8 +20,8 @@ class Membership(models.Model):
     is_active              = models.BooleanField("Attivato", default=False)
     associate              = models.ForeignKey('Associate')
     public_subscription    = models.BooleanField("Iscrizione pubblica",default=False, help_text='Voglio comparire tra i sostenitori dell\'associazione e desidero che la mia quota di sottoscrizione sia pubblicata insieme al mio nome')
-    created_at             = models.DateField(auto_now_add=False)
-    updated_at             = models.DateField(auto_now=False)
+    created_at             = models.DateField(auto_now_add=True)
+    updated_at             = models.DateField(auto_now=True)
 
     @staticmethod
     def get_minimum_fee(member_type):
@@ -40,7 +40,7 @@ class Membership(models.Model):
         return u'Tipologia di utente %s non trovata' % member_type
 
     def __unicode__(self):
-        return self.created_at.isoformat()
+        return "%s at %s" % (self.associate, self.created_at.isoformat())
 
     class Meta:
         verbose_name = 'Iscrizione'
@@ -73,8 +73,8 @@ class Associate(models.Model):
     exp_province          = models.CharField('Provincia', max_length=100)
     exp_country           = models.CharField('Nazione', max_length=100)
     hash_key              = models.CharField('HASH', max_length=40)
-    created_at            = models.DateField(auto_now_add=False)
-    updated_at            = models.DateField(auto_now=False)
+    created_at            = models.DateField(auto_now_add=True)
+    updated_at            = models.DateField(auto_now=True)
 
     @property
     def memberships(self):

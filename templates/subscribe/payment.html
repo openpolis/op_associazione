@@ -1,50 +1,73 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	
-	{% if renewal %}
-	<h1>Rinnova l'associazione ad Openpolis</h1>
-	{% else %}
-	<h1>La quota associativa</h1>
-	{% endif %}
-	
-	<p>
-		{{ associate_name|capfirst }}, grazie. Ora poi versare la quota associativa di <strong>{{ associate_fee }} euro</strong>
-		<br />
-		C'è ancora un passo da fare e riguarda il metodo di pagamento.
-		<br />
-		Puoi scegliere tra il bonifico bancario e Paypal/carta di credito.
-	</p>
-	
-	<aside class="orange">
-		<h2>Bonifico bancario</h2>
-		<small>(metodo preferito perché senza commissioni)</small>
-		
-		<blockquote>
-			Associazione Openpolis<br /> 
-			Banca Popolare Etica scarl<br />
-			IT47 C050 1803 2000 0000 0131 034
-		</blockquote>
-		
-	</aside>
-	
-	<aside class="orange">
-		<h2>Carta di credito o Paypal</h2>
-		<small>Paga la quota associativa tramite il tuo conto Paypal o carta di credito</small>
-		
-		PAGA ADESSO
-	</aside>
+    
+    {% if renewal %}
+    <h1>Rinnova l'associazione ad Openpolis</h1>
+    {% else %}
+    <h1>La quota associativa</h1>
+    {% endif %}
+    
+    <p>
+        {{ associate_name|capfirst }}, grazie. Ora poi versare la quota associativa di <strong>{{ associate_fee }} euro</strong>
+        <br />
+        C'è ancora un passo da fare e riguarda il metodo di pagamento.
+        <br />
+        Puoi scegliere tra il bonifico bancario e Paypal/carta di credito.
+    </p>
+    
+    <aside class="orange">
+        <h2>Bonifico bancario</h2>
+        <small>(metodo preferito perché senza commissioni)</small>
+        
+        <div id="coordinate-bancarie">
+            Associazione Openpolis<br /> 
+            Banca Popolare Etica scarl<br />
+            IT47 C050 1803 2000 0000 0131 034
+        </div>
+        
+    </aside>
+    
+    <aside class="orange">
+        <h2>Carta di credito o Paypal</h2>
+        <small>Paga la quota associativa tramite il tuo conto Paypal o carta di credito</small>
+        
+        <form method="post" action="https://www.paypal.com/cgi-bin/webscr" class="form-inline">
+            <input type="hidden" value="_xclick" name="cmd">
+            <input type="hidden" value="v.alvino@openpolis.it" name="business">
+            <input type="hidden" value="Donazione occasionale per l'associazione openpolis" name="item_name">
+            <input type="hidden" value="openpolis" name="page_style">
+            <input type="hidden" value="1" name="no_shipping">
+            <input type="hidden" value="http://www.openpolis.it" name="return">
+            <input type="hidden" value="1" name="no_note">
+            <input type="hidden" value="EUR" name="currency_code">
+            <input type="hidden" value="0" name="tax">
+            <input type="hidden" value="IT" name="lc">
+            <input type="hidden" value="PP-DonationsBF" name="bn">
+            <span class="add-on">&euro;</span>
+            <span class="input-append" style="margin-bottom: -12px">
+              <input value="{{ associate_fee }}" name="amount" size="5" class="span1" style="text-align: right">
+              <span class="add-on">,00</span>
+            </span>
+            <button type="submit" class="btn btn-success" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Paga subito</button>
+        </form>
+    </aside>
 
 {% endblock %}
 
 {% block css_styles %}
+{{ block.super }}
 <style type="text/css">
-	article aside blockquote { font-family: Arial; font-size:1.3em; font-weight:bold; }
-	
-	article aside.orange {
-		background-color: #fcf7c8;
-		margin: 15px 0;
-		padding: 5px 10px;
-	}
+    article aside #coordinate-bancarie { 
+      font-family: Arial; 
+      font-size: 1.3em; 
+      font-weight: bold; 
+    }
+    
+    article aside.orange {
+        background-color: #fcf7c8;
+        margin: 15px 0;
+        padding: 5px 10px;
+    }
 </style>
 {% endblock %}

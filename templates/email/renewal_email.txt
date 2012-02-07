@@ -1,1 +1,39 @@
+Ciao {{ associate.first_name|lower|capfirst }},
+
+intanto grazie. Se siamo diventati una fonte indipendente d'informazione politica e siamo riusciti a completare i progetti sulla trasparenza facendovi partecipare migliaia di utenti, è anche merito tuo. Abbiamo stabilito un canale di comunicazione con i nostri politici, che abbiamo coinvolto nella campagna sui patrimoni trasparenti e nella costruzione dell'indice di produttività, su cui è strutturato Camere Aperte, un'opera vissuta con grande interesse e coinvolgimento dai soci come te, dai sostenitori della comunità web di Openpolis, da cittadini appassionati, arrabbiati, impegnati, critici.
+
+Un buon inizio, insomma, con tanto ancora da fare per diffondere pratiche di trasparenza nella politica e nelle amministrazioni italiane, continuando con il metodo che ci siamo dati e quindi ad essere seri, scrupolosi e sopratutto indipendenti.
+Siamo qui per chiederti una mano ancora una volta, ma prima vediamo cosa possiamo fare assieme:
+
+
+ - Vogliamo costruire una piattaforma web per cause, petizioni e class-action, basata su un canale di comunicazione certificata con chi decide, per risparmiare le energie dei media sociali: identifichiamo i richiedenti, certifichiamo il consenso, tracciamo la comunicazione coi decisori.
+
+ - Vogliamo "dislocare" Open Parlamento nei comuni italiani e rendere comprensibile il lavoro e il contesto delle amministrazioni locali con il progetto Open Municipio, a cui hanno già aderito i comuni di Senigallia e Udine. Che ne diresti del tuo comune di appartenenza?
+
+ - Vogliamo rendere trasparenti i bilanci dei comuni italiani, guardarci dentro e seguire il denaro per capire in che direzione vanno le decisioni politiche (Falcone lo diceva anche per le indagini di mafia). Riusciremo anche a confrontare l'efficacia della gestione con lo storico degli ultimi dieci anni.
+
+ - Vogliamo continuare ad essere un osservatorio civico della politica, indipendente e autorevole per esercitare una pressione costante sulle istituzioni e i singoli politici affinché adottino le regole della trasparenza.
+
+ - Vogliamo ampliare e rendere sempre più utili le nostre piattaforme web: Open parlamento, Open poltici e Voisietequi e generare ancora pi&ugrave; partecipazione.
+
+
+Siamo convinti che in tanti possiamo essere efficaci. E se siamo capaci di garantire la nostra autonomia economica attraverso i contributi che soci e donatori ci riconoscono senza condizioni, se siamo capaci di convincere un numero sufficiente di persone della necessità di Openpolis, allora possiamo dire di essere credibili e quindi sostenibili. 
+E' ancora questo il punto di arrivo di un sentiero difficile ma luminoso che sogniamo di percorrere in compagnia di migliaia di persone come te, di ogni orientamento politico e culturale con cui condividere la priorità di un'informazione politica imparziale, indipendente e basata su dati ufficiali. E per fare tutto questo abbiamo bisogno di te, ancora una volta.
+
+Resta qui, {{ associate.first_name|lower|capfirst }}.
+Visita questo link, per rinnovare l'iscrizione a Openpolis.
+
 http://{{current_site.domain}}{{ renewal_url }}
+
+
+E ancora grazie,
+L'Associazione Openpolis
+
+--
+Associazione Openpolis
+Via Dei Sabelli 215 - 00185 Roma
+Tel.: +39.06.83608392
+http://associazione.openpolis.it
+
+Openpolis. Fatti di trasparenza.
+http://openpolitici.it | http://openparlamento.it | http://voisietequi.it
