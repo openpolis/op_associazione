@@ -1,37 +1,38 @@
 {% extends "easycms/page.html" %}
 
 {% block content_header %}
-	<img src="/static/img/icons/minidossier.png" id="dossier-logo" alt="MiniDossier di OpenPolis" />
-	<h1>{{ page.title }}</h1>
+    <img src="/static/img/icons/minidossier.png" id="dossier-logo" alt="MiniDossier di OpenPolis" />
+    <h1>{{ page.title }}</h1>
 {% endblock %}
 
 {% block payoff %}
 <div class="container">
-	<div class="row">
-		<div class="twelvecol">
-			<ul id="breadcrumb">
-				<li class="first">Dossier</li>
-				<li>{{ page.title }}</li>
-			</ul>
-		</div>
-	</div>
+    <div class="row">
+      <div class="span12">
+          <ul class="breadcrumb">
+              <li class="first">Dossier</li><span class="divider">/</span>
+              <li>{{ page.title }}</li>
+          </ul>
+      </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block content_footer %}
 
-	{% for link in page.links.all %}
-	<a href="{{ link.url }}" class="button-{{ link.icon }}">{{ link.text|safe }}</a>
-	{% endfor %}
+    {% for link in page.links.all %}
+      <a href="{{ link.url }}" class="button-{{ link.icon }}">{{ link.text|safe }}</a>
+    {% endfor %}
 
 {% endblock %}
 
 {% block css_styles %}
-<style type="text/css">
-    article#main header { letter-spacing: -1px; }
-    article#main header h1 { margin-top:0px;  }
-    article#main header h2 { color:#333; font-size:20px; }
+  {{ block.super }}
+  <style type="text/css">
+      article#main header { letter-spacing: -1px; }
+      article#main header h1 { margin-top:0px;  }
+      article#main header h2 { color:#333; font-size:20px; }
     
     
-</style>
+  </style>
 {% endblock %}

@@ -3,36 +3,23 @@
 
 
 {% block sidebar %}
-	<aside id="accordion">
-		{% for aside in asides %}
-		<h3><a href="#"><img src="{{ aside.url }}" alt="{{ aside.author }}" /></a></h3>
-		<div>
-            <h4>{{ aside.author }}</h4>
-		    <p>{{ aside.text }}</p></div>
-		{% endfor %}
-	</aside>
+    <aside id="biopictures">
+        {% for aside in asides %}
+        <div class="popoverable" rel="popover" data-content="{{aside.text}}" data-original-title="{{aside.author}}"><img src="{{ aside.url }}" alt="{{ aside.author }}" /></div>
+        {% endfor %}
+    </aside>
 {% endblock %}
 
 {% block js_footer %}
-	{{ block.super }}
-	<script type="text/javascript" src="/static/js/jquery-ui-1.8.17.accordion.min.js"></script>
-
-	<script>
-	$(function() {
-		$( "#accordion" ).accordion({
-			event: "mouseover",
-			collapsible: true,
-			active: false
-		}).mouseleave(function(){ $(this).accordion( "activate" , false ) });
-	});
-	</script>
-{% endblock %}
-
-{% block css_styles %}
-<style type="text/css">
-#accordion { width:222px; }
-#accordion div { background-color: #fbec6d;  }
-#accordion div p { padding: 5px; }
-#accordion div h4 { line-height: 18px; font-size: 18px; padding: 5px; font-family: Georgia;  }
-</style>
+    {{ block.super }}
+    <script>
+    $(function() {
+        $( "#biopictures .popoverable" ).popover({
+            placement: "left",
+        });
+        $( ".popoverable" ).popover({
+            placement: "right",
+        });
+    });
+    </script>
 {% endblock %}

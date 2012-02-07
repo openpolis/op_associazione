@@ -8,14 +8,15 @@ def parse(kwargs):
     align = kwargs.get('align', 'left')
     css_styles = """ 
         <style type=\"text/css\">
-        div#op_realtime { font-family:Arial; width:270px; background-color: #FFF; text-align:left; margin: 15px; float:%s; }
-        div#op_realtime h1 { color:#333; font-family: Georgia; font-size: 24px; line-height: 30px; margin:0; }
-        div#op_realtime h2 { font-size: 14px; line-height: 16px; color:#333; margin:0; }
-        div#op_realtime table { width:100%% ; margin-top: 5px; }
-        div#op_realtime tr { border-bottom:1px solid #FFF; background-color: #fbec6d; }
-        div#op_realtime tr > * { padding: 0 5px; }
-        div#op_realtime tr th { font-size:12px; background-color: #e8da65; }
-        div#op_realtime tr td { font-weight:bold; line-height: 24px; font-size: 18px; text-align:right; }
+        aside#op_realtime { font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; width:270px; background-color: #FFF; text-align:left; margin: 15px; float:%s; }
+        aside#op_realtime caption { text-align: left; padding: 0.5em; padding-top: 0 }
+        aside#op_realtime h1 { color:#333; font-size: 22px; margin:0; }
+        aside#op_realtime h2 { font-size: 14px; line-height: 16px; color:#333; margin:0; letter-spacing: 0; }
+        aside#op_realtime table { width:94%% ; margin-top: 5px; }
+        aside#op_realtime tr { border-bottom:1px solid #FFF; background-color: #fbec6d; }
+        aside#op_realtime th, aside#op_realtime td { padding: 10px; }
+        aside#op_realtime tr th { font-size:12px; background-color: #e8da65; text-transform: uppercase }
+        aside#op_realtime tr td { font-weight:bold; line-height: 24px; font-size: 18px; text-align:right; }
         </style>
     """ % align
     
@@ -23,12 +24,12 @@ def parse(kwargs):
     op_url = 'http://openpolis.it/'
     opp_url = 'http://parlamento.openpolis.it/'
     stats = (
-            ('Incarichi censiti', op_url + 'api/chargeNumber/', 'Incarichi censiti'),
-            ('Politici monitorati', op_url + 'api/politicianNumber/', 'Politici monitorati'),
-            ('Emendamenti', opp_url + 'api/getNumeroEmendamenti/', 'Emendamenti'),
-            ('Dichiarazioni', op_url + 'api/declarationNumber/', 'Dichiarazioni'),
-            ('Votazioni d\'aula', opp_url + 'api/getNumeroVotazioni/', 'Votazioni d\'aula'),
-            ('Utenti registrati', op_url + 'api/userNumber/', 'Utenti registrati'),
+            ('Incarichi censiti', op_url + 'api/chargeNumber/', 'Suggerimento incarichi censiti'),
+            ('Politici monitorati', op_url + 'api/politicianNumber/', 'Suggerimento politici monitorati'),
+            ('Emendamenti', opp_url + 'api/getNumeroEmendamenti/', 'Suggerimento emendamenti'),
+            ('Dichiarazioni', op_url + 'api/declarationNumber/', 'Suggerimento dichiarazioni'),
+            ('Votazioni d\'aula', opp_url + 'api/getNumeroVotazioni/', 'Suggerimento votazioni d\'aula'),
+            ('Utenti registrati', op_url + 'api/userNumber/', 'Suggerimento utenti registrati'),
         )
 
     table_rows = ''
@@ -36,18 +37,20 @@ def parse(kwargs):
     for stat in stats:
         f = urllib2.urlopen(stat[1])
         value = strip_tags(f.read()).strip() # Remove xml tags and spaces
-        table_rows += u'<tr title="%s" class="tips"><th>%s</th><td>%s</td></tr>' % (stat[2], stat[0], splitthousands(value))
+        table_rows += u'<tr title="%s" class="popoverable" rel="popover" data-content="%s"><th>%s</th><td>%s</td></tr>' % (stat[0], stat[2], stat[0], splitthousands(value))
     
     html_table = u"""
-        <div id="op_realtime">
-            <h1>Openpolis in tempo reale</h2>
-            <h2>Le attivit&agrave; nel nostro network mentre consulti questa pagina </h2>
+        <aside id="op_realtime">
             <table>
+                <caption>
+                    <h1>Openpolis in tempo reale</h2>
+                    <h2>Le attivit&agrave; nel nostro network mentre consulti questa pagina </h2>
+                </caption>
                 <tbody>
                 %s
                 </tbody>
             </table>
-        </div>
+        </aside>
     """ % table_rows
     return css_styles + html_table
     

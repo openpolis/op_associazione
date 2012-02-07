@@ -2,11 +2,14 @@
 from django import forms
 from op_associazione.models import Membership, Citizen, Politician, Organization, Associate
 
+
 class MembershipForm(forms.ModelForm):
     class Meta:
         model = Membership
         fields = ('fee', 'public_subscription', 'type_of_membership')
-        
+        widgets = {
+                    'fee': forms.TextInput(attrs={'class': 'span1'}),
+                }
     def clean(self):
         cleaned_data = self.cleaned_data
         fee = cleaned_data.get("fee")
@@ -38,10 +41,20 @@ class AssociateForm(forms.ModelForm):
     
     class Meta():
         widgets = {
-            'gender': forms.RadioSelect(),
             'notes': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
             'charge': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
-            'birth_date': forms.DateInput(format='%d/%m/%Y', attrs={'class':'datepicker'}),
+            'birth_date': forms.DateInput(format='%d/%m/%Y', attrs={'class':'datepicker span2'}),
+            'civic_nb': forms.TextInput(attrs={'class': 'span1'}),
+            'zip_code': forms.TextInput(attrs={'class': 'span1'}),
+            'city': forms.TextInput(attrs={'class': 'span2'}),
+            'province': forms.TextInput(attrs={'class': 'span2'}),
+            'country': forms.TextInput(attrs={'class': 'span2'}),
+            'exp_civic_nb': forms.TextInput(attrs={'class': 'span1'}),
+            'exp_zip_code': forms.TextInput(attrs={'class': 'span1'}),
+            'exp_city': forms.TextInput(attrs={'class': 'span2'}),
+            'exp_province': forms.TextInput(attrs={'class': 'span2'}),
+            'exp_country': forms.TextInput(attrs={'class': 'span2'}),
+            'denomination': forms.TextInput(attrs={'class': 'span4'}),
         }
         exclude = ('hash_key',)
 

@@ -3,83 +3,85 @@
 
 {% block content %}
 <p>
-	Come lavora chi governa il mio paese? Come faccio a seguirlo? Come posso contribuire al suo lavoro? Come posso cambiare le cose che non vanno? 
-	Quante volte ti sei fatto queste domande e quante hai rimandato le risposte. E quanto è aumentata la distanza dalle istituzioni, il malessere, il disagio.
-	È arrivato il momento di riprenderci ciò che ci appartiene: i dati innanzitutto. Le informazioni pubbliche che devono essere a disposizione di tutti, in condizione di eguaglianza. E poi costruirci intorno, insieme, un’informazione costante, trasparente e partecipata da tutti. Un progetto, questo, che può vivere solo con l'iniziativa diffusa e l'azione diretta di tante persone, dentro e fuori le istituzioni, le amministrazioni, i partiti, le associazioni.
-	Abbiamo qualcosa di importante da fare. Manchi solo tu.
+    Come lavora chi governa il mio paese? Come faccio a seguirlo? Come posso contribuire al suo lavoro? Come posso cambiare le cose che non vanno? 
+    Quante volte ti sei fatto queste domande e quante hai rimandato le risposte. E quanto è aumentata la distanza dalle istituzioni, il malessere, il disagio.
+    È arrivato il momento di riprenderci ciò che ci appartiene: i dati innanzitutto. Le informazioni pubbliche che devono essere a disposizione di tutti, in condizione di eguaglianza. E poi costruirci intorno, insieme, un’informazione costante, trasparente e partecipata da tutti. Un progetto, questo, che può vivere solo con l'iniziativa diffusa e l'azione diretta di tante persone, dentro e fuori le istituzioni, le amministrazioni, i partiti, le associazioni.
+    Abbiamo qualcosa di importante da fare. Manchi solo tu.
 </p>
 
 <h2>Associati ad Openpolis</h2>
 <p>
-	Scegli di sostenere progetti utili, indipendenti e partecipati, un osservatorio costante e imparziale della politica italiana, una grande operazione di trasparenza. Scegli di appartenere ad un’associazione di italiani di ogni orientamento politico e culturale che ha a cuore il futuro del paese. 
-	La tessera vale un anno e ti da accesso ai servizi personalizzati di monitoraggio parlamentare. Ma vale molto di più, è un atto di impegno e passione politica.
+    Scegli di sostenere progetti utili, indipendenti e partecipati, un osservatorio costante e imparziale della politica italiana, una grande operazione di trasparenza. Scegli di appartenere ad un’associazione di italiani di ogni orientamento politico e culturale che ha a cuore il futuro del paese. 
+    La tessera vale un anno e ti da accesso ai servizi personalizzati di monitoraggio parlamentare. Ma vale molto di più, è un atto di impegno e passione politica.
 </p>
 
 <section id="subscribe">
-	
-	<h2>Cittadini</h2>
-	<small>Persone che fanno domanda di iscrizione come privati</small>
-	
-	<table>
-		<tr><th>Socio ordinario</th><td>da 50 euro l'anno</td></tr>
-		<tr><th>Socio studente/precario</th><td>da 20 euro l'anno</td></tr>
-		<tr><th>Socio sostenitore</th><td>da 500 euro l'anno</td></tr>
-		<tr><th></th><td><a href="{% url subscribe-module member_type='cittadino' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
-	</table>
-	
-	<h2>Organizzazione</h2>
-	<small>Persona giuridica (associazione, azienda, ente, eccetera) privata o pubblica</small>
-	
-	<table>
-		<tr><th>Socio ordinario</th><td>da 50 euro l'anno</td></tr>
-		<tr><th>Socio sostenitore</th><td>da 500 euro l'anno</td></tr>
-		<tr><th></th><td><a href="{% url subscribe-module member_type='organizzazione' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
-	</table>
-	
-	<h2>Politici eletti</h2>
-	<small>Persona fisica che al momento dell'iscrizione ricopre un incarico politico-amministrativo (Parlamento Europeo 
-	Parlamento, Regioni, Province, Comuni) e che si impegna alla trasparenza fornendo a Openpolis 
-	la dichiarazione dei redditi e le spese elettorali da pubblicare online senza limitazioni.</small>
-	
-	<table>
-		<tr><th>Socio ordinario</th><td>da 50 euro l'anno</td></tr>
-		<tr><th>Socio sostenitore</th><td>da 500 euro l'anno</td></tr>
-		<tr><th></th><td><a href="{% url subscribe-module member_type='politico' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
-	</table>
-	
+    
+    <h2>Cittadini</h2>
+    
+    <table class="table span6">
+      <caption class="small">Persone che fanno domanda di iscrizione come privati</caption>
+      <tr><th>Socio ordinario</th><td>da 50 euro l'anno</td></tr>
+      <tr><th>Socio studente/precario</th><td>da 20 euro l'anno</td></tr>
+      <tr><th>Socio sostenitore</th><td>da 500 euro l'anno</td></tr>
+      <tr><th></th><td><a href="{% url subscribe-module member_type='cittadino' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
+    </table>
+    
+    <h2>Organizzazione</h2>
+    
+    <table class="table span6">
+      <caption>Persona giuridica (associazione, azienda, ente, eccetera) privata o pubblica</caption>
+      <tr><th>Socio ordinario</th><td>da 50 euro l'anno</td></tr>
+      <tr><th>Socio sostenitore</th><td>da 500 euro l'anno</td></tr>
+      <tr><th></th><td><a href="{% url subscribe-module member_type='organizzazione' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
+    </table>
+    
+    <h2>Politici eletti</h2>
+    
+    <table class="table span6">
+      <caption>Persona fisica che al momento dell'iscrizione ricopre un incarico politico-amministrativo (Parlamento Europeo 
+      Parlamento, Regioni, Province, Comuni) e che si impegna alla trasparenza fornendo a Openpolis 
+      la dichiarazione dei redditi e le spese elettorali da pubblicare online senza limitazioni.</caption>
+      <tr><th>Socio ordinario</th><td>da 50 euro l'anno</td></tr>
+      <tr><th>Socio sostenitore</th><td>da 500 euro l'anno</td></tr>
+      <tr><th></th><td><a href="{% url subscribe-module member_type='politico' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
+    </table>
+    
 </section>
 
 
 {% endblock %}
 
 {% block sidebar %}
-{{ "[openpolis]"|shortcodes|safe }}
 {% endblock %}
 
 {% block payoff %}
-<section id="extra" class="container">      
-    <div class="row">
-        <div class="twelvecol">
-			<ul id="breadcrumb">
-				<li class="first">Sostienici</li>
-				<li>Associati</li>
-			</ul>
-		</div>
-    </div>
-	<div class="row"><img src="/static/img/payoff/slogan_cittadino_consapevole.png" /></div>
+<section id="extra" class="sostienici">
+  <div class="container">
+      <div class="row">
+        <div class="span12">
+            <ul class="breadcrumb">
+                <li class="first">Sostienici</li><span class="divider">/</span>
+                <li>Associati</li>
+            </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span12">
+          <img src="/static/img/payoff/slogan_cittadino_consapevole.png" />
+        </div>
+      </div>
+  </div>
 </section>
 {% endblock %}
 
-{% block css_styles %}
-<style type="text/css">
-	#subscribe table { width: 90%; }
-	#subscribe table tr { border-top:3px solid #ccc; }
-	#subscribe table tr > * { text-align: left; padding: 10px 0; font-size:1.4em; }
-	article#main section#subscribe h2 { font-size:24px; }
-	article#main section#subscribe h2, #subscribe th  {
-		color:#333;
-		font-family: Georgia;
-	}
-	#subscribe td { color: #666; font-weight:bold; width:40%; }
-</style>
+{% block js_footer %}
+    {{ block.super }}
+    <script>
+    $(function() {
+        $( ".popoverable" ).popover({
+            placement: "left",
+        });
+    });
+    </script>
 {% endblock %}

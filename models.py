@@ -3,12 +3,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db import models
 
-GENDERS = (
-    ('M', 'Uomo'),
-    ('F', 'Donna'),
-)
-
-
 class Membership(models.Model):
     MEMBER_TYPE = (
         ('fondatore', 'Socio fondatore'),
@@ -53,10 +47,15 @@ class Membership(models.Model):
         verbose_name_plural = 'Iscrizioni'
 
 class Associate(models.Model):
+    GENDERS = (
+        ('M', 'Uomo'),
+        ('F', 'Donna'),
+    )
+    
     first_name            = models.CharField('Nome',max_length=200)
     last_name             = models.CharField('Cognome',max_length=200)
     birth_date            = models.DateField('Data di nascita')
-    gender                = models.CharField('Sesso',max_length=1, choices=GENDERS, default='')
+    gender                = models.CharField('Sesso',max_length=1, choices=GENDERS, null=False, blank=False)
     fiscal_code           = models.CharField('Codice fiscale',max_length=20, help_text="Inserisci codice fiscale (16 caratteri)")
     phone_number          = models.CharField('Telefono',max_length=200,blank=True, null=True)
     wants_newsletter      = models.BooleanField('Newsletter',help_text='Voglio ricevere la newsletter via email')
@@ -102,7 +101,7 @@ class Organization(Associate):
     )
     denomination             = models.CharField('Denominazione',max_length=300)
     type_of_organization     = models.CharField('Tipo di Organizzazione',max_length=100, choices=ORG_TYPE)
-    vat_code                 = models.CharField('Partita Iva',max_length=100)
+    vat_code                 = models.CharField('Partita Iva',max_length=100, help_text="Inserire il codice di 11 cifre, privo dell'identificativo nazionale")
     #    location_address         = models.OneToOneField(Address, related_name='+')
 
     def __unicode__(self):

@@ -1,15 +1,18 @@
 from django import template
 register = template.Library()
-
+from os import sys
 
 from django.core.urlresolvers import resolve
 import re
-def is_active(context, url_name, class_name):
-	if (url_name == context['current_route_name']) :
-		return ' class="' + class_name +'"'
-	if re.search(url_name, context['current_route_name']):
-		return ' class="' + class_name +'"'
-	return ''
+def is_active(context, url_name, class_name, default_class_name=""):
+    
+    if (url_name == context['current_route_name'] or 
+        re.search(url_name, context['current_route_name'])):
+        return ' class="%s"' % (class_name,)
+    elif default_class_name != "":
+        return ' class="%s"' % (default_class_name,)
+    else:
+        return ''
 register.simple_tag(takes_context=True)(is_active)
 
 

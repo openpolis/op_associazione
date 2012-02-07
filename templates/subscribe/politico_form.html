@@ -2,10 +2,16 @@
 
 {% block associate_contact_extra %}
 
-<div class="fieldWrapper">
-	<label for="{{ associate_form.charge.html_name }}">{{ associate_form.charge.label }}</label>
-	<p>{{ associate_form.charge }}</p>
-	{{ associate_form.charge.errors }}
+<div class="control-group {% if associate_form.charge.errors %}error{% endif %}">
+  <label for="id_{{ associate_form.charge.html_name }}">*{{ associate_form.charge.label }}</label>
+  {{ associate_form.charge }}
+  <span class="help-inline">
+    {% if associate_form.charge.errors %}
+      {% for error in associate_form.charge.errors %}
+          {{ error|escape }}
+      {% endfor %}
+    {% endif %}
+  </span>
 </div>
 
 {% endblock %}

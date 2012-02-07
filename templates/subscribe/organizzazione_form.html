@@ -2,25 +2,50 @@
 
 {% block associate_extra %}
 
-<h2>Dati dell'Organizzazione</h2>
 
-<div class="fieldWrapper">
-	<label for="{{ associate_form.denomination.html_name }}">*{{ associate_form.denomination.label }}</label>
-	<p>{{ associate_form.denomination }}</p>
-	{{ associate_form.denomination.errors }}
-</div>
+<fieldset>
+  <legend>Dati dell'organizzazione</legend>
 
-<div class="fieldWrapper">
-	<label for="{{ associate_form.type_of_organization.html_name }}">{{ associate_form.type_of_organization.label }}</label>
-	<p>{{ associate_form.type_of_organization }}</p>
-	{{ associate_form.type_of_organization.errors }}
-</div>
+  <div class="control-group {% if associate_form.denomination.errors %}error{% endif %}">
+    <label for="id_{{ associate_form.denomination.html_name }}">*{{ associate_form.denomination.label }}</label>
+    {{ associate_form.denomination }}
+    <span class="help-inline">
+      {% if associate_form.denomination.errors %}
+        {% for error in associate_form.denomination.errors %}
+            {{ error|escape }}
+        {% endfor %}
+      {% endif %}
+    </span>
+  </div>
+  
 
-<div class="fieldWrapper">
-	<label for="{{ associate_form.vat_code.html_name }}">*{{ associate_form.vat_code.label }}</label>
-	<p>{{ associate_form.vat_code }}</p>
-	{{ associate_form.vat_code.errors }}
-</div>
+  <div class="control-group {% if associate_form.type_of_organization.errors %}error{% endif %}">
+    <label for="id_{{ associate_form.type_of_organization.html_name }}">*{{ associate_form.type_of_organization.label }}</label>
+    {{ associate_form.type_of_organization }}
+    <span class="help-inline">
+      {% if associate_form.type_of_organization.errors %}
+        {% for error in associate_form.type_of_organization.errors %}
+            {{ error|escape }}
+        {% endfor %}
+      {% endif %}
+    </span>
+  </div>
+
+  <div class="control-group {% if associate_form.vat_code.errors %}error{% endif %}">
+    <label for="id_{{ associate_form.vat_code.html_name }}">*{{ associate_form.vat_code.label }}</label>
+    {{ associate_form.vat_code }}
+    <span class="help-inline">
+      {% if associate_form.vat_code.errors %}
+        {% for error in associate_form.vat_code.errors %}
+            {{ error|escape }}
+        {% endfor %}
+      {% else %}
+        {{associate_form.vat_code.help_text}}
+      {% endif %}
+    </span>
+  </div>
+  
+</fieldset>
 
 {% endblock %}
 

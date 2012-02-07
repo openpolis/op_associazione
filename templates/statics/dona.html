@@ -34,12 +34,10 @@
         Se vuoi puoi naturalmente cambiare l'importo, dona quello che puoi.
     </p>
 
-    <form method="post" action="https://www.paypal.com/cgi-bin/webscr">
+    <form method="post" action="https://www.paypal.com/cgi-bin/webscr" class="form-inline">
         <input type="hidden" value="_xclick" name="cmd">
         <input type="hidden" value="v.alvino@openpolis.it" name="business">
         <input type="hidden" value="Donazione occasionale per l'associazione openpolis" name="item_name">
-        <strong>Donazione di euro:</strong>
-        <label for="importo"><input value="20" name="amount" size="5"></label> una tantum
         <input type="hidden" value="openpolis" name="page_style">
         <input type="hidden" value="1" name="no_shipping">
         <input type="hidden" value="http://www.openpolis.it" name="return">
@@ -48,10 +46,12 @@
         <input type="hidden" value="0" name="tax">
         <input type="hidden" value="IT" name="lc">
         <input type="hidden" value="PP-DonationsBF" name="bn">
-         <p>
-                <input type="image" src="/static/img/icons/button-dona.png" border="0" name="submit" alt="PayPal - Il sistema di pagamento online più facile e sicuro!">
-                <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
-            </p>
+        <span class="add-on">&euro;</span>
+        <span class="input-append" style="margin-bottom: -12px">
+          <input value="20" name="amount" size="5" class="span1" style="text-align: right">
+          <span class="add-on">,00</span>
+        </span>
+        <button type="submit" class="btn btn-success" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Dona ogni mese</button>
     </form>
 
     <p><strong>Donazione mensile per un anno</strong>
@@ -61,12 +61,10 @@
         Se vuoi puoi naturalmente cambiare l'importo, dona quello che puoi.
     </p>
 
-    <form method="post" action="https://www.paypal.com/cgi-bin/webscr">
+    <form method="post" action="https://www.paypal.com/cgi-bin/webscr" class="form-inline">
         <input type="hidden" value="_xclick-subscriptions" name="cmd">
         <input type="hidden" value="v.alvino@openpolis.it" name="business">
         <input type="hidden" value="Donazione mensile per l'associazione openpolis" name="item_name">
-        Donazione di euro:
-        <label for="importo"><input value="5" name="a3" size="5"></label> ogni mese
         <input type="hidden" value="openpolis" name="page_style">
         <input type="hidden" value="1" name="no_shipping">
         <input type="hidden" value="http://www.openpolis.it" name="return">
@@ -78,11 +76,12 @@
         <input type="hidden" value="M" name="t3">
         <input type="hidden" value="1" name="src">
         <input type="hidden" value="1" name="sra">
-        
-        <p>
-            <input type="image" src="/static/img/icons/button-dona.png" border="0" name="submit" alt="PayPal - Il sistema di pagamento online più facile e sicuro!">
-            <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
-        </p>  
+        <span class="add-on">&euro;</span>
+        <span class="input-append" style="margin-bottom: -12px">
+          <input value="5" name="a3" size="5" class="span1" style="text-align: right">
+          <span class="add-on">,00</span>
+        </span>
+        <button type="submit" class="btn btn-success" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Dona ogni mese</button>
     </form>
     
 </section>
@@ -91,26 +90,22 @@
 {% endblock %}
 
 {% block payoff %}
-<section id="extra" class="container">      
-    <div class="row">
-        <div class="twelvecol">
-			<ul id="breadcrumb">
-				<li class="first">Sostienici</li>
-				<li>Dona</li>
-			</ul>
-		</div>
-    </div>
-	<div class="row"><img src="/static/img/payoff/slogan_donare.png" /></div>
+<section id="extra" class="sostienici">
+  <div class="container">
+      <div class="row">
+        <div class="span12">
+            <ul class="breadcrumb">
+                <li class="first">Sostienici</li><span class="divider">/</span>
+                <li>Dona</li>
+            </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span12">
+          <img src="/static/img/payoff/slogan_donare.png" />
+        </div>
+      </div>
+  </div>
 </section>
 {% endblock %}
 
-
-{% block css_styles %}
-<style type="text/css">
-    
-    #donate { width: 70%; }
-    #donate form { background-color: #f5f5f3; padding: 8px; }
-    #donate form input { padding-left:3px; border:0; background-color: white; }
-    #donate form p { padding-bottom: 0; text-align:center; }
-</style>
-{% endblock %}

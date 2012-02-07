@@ -18,7 +18,7 @@ from op_associazione import notifications
 
 
 def static_page(request, page_slug):
-    return render_to_response('statics/'+ page_slug +'.html', {},context_instance=RequestContext(request))
+    return render_to_response('statics/'+ page_slug +'.html', {'page_slug': page_slug},context_instance=RequestContext(request))
 
 def payment(request):
     if request.session.get('associate-name', False) == False :

@@ -57,7 +57,7 @@ def homepage(request):
         cache.set('op_associazione_home_feeds', feeds, 3600)
     
     return render_to_response('easycms/home.html', 
-      {'blog_entries': feeds['blog'].entries[0:3],
+      {'blog_entries': feeds['blog'].entries[0:5],
        'tw_entries': feeds['tw'].entries[0:3],
        'fb_entries': feeds['fb'].entries[0:3]}, 
       context_instance=RequestContext(request))

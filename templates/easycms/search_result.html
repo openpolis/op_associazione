@@ -2,14 +2,14 @@
 
 {% block content %}
 <header>
-	<h1>Risultati della ricerca : <em class="search-text">{{ search_text }}</em></h1>
+    <h1>Risultati della ricerca : <em class="search-text">{{ search_text }}</em></h1>
 </header>
 
 <dl>
-	{% for res in search_results %}
-	<dd><a href="{{ res.get_absolute_url }}">{{ res.title }}</a></dd>
-	<dt>{{ res.sub_title }}</dt>
-	{% endfor %}
+    {% for res in search_results %}
+    <dd><a href="{{ res.get_absolute_url }}">{{ res.title }}</a></dd>
+    <dt>{{ res.sub_title }}</dt>
+    {% endfor %}
 </dl>
 
 {% endblock %}

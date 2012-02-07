@@ -1,26 +1,25 @@
 {% extends "easycms/page.html" %}
 
 {% block content_header %}
-
     {% if page.logo %}
-    <a href="{{ page.url }}/" target="_blank" id="project-logo"><img src="{{ page.logo.url }}" alt="{{ page.title }}" /></a>
+      <a href="{{ page.url }}/" target="_blank" id="project-logo"><img src="{{ page.logo.url }}" alt="{{ page.title }}" /></a>
     {% else %}
-    <h1>{{ page.title }}</h1>
+      <h1>{{ page.title }}</h1>
     {% endif %}
 {% endblock %}
 
 {% block content_footer %}
   {% if page.url %}
-  <a href="{{ page.url }}" class="button-forward">vai al progetto <br/> {{ page.title }}</a>    
+    <a href="{{ page.url }}" class="button-forward">vai al progetto <br/> {{ page.title }}</a>    
   {% endif %}
 {% endblock %}
 
 {% block payoff %}
 <div class="container">
     <div class="row">
-        <div class="twelvecol">
-            <ul id="breadcrumb">
-                <li class="first">Progetti</li>
+        <div class="span12">
+            <ul class="breadcrumb">
+                <li class="first">Progetti</li><span class="divider">/</span>
                 <li>{{ page.title }}</li>
             </ul>
         </div>

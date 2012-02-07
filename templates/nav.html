@@ -1,45 +1,65 @@
 {% load cms_extras %}
-<section id="navigation" class="container">        
-    <div class="row">
-        <nav class="prefixone elevencol last">
-            <ul id="menu">
-                <li><a href="{% url about-us %}"{% is_active "about-us" "current" %}>Chi siamo</a></li>
-                <li>
-                    <a href="#"{% is_active "progetti" "current" %}>Progetti</a>
-                    <ul>
-						{% for p in projects %}
-						{% if progetto  %}
-                        <li><a href="{{ p.get_absolute_url }}" class="current">{{ p.title }}</a></li>
-						{% else %}
-						<li><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></li>
-						{% endif %}
-						{% endfor %}
-                    </ul>
-                </li>
-                <li>
-					<a href="#"{% is_active "dossier" "current" %}>Dossier</a>
-					<ul>
-						{% for d in dossiers %}
-						{% if dossier  %}
-                        <li><a href="{{ d.get_absolute_url }}" class="current">{{ d.title }}</a></li>
-						{% else %}
-						<li><a href="{{ d.get_absolute_url }}">{{ d.title }}</a></li>
-						{% endif %}
-						{% endfor %}
-                    </ul>
-	
-				</li>
-                <li><a href="http://blog.openpolis.it">Openblog</a></li>
-                <li>
-					<a href="#"{% is_active "subscribe" "current" %}><img src="/static/img/icons/love.png" class="sostienici" />Sostienici</a>
-					<ul>
-						<li><a href="{% url subscribe %}">Diventa socio</a></li>
-						<li><a href="{% url subscribe-other page_slug='dona' %}">Fai una donazione</a></li>
-						<li><a href="{% url subscribe-other page_slug='collabora' %}">Collabora con noi</a></li>
-					</ul>
-				</li>
+
+<nav class="navbar navbar-static">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="nav-collapse offset1">
+        <ul class="nav" style="margin-left: -10px">
+          <li{% is_active "about-us" "active" %}><a href="{% url about-us %}">Chi siamo</a></li>
+          <li{% is_active "progetti" "dropdown active" "dropdown" %}>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Progetti <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              {% for p in projects %}
+                {% if page == p  %}
+                  <li class="active"><a>{{ p.title }}</a></li>
+                {% else %}
+                  <li><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></li>
+                {% endif %}
+              {% endfor %}
             </ul>
-        </nav>
+          </li>
+
+          <li{% is_active "dossier" "dropdown active" "dropdown" %}>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dossier <b class="caret"></b></a>
+            <ul class="dropdown-menu" style="max-width: 320px">
+              {% for d in dossiers %}
+                {% if page == d  %}
+                  <li class="active"><a>{{ d.title }}</a></li>
+                {% else %}
+                  <li><a href="{{ d.get_absolute_url }}">{{ d.title }}</a></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </li>
           
+          <li><a href="http://blog.openpolis.it">Open blog</a></li>
+          
+          <li{% is_active "subscribe" "dropdown active" "dropdown" %}>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/static/img/icons/love.png" class="sostienici" /> Sostienici <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              {% if current_route_name == 'subscribe'%}
+                <li class="active"><a>Diventa socio</a></li>
+              {% else %}
+                <li><a href="{% url subscribe %}">Diventa socio</a></li>
+              {% endif %}
+              
+              {% if page_slug == 'dona' %}
+                <li class="active"><a>Fai una donazione</a></li>
+              {% else %}
+                <li><a href="{% url subscribe-other page_slug='dona' %}">Fai una donazione</a></li>
+              {% endif %}
+              
+              {% if  page_slug == 'collabora' %}
+                <li class="active"><a>Collabora con noi</a></li>
+              {% else %}
+                <li><a href="{% url subscribe-other page_slug='collabora' %}">Collabora con noi</a></li>
+              {% endif %}
+            </ul>
+          </li>
+          
+          
+        </ul>
+      </div><!--/.nav-collapse -->
     </div>
-</section>
+  </div>
+</nav>

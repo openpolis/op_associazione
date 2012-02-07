@@ -9,177 +9,375 @@
       <h1>Richiesta di iscrizione all’associazione Openpolis come {{ member_type|capfirst }}</h1>
       <small>I Campi con * sono obbligatori</small>
 
-      {% if membership_form.errors or associate_form.errors or legal_address_form.errors or expedition_address_form.errors %}
-      <p class="errorlist">
-          Attenzione! C’è qualche errore nella compilazione del form. <br /> Controlla ciò che è segnalato in rosso.
-      </p>
+      {% if membership_form.errors or associate_form.errors %}
+        <div class="alert alert-error">
+          <strong>Attenzione!</strong> 
+          C'&egrave; qualche errore nella compilazione del form. 
+          Controlla ci&ograve; che &egrave; segnalato in rosso.
+        </div>
       {% endif %}
 
-      <form action="{% url subscribe-module member_type=member_type %}" id="subscribe_form" method="post">
+      <form class="action={% url subscribe-module member_type=member_type %}" 
+            id="subscribe_form" method="post">
           {% csrf_token %}
 
-          <div class="fieldWrapper">
-              {{ membership_form.type_of_membership.label_tag }}
-              <p>
-                {{ membership_form.type_of_membership }}
-                <div>{{membership_form.type_of_membership.help_text}}</div>
-              </p>
-          </div>
+          <fieldset>
 
-          <div class="fieldWrapper">
+            <legend>Dati di iscrizione</legend>
+
+            <label>{{ membership_form.type_of_membership.label_tag }}</label>
+            {{ membership_form.type_of_membership }}
+            <span class="help-inline">{{membership_form.type_of_membership.help_text}}</span>
+
+            <div class="control-group {% if membership_form.fee.errors %}error{% endif %}">
               <label for="id_{{ membership_form.fee.html_name }}">*{{ membership_form.fee.label }}</label>
-              <p>
-                {{ membership_form.fee }}
-                <div>{{membership_form.fee.help_text}}</div>
-              </p>
-              {{ membership_form.fee.errors }}
-          </div>
+              {{ membership_form.fee }}
+              <span class="help-inline">
+                {% if membership_form.fee.errors %}
+                  {% for error in membership_form.fee.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% else %}
+                  {{membership_form.fee.help_text}}
+                {% endif %}
+              </span>
+            </div>
 
-          <div class="fieldWrapper gray">
+            <label class="checkbox" for="id_{{ membership_form.public_subscription.html_name}}">
               {{ membership_form.public_subscription }}
-              <label style="width:80%; margin-top: 3px; font-weight: normal" for="id_{{ membership_form.public_subscription.html_name}}">{{ membership_form.public_subscription.help_text }}</label>
-          </div>
+              {{ membership_form.public_subscription.help_text }}
+            </label>
+
+          </fieldset>
 
           {% block associate_extra %}{% endblock%}
 
-      <h2>{% block associate_details_title %}Dati personali{% endblock %}</h2>
 
-          <div class="fieldWrapper large">
+          <fieldset>
+            
+            <legend>{% block associate_details_title %}Dati personali{% endblock %}</legend>
+
+            <div class="control-group {% if associate_form.first_name.errors %}error{% endif %}">
               <label for="id_{{ associate_form.first_name.html_name }}">*{{ associate_form.first_name.label }}</label>
-              <p>{{ associate_form.first_name }}</p>
-              {{ associate_form.first_name.errors }}
-          </div>
+              {{ associate_form.first_name }}
+              <span class="help-inline">
+                {% if associate_form.first_name.errors %}
+                  {% for error in associate_form.first_name.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
 
-          <div class="fieldWrapper large">
+            <div class="control-group {% if associate_form.last_name.errors %}error{% endif %}">
               <label for="id_{{ associate_form.last_name.html_name }}">*{{ associate_form.last_name.label }}</label>
-              <p>{{ associate_form.last_name }}</p>
-              {{ associate_form.last_name.errors }}
-          </div>
+              {{ associate_form.last_name }}
+              <span class="help-inline">
+                {% if associate_form.last_name.errors %}
+                  {% for error in associate_form.last_name.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
 
-          <div class="fieldWrapper">
+            <div class="control-group {% if associate_form.birth_date.errors %}error{% endif %}">
               <label for="id_{{ associate_form.birth_date.html_name }}">*{{ associate_form.birth_date.label }}</label>
-              <p>{{ associate_form.birth_date }}</p>
-              {{ associate_form.birth_date.errors }}
-          </div>
+              {{ associate_form.birth_date }}
+              <span class="help-inline">
+                {% if associate_form.birth_date.errors %}
+                  {% for error in associate_form.birth_date.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
 
-          <div class="fieldWrapper">
-              <label for="id_{{ associate_form.gender.html_name }}">*{{ associate_form.gender.label }}</label>
-              {{ associate_form.gender }}
-              {{ associate_form.gender.errors }}
-          </div>
+            <div class="control-group {% if associate_form.gender.errors %}error{% endif %}">
+              <label for="{{ associate_form.gender.html_name }}">*{{ associate_form.gender.label }}</label>
+              <div class="controls">
+                {{ associate_form.gender }}
+                <span class="help-inline">
+                  {% if associate_form.gender.errors %}
+                    {% for error in associate_form.gender.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                  {% endif %}
+                </span>
+              </div>
+            </div>          
 
-          <div class="fieldWrapper">
+            <div class="control-group {% if associate_form.fiscal_code.errors %}error{% endif %}">
               <label for="id_{{ associate_form.fiscal_code.html_name }}">*{{ associate_form.fiscal_code.label }}</label>
-              <p>
-                {{ associate_form.fiscal_code }}
-                <div>{{associate_form.fiscal_code.help_text}}</div>
-                </p>
-              {{ associate_form.fiscal_code.errors }}
-          </div>
+              {{ associate_form.fiscal_code }}
+              <span class="help-inline">
+                {% if associate_form.fiscal_code.errors %}
+                  {% for error in associate_form.fiscal_code.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% else %}
+                  {{associate_form.fiscal_code.help_text}}
+                {% endif %}
+              </span>
+            </div>
 
-      <h2>{% block main_address_title %}Indirizzo Residenza{% endblock %}</h2>
+          </fieldset>
 
-          <div class="fieldWrapper large">
+
+          <fieldset>
+            <legend>
+              {% block main_address_title %}Indirizzo di residenza{% endblock %}
+            </legend>
+
+            <div class="control-group {% if associate_form.street.errors %}error{% endif %}">
               <label for="id_{{ associate_form.street.html_name }}">*{{ associate_form.street.label }}</label>
-              <p>{{ associate_form.street }}</p>
-              {{ associate_form.street.errors }}
-          </div>
-          <div class="fieldWrapper small">
+              {{ associate_form.street }}
+              <span class="help-inline">
+                {% if associate_form.street.errors %}
+                  {% for error in associate_form.street.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
+
+            <div class="control-group {% if associate_form.civic_nb.errors %}error{% endif %}">
               <label for="id_{{ associate_form.civic_nb.html_name }}">*{{ associate_form.civic_nb.label }}</label>
-              <p>{{ associate_form.civic_nb }}</p>
-              {{ associate_form.civic_nb.errors }}
-          </div>
-          <div class="fieldWrapper small">
+              {{ associate_form.civic_nb }}
+              <span class="help-inline">
+                {% if associate_form.civic_nb.errors %}
+                  {% for error in associate_form.civic_nb.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
+
+            <div class="control-group {% if associate_form.zip_code.errors %}error{% endif %}">
               <label for="id_{{ associate_form.zip_code.html_name }}">*{{ associate_form.zip_code.label }}</label>
-              <p>{{ associate_form.zip_code }}</p>
-              {{ associate_form.zip_code.errors }}
-          </div>
-          <div class="fieldWrapper">
+              {{ associate_form.zip_code }}
+              <span class="help-inline">
+                {% if associate_form.zip_code.errors %}
+                  {% for error in associate_form.zip_code.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
+
+            <div class="control-group {% if associate_form.location.errors %}error{% endif %}">
               <label for="id_{{ associate_form.location.html_name }}">*{{ associate_form.location.label }}</label>
-              <p>{{ associate_form.location }}</p>
-              {{ associate_form.location.errors }}
-          </div>
-          <div class="fieldWrapper">
-              <label for="{{ associate_form.province.html_name }}">*{{ associate_form.province.label }}</label>
-              <p>{{ associate_form.province }}</p>
-              {{ associate_form.province.errors }}
-          </div>
-          <div class="fieldWrapper">
-              <label for="{{ associate_form.country.html_name }}">*{{ associate_form.country.label }}</label>
-              <p>{{ associate_form.country }}</p>
-              {{ associate_form.country.errors }}
-          </div>
+              {{ associate_form.location }}
+              <span class="help-inline">
+                {% if associate_form.location.errors %}
+                  {% for error in associate_form.location.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
 
-      <h2>Indirizzo di spedizione della tessera</h2>
-          <div class="fieldWrapper">
+            <div class="control-group {% if associate_form.province.errors %}error{% endif %}">
+              <label for="id_{{ associate_form.province.html_name }}">*{{ associate_form.province.label }}</label>
+              {{ associate_form.province }}
+              <span class="help-inline">
+                {% if associate_form.province.errors %}
+                  {% for error in associate_form.province.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
+
+            <div class="control-group {% if associate_form.country.errors %}error{% endif %}">
+              <label for="id_{{ associate_form.country.html_name }}">*{{ associate_form.country.label }}</label>
+              {{ associate_form.country }}
+              <span class="help-inline">
+                {% if associate_form.country.errors %}
+                  {% for error in associate_form.country.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
+            
+          </fieldset>
+
+
+          <fieldset>
+            <legend>
+              Indirizzo di spedizione della tessera
+            </legend>
+
+            
+            <label class="checkbox">
               <input type="checkbox" name="expedition_address_provided" id="address-box"{% if expedition_address_provided %}checked="yes"{% endif %} />
-              <p>E' diverso dall'indirizzo di residenza</p>
-          </div>
+              E' diverso dall'indirizzo di residenza
+            </label>
 
-          <div id="hiddenField" {% if not expedition_address_provided %}style="display:none;"{% endif %}>
-            <div class="fieldWrapper large">
-                <label for="{{ associate_form.exp_street.html_name }}">*{{ associate_form.exp_street.label }}</label>
-                <p>{{ associate_form.exp_street }}</p>
-                {{ associate_form.exp_street.errors }}
+            <div id="hiddenField" {% if not expedition_address_provided %}style="display:none;"{% endif %}>
+
+              <div class="control-group {% if associate_form.exp_street.errors %}error{% endif %}">
+                <label for="id_{{ associate_form.exp_street.html_name }}">*{{ associate_form.exp_street.label }}</label>
+                {{ associate_form.exp_street }}
+                <span class="help-inline">
+                  {% if associate_form.exp_street.errors %}
+                    {% for error in associate_form.exp_street.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                  {% endif %}
+                </span>
+              </div>
+
+              <div class="control-group {% if associate_form.exp_civic_nb.errors %}error{% endif %}">
+                <label for="id_{{ associate_form.exp_civic_nb.html_name }}">*{{ associate_form.exp_civic_nb.label }}</label>
+                {{ associate_form.exp_civic_nb }}
+                <span class="help-inline">
+                  {% if associate_form.exp_civic_nb.errors %}
+                    {% for error in associate_form.exp_civic_nb.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                  {% endif %}
+                </span>
+              </div>
+
+              <div class="control-group {% if associate_form.exp_zip_code.errors %}error{% endif %}">
+                <label for="id_{{ associate_form.exp_zip_code.html_name }}">*{{ associate_form.exp_zip_code.label }}</label>
+                {{ associate_form.exp_zip_code }}
+                <span class="help-inline">
+                  {% if associate_form.exp_zip_code.errors %}
+                    {% for error in associate_form.exp_zip_code.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                  {% endif %}
+                </span>
+              </div>
+
+              <div class="control-group {% if associate_form.exp_location.errors %}error{% endif %}">
+                <label for="id_{{ associate_form.exp_location.html_name }}">*{{ associate_form.exp_location.label }}</label>
+                {{ associate_form.exp_location }}
+                <span class="help-inline">
+                  {% if associate_form.exp_location.errors %}
+                    {% for error in associate_form.exp_location.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                  {% endif %}
+                </span>
+              </div>
+
+              <div class="control-group {% if associate_form.exp_province.errors %}error{% endif %}">
+                <label for="id_{{ associate_form.exp_province.html_name }}">*{{ associate_form.exp_province.label }}</label>
+                {{ associate_form.exp_province }}
+                <span class="help-inline">
+                  {% if associate_form.exp_province.errors %}
+                    {% for error in associate_form.exp_province.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                  {% endif %}
+                </span>
+              </div>
+
+              <div class="control-group {% if associate_form.exp_country.errors %}error{% endif %}">
+                <label for="id_{{ associate_form.exp_country.html_name }}">*{{ associate_form.exp_country.label }}</label>
+                {{ associate_form.exp_country }}
+                <span class="help-inline">
+                  {% if associate_form.exp_country.errors %}
+                    {% for error in associate_form.exp_country.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                  {% endif %}
+                </span>
+              </div>
+            
             </div>
-            <div class="fieldWrapper small">
-                <label for="{{ associate_form.exp_civic_nb.html_name }}">*{{ associate_form.exp_civic_nb.label }}</label>
-                <p>{{ associate_form.exp_civic_nb }}</p>
-                {{ associate_form.exp_civic_nb.errors }}
-            </div>
-            <div class="fieldWrapper small">
-                <label for="{{ associate_form.exp_zip_code.html_name }}">*{{ associate_form.exp_zip_code.label }}</label>
-                <p>{{ associate_form.exp_zip_code }}</p>
-                {{ associate_form.exp_zip_code.errors }}
-            </div>
-            <div class="fieldWrapper">
-                <label for="{{ associate_form.exp_location.html_name }}">*{{ associate_form.exp_location.label }}</label>
-                <p>{{ associate_form.exp_location }}</p>
-                {{ associate_form.exp_location.errors }}
-            </div>
-            <div class="fieldWrapper">
-                <label for="{{ associate_form.exp_province.html_name }}">*{{ associate_form.exp_province.label }}</label>
-                <p>{{ associate_form.exp_province }}</p>
-                {{ associate_form.exp_province.errors }}
-            </div>
-            <div class="fieldWrapper">
-                <label for="{{ associate_form.exp_country.html_name }}">*{{ associate_form.exp_country.label }}</label>
-                <p>{{ associate_form.exp_country }}</p>
-                {{ associate_form.exp_country.errors }}
-            </div>
-          </div>
+            
+          </fieldset>
 
 
-      <h2>Contatti</h2>
-          <div class="fieldWrapper">
-              <label for="{{ contact_form.email.html_name }}">*{{ associate_form.email.label }}</label>
-              <p>{{ associate_form.email }}</p>
-              {{ associate_form.email.errors }}
-          </div>
-          <div class="fieldWrapper">
+
+          <fieldset>
+            <legend>Contatti</legend>
+
+            <div class="control-group {% if associate_form.email.errors %}error{% endif %}">
+              <label for="id_{{ associate_form.email.html_name }}">*{{ associate_form.email.label }}</label>
+              <div class="input-prepend">
+                <span class="add-on">@</span>
+                {{ associate_form.email }}
+              </div>
+              <span class="help-inline">
+                {% if associate_form.email.errors %}
+                  {% for error in associate_form.email.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
+
+            <label class="checkbox">
               {{ associate_form.wants_newsletter }}
               <div>{{ associate_form.wants_newsletter.help_text }}</div>
-          </div>
-          <div class="fieldWrapper">
-              <label for="{{ contact_form.phone_number.html_name }}">{{ associate_form.phone_number.label }}</label>
-              <p>{{ associate_form.phone_number }}</p>
-          </div>
+            </label>
 
+            <div class="control-group {% if associate_form.phone_number.errors %}error{% endif %}">
+              <label for="id_{{ associate_form.phone_number.html_name }}">*{{ associate_form.phone_number.label }}</label>
+              <div class="input-prepend">
+                <span class="add-on">Tel</span>
+                {{ associate_form.phone_number }}
+              </div>
+              <span class="help-inline">
+                {% if associate_form.phone_number.errors %}
+                  {% for error in associate_form.phone_number.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
+
+          </fieldset>
+          
           {% block associate_contact_extra %}{% endblock%}
 
-          <div class="fieldWrapper orange">
-              {{ associate_form.accept_policy }}
-              <div><strong>*{{ associate_form.accept_policy.help_text }}</strong> <br /> Approvo i principi e le regole dello <a href="{% url static-page page_slug='statuto' %}" target="_blank">statuto dell'Associazione Openpolis</a></div>
-              {{ associate_form.accept_policy.errors }}
+          <div class="orange">
+            <fieldset>
+              <legend>{{ associate_form.accept_policy.help_text }}</legend>
 
-              <br />
+              <div class="control-group {% if associate_form.accept_policy.errors %}error{% endif %}">
+                <label class="checkbox">
+                  {{ associate_form.accept_policy }}
+                  <div>Approvo i principi e le regole dello <a href="{% url static-page page_slug='statuto' %}" target="_blank">statuto dell'Associazione Openpolis</a></div>
+                </label>
+                <span class="help-inline">
+                  {% if associate_form.accept_policy.errors %}
+                    {% for error in associate_form.accept_policy.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                  {% endif %}
+                </span>
+              </div>
+            </fieldset>
 
-              {{ associate_form.accept_privacy_policy }}
-              <div><strong>*{{ associate_form.accept_privacy_policy.help_text }}</strong> <br /> Autorizzo l'Associazione Openpolis al trattamento dei miei dati personali per gli scopi indicati nell'<a href="{% url static-page page_slug='privacy' %}" target="_blank">apposita informativa</a></div>
-              {{ associate_form.accept_privacy_policy.errors }}
+
+            <fieldset>
+              <legend>{{ associate_form.accept_privacy_policy.help_text }}</legend>
+
+              <div class="control-group {% if associate_form.accept_privacy_policy.errors %}error{% endif %}">
+                <label class="checkbox">
+                  {{ associate_form.accept_privacy_policy }}
+                  <div>Autorizzo l'Associazione Openpolis al trattamento dei miei dati personali per gli scopi indicati nell'<a href="{% url static-page page_slug='privacy' %}" target="_blank">apposita informativa</a></div>
+                </label>
+                <span class="help-inline">
+                  {% if associate_form.accept_privacy_policy.errors %}
+                    {% for error in associate_form.accept_privacy_policy.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                  {% endif %}
+                </span>
+              </div>
+            </fieldset>
+            
           </div>
 
-      <input type="submit" value="Invia" id="submit_button" />
+      <input type="submit" class="btn btn-primary" value="Invia" id="submit_button" />
       </form>
 
     </div>
@@ -189,31 +387,15 @@
 {% endblock %}
 
 {% block css_styles %}
-<link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.8.17.custom.css" />
-<style type="text/css">
-    #submit_button { font-size:1.4em; padding: 5px 10px; height:auto;}
-    article#main h1 { font-size:1.4em; clear:left; color: black; }
-    form#subscribe_form h2 { clear:left; padding-top:20px; font-size: 22px}
-    .fieldWrapper { min-height: 30px; padding: 5px; clear:both; margin-bottom:10px;  }
-    article#main .fieldWrapper > p { padding: 0;}
-    .fieldWrapper label { float:left; width:150px; line-height:15px; font-weight: bold; font-family: Arial, Helvetica, sans; font-size: 15px; }
-    .fieldWrapper.gray, .fieldWrapper.orange { padding: 10px 0; }
-    .fieldWrapper.gray { background-color: #e9e8e8; }
-    .fieldWrapper.orange { background-color: #fcf8c5; }
-    .fieldWrapper p { float:left; font-size: 0.9em; width:210px; }
-    .fieldWrapper input, .fieldWrapper select { font-size: 16px; font-weight: normal }
-    .fieldWrapper.large input { width: 400px; }
-    .fieldWrapper.large p { width:420px; }
-    .fieldWrapper.small input { width: 50px; }
-    .fieldWrapper.small p { width:80px; }
-    .fieldWrapper input[type='checkbox'] { float: left; margin: 5px; }
-
-    .fieldWrapper ul li label { width:103px; }
-    .errorlist { color:red; }
-    .errorlist li { background:none; }
-    
-    
-</style>
+  {{ block.super }}
+  <link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.8.17.custom.css" />
+  <style>
+    .orange {
+      background-color: #FCF8C5;
+      padding: 1em;
+      margin-bottom: 2em;
+    }
+  </style>
 {% endblock %}
 
 
@@ -254,8 +436,6 @@
                     yearRange: "1900:+0"
             });
             
-            $( 'ul.errorlist' ).parent().children('label').css('color','red');
-
             $( '#address-box' ).click(function() {
                 $('#hiddenField').slideToggle();
             });
