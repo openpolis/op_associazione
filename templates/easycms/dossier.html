@@ -3,7 +3,8 @@
 {% block title %} - {{page.title}} {% endblock %}
 
 {% block content_header %}
-    {% if page.slug ==  'camere-aperte' %}
+  
+    {% if page.title_slug ==  'camere-aperte' %}
       <img src="/static/img/icons/dossier_camere_aperte.png" id="dossier-logo" alt="Dossier Camere Aperte" />
     {% else %}
       <img src="/static/img/icons/minidossier.png" id="dossier-logo" alt="MiniDossier di OpenPolis" />
