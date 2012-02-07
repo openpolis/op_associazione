@@ -2,81 +2,66 @@
 
 {% block content %}
 {% url subscribe-renewal user_hash=associate.hash_key as renewal_url %}
-	<div class="yellow">
-		<h1>Rinnova l'associazione ad Openpolis</h1>
-			
-		<p>
-			Ciao {{ associate.first_name|capfirst }}, 
-			<br />
-			ci richiedi il rinnovo dell’associazione ad Openpolis fino al <strong>{{ next_expire|date:'d F Y' }}</strong>
-			<br />
-			come socio ordinario. La quota da versare è di {{ last_membership.fee }} euro.
-		</p>
-		
-		<form action="{{ renewal_url }}" method="POST">
-			{% csrf_token %}
-			<input type="hidden" name="{{ form.type_of_membership.html_name }}" value="{{ form.type_of_membership.value }}" />
-			<input type="hidden" name="{{ form.fee.html_name }}" value="{{ form.fee.value|safe }}" />
-			<input type="hidden" name="{{ form.public_subscription.html_name }}" value="{{ form.public_subscription.value }}" />
-			<input type="submit" value="Conferma" />
-		</form>
-		
-	</div>
-	<div>
-		<h2>Oppure modifica il tipo di iscrizione</h2>
-		<small>Scegli una nuova tipologia di associazione per modificare la tua iscrizione.</small>
-		
-		<form action="{{ renewal_url }}" method="POST">
-			{% csrf_token %}
-			
-			<div class="fieldWrapper">
-				{{ form.type_of_membership.label_tag }}
-				<p>{{ form.type_of_membership }}</p>
-			</div>
+    <div class="yellow">
+        <h1>Rinnova l'associazione ad Openpolis</h1>
+            
+        <p>
+            Ciao {{ associate.first_name|capfirst }}, 
+            <br />
+            ci richiedi il rinnovo dell’associazione ad Openpolis fino al <strong>{{ next_expire|date:'d F Y' }}</strong>
+            <br />
+            come socio ordinario. La quota da versare è di {{ last_membership.fee }} euro.
+        </p>
+        
+        <form action="{{ renewal_url }}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="{{ form.type_of_membership.html_name }}" value="{{ form.type_of_membership.value }}" />
+            <input type="hidden" name="{{ form.fee.html_name }}" value="{{ form.fee.value|safe }}" />
+            <input type="hidden" name="{{ form.public_subscription.html_name }}" value="{{ form.public_subscription.value }}" />
+            <button type="submit" class="btn btn-primary">Conferma</button>
+        </form>
+        
+    </div>
+    <div style="padding: 1em;">
 
-			<div class="fieldWrapper">
-				<label for="{{ membership_form.fee.html_name }}">*{{ form.fee.label }}</label>
-				<p>{{ form.fee }}</p>
-				{{ form.fee.errors }}
-			</div>
+      <fieldset>
 
-			<div class="fieldWrapper gray">
-				{{ form.public_subscription }}
-				<div>{{ form.public_subscription.help_text }}</div>
-			</div>
-			
-			<input type="submit" value="Invia" />
-		</form>
-		
-		
-	</div>
+        <legend>Oppure modifica il tipo di iscrizione</legend>
 
-{% endblock %}
+        <label>{{ form.type_of_membership.label_tag }}</label>
+        {{ form.type_of_membership }}
+        <span class="help-inline">Scegli una nuova tipologia di associazione per modificare la tua iscrizione.</span>
 
-{% block css_styles %}
-<style type="text/css">
-	#renewal_request_form div { margin: 10px 20px;}
-	#renewal_request_form .errorlist li { background: none; color: red;}
-	#submit_button { font-size:1.1em; padding: 5px 10px; height:auto;}
-	article aside blockquote { font-family: Arial; font-size:1.3em; font-weight:bold; }
-	article .yellow { padding: 20px; background-color:#fbee7d; margin-bottom: 15px; }
-	article aside.orange {
-		background-color: #fcf7c8;
-		margin: 15px 0;
-		padding: 5px 10px;
-	}
-	form#subscribe_form h2 { clear:left; padding-top:20px; }
-	.fieldWrapper { min-height: 30px; padding: 5px; clear:both; margin-bottom:10px;  }
-	article#main .fieldWrapper > p { padding: 4px 0 ;}
-	.fieldWrapper label { float:left; width:150px; line-height:15px; font-weight: bold; }
-	.fieldWrapper.gray, .fieldWrapper.orange { padding: 10px 0; }
-	.fieldWrapper.gray { background-color: #e9e8e8; }
-	.fieldWrapper.orange { background-color: #fcf8c5; }
-	.fieldWrapper p { float:left; font-size: 0.9em; width:210px; }
-	.fieldWrapper input[type='checkbox'] { float: left; margin: 5px; }
+        <div class="control-group {% if form.fee.errors %}error{% endif %}">
+          <label for="id_{{ form.fee.html_name }}">*{{ form.fee.label }}</label>
+          {{ form.fee }}
+          <span class="help-inline">
+            {% if form.fee.errors %}
+              {% for error in form.fee.errors %}
+                  {{ error|escape }}
+              {% endfor %}
+            {% else %}
+              {{form.fee.help_text}}
+            {% endif %}
+          </span>
+        </div>
 
-	.fieldWrapper ul li label { width:103px; }
-	.errorlist { color:red; }
-	.errorlist li { background:none; }
-</style>
+        <label class="checkbox" for="id_{{ form.public_subscription.html_name}}">
+          {{ form.public_subscription }}
+          {{ form.public_subscription.help_text }}
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Invia</button>
+
+        </div>
+
+      </fieldset>
+
+
+        </form>
+        
+        
+    </div>
+
 {% endblock %}

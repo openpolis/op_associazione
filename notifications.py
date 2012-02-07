@@ -3,6 +3,8 @@ from django.core.mail import EmailMultiAlternatives, mail_managers
 from django.template.loader import get_template
 from django.template import Context
 from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
+
 
 from op_associazione import settings
 
@@ -16,7 +18,8 @@ def send_mail(subject, txt_content, from_address, to_addresses, html_content=Non
     msg.send()
 
 def send_renewal_email(associate):
-    d = Context({ 'renewal_url': reverse('subscribe-renewal', args=[associate.hash_key]) })
+    d = Context({ 'current_site': Site.objects.get(id=settings.SITE_ID),
+                  'renewal_url': reverse('subscribe-renewal', args=[associate.hash_key]) })
     plaintext = get_template('email/renewal_email.txt')
     htmly     = get_template('email/renewal_email.html')
     
@@ -29,7 +32,8 @@ def send_renewal_email(associate):
     )
 
 def subscription_received(membership, request_type):
-    d = Context({ 'membership': membership, 'request_type': request_type })
+    d = Context({ 'current_site': Site.objects.get(id=settings.SITE_ID),
+                  'membership': membership, 'request_type': request_type })
 
     # send mail to requiring associate
     plaintext = get_template('email/your_subscription_received.txt')

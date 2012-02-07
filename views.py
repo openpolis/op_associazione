@@ -43,8 +43,8 @@ def renewal(request, user_hash):
     from datetime import timedelta
     next_expire = last_membership.expire_at + timedelta(days=365)
     
+    form = build_membership_form(request, last_membership)
     if request.method == 'POST':
-        form = forms.MembershipForm(request.POST)
         if form.is_valid():
             # Create new Membership..
             new_membership = form.save(commit=False)
@@ -57,8 +57,6 @@ def renewal(request, user_hash):
             request.session['associate-fee'] = new_membership.fee
             request.session['associate-renewal'] = next_expire
             return HttpResponseRedirect(reverse('subscribe-pay')) # Redirect
-    else:
-        form = forms.MembershipForm(instance=last_membership)
 
     return render_to_response( 'subscribe/renewal.html' , {
         'form' : form,
@@ -95,7 +93,7 @@ def check_expedition_address(provided, form):
 
 def subscribe_module(request, member_type):
     associate_form = build_associate_form(request,member_type)
-    membership_form = build_membership_form(request,member_type)
+    membership_form = build_membership_form(request,member_type=member_type)
     exp_address_provided = request.POST.get('expedition_address_provided', False)
     if request.method == 'POST': # If the form has been submitted...
 
@@ -134,18 +132,31 @@ def subscribe_module(request, member_type):
         'member_type' : member_type
     }, context_instance=RequestContext(request))
 
-def build_membership_form(request, member_type):
+def build_membership_form(request, membership=None, member_type=None):
     if request.method == 'POST' :
         form = forms.MembershipForm(data=request.POST)
     else :
         form = forms.MembershipForm()
     
-    if member_type == 'cittadino' :
-        form.fields['type_of_membership'].widget.choices = Membership.MEMBER_TYPE[1:4]
-    else :
-        form.fields['type_of_membership'].widget.choices = Membership.MEMBER_TYPE[1:3]
+    
+    if member_type is not None:
+        if member_type == 'cittadino':
+            form.fields['type_of_membership'].widget.choices = Membership.MEMBER_TYPE[1:4]
+        else:
+            form.fields['type_of_membership'].widget.choices = Membership.MEMBER_TYPE[1:3]
+        return form
         
-    return form
+        
+    # test if membership is owned by a citizen or not
+    if membership is not None:
+        try:
+            c = membership.associate.citizen
+            form.fields['type_of_membership'].widget.choices = Membership.MEMBER_TYPE[1:4]
+        except Exception, e:
+            form.fields['type_of_membership'].widget.choices = Membership.MEMBER_TYPE[1:3]
+        
+        return form
+
 
 def build_associate_form(request, member_type):
     if request.method == 'POST' :

@@ -305,3 +305,22 @@ blockquote p {
 blockquote small {
   color: #333;
 }
+
+.yellow {
+  padding: 20px;
+  background-color: #FBEE7D;
+  margin: 1em 0;
+}
+
+.yellow h1 {
+  margin-top: 0!important;
+  margin-bottom: 0.8em;
+}
+
+.yellow form {
+  margin-bottom: 0!important;
+}
+
+label {
+  font-family: Georgia;
+}

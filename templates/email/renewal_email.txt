@@ -1,1 +1,1 @@
-{{ renewal_url }}
+http://{{current_site.domain}}{{ renewal_url }}
