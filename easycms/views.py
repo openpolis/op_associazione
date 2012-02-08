@@ -73,8 +73,15 @@ def dossier( request, page_slug=None ):
 
 def project( request, page_slug ):
     page = get_object_or_404(Project, title_slug=page_slug)
+    # feeds are extracted and cached for one hour (memcached)
+    feed = cache.get('op_associazione_buzz_feed')
+    if feed is None:
+        feed = feedparser.parse(settings.BUZZ_FEED)
+        cache.set('op_associazione_buzz_feed', feed, 3600)
+    
     return render_to_response('easycms/project.html',     {
-            'page_slug' : page_slug,
-            'page' : page,
-            'asides' : page.asides.all()
+            'buzz_feed': feed.entries[0:5],
+            'page_slug': page_slug,
+            'page': page,
+            'asides': page.asides.all()
         },context_instance=RequestContext(request))

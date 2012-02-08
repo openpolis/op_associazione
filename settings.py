@@ -36,6 +36,7 @@ EMAIL_PORT = 1025
 OP_BLOG_FEED = "http://feeds.feedburner.com/openpolis?format=xml"
 OP_TW_FEED = "https://twitter.com/statuses/user_timeline/83212310.rss"
 OP_FB_FEED = "http://www.facebook.com/feeds/page.php?id=129419747068352&format=rss20"
+BUZZ_FEED = "http://news.google.it/news?hl=it&gl=it&q=openpolis+-%22ettore+di+cesare%22&gs_sm=e&gs_upl=25009l30374l0l31591l20l20l0l0l0l0l275l2985l0.18.2l20l0&bav=on.2,or.r_gc.r_pw.,cf.osb&biw=1268&bih=635&um=1&ie=UTF-8&output=rss"
 
 SERVER_EMAIL = "noreply@openpolis.it"
 
