@@ -33,11 +33,12 @@
     <div class="container">
       <div class="row">
         <div class="span8">
-          <h2>Openpolis buzz (le ultime cose in rete)</h2>
+          <h2>Openpolis buzz</h2>
+          <p>Openpolis in giro per la rete e nelle piattaforme web</p>
           <ul class="feed unstyled">
             {% for entry in  buzz_feed %}
               <li>
-                {{entry.updated_parsed.tm_mday}}.{{entry.updated_parsed.tm_mon}}.{{entry.updated_parsed.tm_year}} -
+                <span>{{entry.updated_parsed.tm_mday}}.{{entry.updated_parsed.tm_mon}}.{{entry.updated_parsed.tm_year}}</span> 
                 <a href="{{entry.link}}" target="_blank">
                   {{entry.title}}
                 </a>
