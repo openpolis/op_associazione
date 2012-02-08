@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from os import sys
 from django import forms
 from op_associazione.models import Membership, Citizen, Politician, Organization, Associate
 
@@ -27,7 +28,28 @@ class MembershipForm(forms.ModelForm):
 class AssociateForm(forms.ModelForm):
     accept_policy = forms.BooleanField(help_text='Approvazione statuto')
     accept_privacy_policy = forms.BooleanField(help_text='Approvazione trattamento dati personali')
+    exp_address_provided = forms.BooleanField(required=False)
+    exp_street = forms.CharField(label='Via, viale, ecc', required=False)
+    exp_civic_nb = forms.CharField(label='Numero civico', required=False)
+    exp_zip_code = forms.CharField(label='CAP', required=False)
+    exp_location = forms.CharField(label='Città', required=False)
+    exp_province = forms.CharField(label='Provincia', required=False)
+    exp_country = forms.CharField(label='Nazione', required=False)
     
+            
+    def clean(self):
+        """custom validation for expedition address, only if different from main address"""
+        cleaned_data = super(AssociateForm, self).clean()
+        exp_address_provided = cleaned_data.get('exp_address_provided')
+        if exp_address_provided:
+            for f in ['street', 'civic_nb', 'zip_code', 'location', 'province', 'country']:
+                field = "exp_%s" % (f,)
+                if cleaned_data.get(field) == '':
+                    self._errors[field] = self.error_class(["Questo campo è obbligatorio."])
+                    del cleaned_data[field]
+        
+        return cleaned_data
+        
     def clean_fiscal_code(self):
         import re
         cc = self.cleaned_data.get('fiscal_code').upper().replace(' ', '')
@@ -41,6 +63,7 @@ class AssociateForm(forms.ModelForm):
     
     class Meta():
         widgets = {
+            'gender': forms.Select(attrs={'class': 'span1'}),
             'notes': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
             'charge': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
             'birth_date': forms.DateInput(format='%d/%m/%Y', attrs={'class':'datepicker span2'}),

@@ -94,7 +94,7 @@ def check_expedition_address(provided, form):
 def subscribe_module(request, member_type):
     associate_form = build_associate_form(request,member_type)
     membership_form = build_membership_form(request,member_type=member_type)
-    exp_address_provided = request.POST.get('expedition_address_provided', False)
+    exp_address_provided = request.POST.get('exp_address_provided', False)
     if request.method == 'POST': # If the form has been submitted...
 
         if associate_form.is_valid() & membership_form.is_valid(): # All validation rules pass
@@ -128,7 +128,6 @@ def subscribe_module(request, member_type):
     return render_to_response('subscribe/'+ member_type +'_form.html', {
         'associate_form' : associate_form,
         'membership_form' : membership_form,
-        'expedition_address_provided' : exp_address_provided,
         'member_type' : member_type
     }, context_instance=RequestContext(request))
 

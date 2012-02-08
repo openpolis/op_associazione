@@ -38,7 +38,10 @@
 
           <div class="control-group {% if form.fee.errors %}error{% endif %}">
             <label for="id_{{ form.fee.html_name }}">*{{ form.fee.label }}</label>
-            {{ form.fee }}
+            <span class="input-append">
+              {{ form.fee }}
+              <span class="add-on">,00</span>
+            </span>
             <span class="help-inline">
               {% if form.fee.errors %}
                 {% for error in form.fee.errors %}
@@ -68,4 +71,13 @@
         
     </div>
 
+{% endblock %}
+
+{% block css_styles %}
+  {{ block.super }}
+  <style>
+    #id_fee {
+      text-align: right;
+    }
+  </style>
 {% endblock %}

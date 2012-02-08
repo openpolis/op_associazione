@@ -33,7 +33,10 @@
 
             <div class="control-group {% if membership_form.fee.errors %}error{% endif %}">
               <label for="id_{{ membership_form.fee.html_name }}">*{{ membership_form.fee.label }}</label>
-              {{ membership_form.fee }}
+              <span class="input-append">
+                {{ membership_form.fee }}
+                <span class="add-on">,00</span>
+              </span>
               <span class="help-inline">
                 {% if membership_form.fee.errors %}
                   {% for error in membership_form.fee.errors %}
@@ -211,13 +214,21 @@
               Indirizzo di spedizione della tessera
             </legend>
 
+            <div class="control-group {% if associate_form.exp_address_provided.errors %}error{% endif %}">
+              <label class="checkbox">
+                {{ associate_form.exp_address_provided }}
+                <div>E' diverso dall'indirizzo di residenza</div>
+              </label>
+              <span class="help-inline">
+                {% if associate_form.exp_address_provided.errors %}
+                  {% for error in associate_form.exp_address_provided.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                {% endif %}
+              </span>
+            </div>
             
-            <label class="checkbox">
-              <input type="checkbox" name="expedition_address_provided" id="address-box"{% if expedition_address_provided %}checked="yes"{% endif %} />
-              E' diverso dall'indirizzo di residenza
-            </label>
-
-            <div id="hiddenField" {% if not expedition_address_provided %}style="display:none;"{% endif %}>
+            <div id="hiddenField" {% if not associate_form.exp_address_provided.value %}style="display:none;"{% endif %}>
 
               <div class="control-group {% if associate_form.exp_street.errors %}error{% endif %}">
                 <label for="id_{{ associate_form.exp_street.html_name }}">*{{ associate_form.exp_street.label }}</label>
@@ -397,6 +408,9 @@
       padding: 1em;
       margin-bottom: 2em;
     }
+    #id_fee {
+      text-align: right;
+    }
   </style>
 {% endblock %}
 
@@ -438,10 +452,20 @@
                     yearRange: "1900:+0"
             });
             
-            $( '#address-box' ).click(function() {
+            $( '#id_exp_address_provided' ).click(function() {
                 $('#hiddenField').slideToggle();
+                if (!$(this).attr('checked')) {
+                  // reset fields when unchecking
+                  $('#id_exp_street').val("");
+                  $('#id_exp_civic_nb').val("");
+                  $('#id_exp_zip_code').val("");
+                  $('#id_exp_location').val("");
+                  $('#id_exp_province').val("");
+                  $('#id_exp_country').val("");
+                };
             });
-                  
+            
+
         });
     </script>
 {% endblock %}
