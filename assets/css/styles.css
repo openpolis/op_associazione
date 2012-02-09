@@ -335,6 +335,30 @@ label {
 #buzz { 
   background-color: #f5f5f3;
   padding: 2em 0;
+  font-size: 12px;
+}
+#buzz, #buzz p { 
+    font-family: Arial;
+}
+#buzz h2 {
+    font-family: Georgia;
+}
+#buzz ul {
+    margin-top: 20px;
+}
+#buzz li {
+    padding-left: 30px;
+    padding-bottom: 20px;
+    padding-top: 2px;
+    background-image: url(../img/icons/feed-google.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+#buzz li span {
+    color: #646566;
+}
+#buzz li a {
+    font-weight:bold;
 }
 
 #fblike { 
