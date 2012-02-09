@@ -14,13 +14,7 @@
 {% block js_footer %}
     {{ block.super }}
     <script>
-    $(function() {
-        $( "#biopictures .popoverable" ).popover({
-            placement: "left",
-        });
-        $( ".popoverable" ).popover({
-            placement: "right",
-        });
-    });
+    $('#biopictures .popoverable').popover({placement: 'left'});    
+    $('.popoverable').popover({placement: 'right'});    
     </script>
 {% endblock %}
