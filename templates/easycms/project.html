@@ -10,8 +10,13 @@
 {% endblock %}
 
 {% block content_footer %}
-  {% if page.url %}
-    <a href="{{ page.url }}" class="button-forward">vai al progetto <br/> {{ page.title }}</a>    
+  {% if page.title_slug == 'voi-siete-qui' %}
+    <a href="http://amministrative2011.voisietequi.it" class="button-forward">vai all'edizione per le<br/> Elezioni amministrative 2011</a>    
+    <a href="http://politiche2008.voisietequi.it" class="button-forward">vai all'edizione per le<br/> Elezioni politiche 2008</a>    
+  {% else %}
+    {% if page.url %}
+      <a href="{{ page.url }}" class="button-forward">vai al progetto <br/> {{ page.title }}</a>    
+    {% endif %}
   {% endif %}
 {% endblock %}
 
