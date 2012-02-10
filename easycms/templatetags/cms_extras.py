@@ -6,8 +6,8 @@ from django.core.urlresolvers import resolve
 import re
 def is_active(context, url_name, class_name, default_class_name=""):
     
-    if (url_name == context['current_route_name'] or 
-        re.search(url_name, context['current_route_name'])):
+    if ('current_route_name' in context and (url_name == context['current_route_name'] or 
+        re.search(url_name, context['current_route_name']))):
         return ' class="%s"' % (class_name,)
     elif default_class_name != "":
         return ' class="%s"' % (default_class_name,)

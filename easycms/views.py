@@ -36,7 +36,7 @@ def page(request, page_slug=None):
     try:
         page = Page.objects.get(title_slug=page_slug)
     except Page.DoesNotExist:
-        return render_to_response('easycms/home.html', {},context_instance=RequestContext(request))
+        raise Http404 
     template = 'page'
     if ( page.template != 'default' ):
         template = 'easycms/' + page.template + '.html'
