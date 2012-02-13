@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
+from datetime import timedelta
+from copy import deepcopy
+import hashlib
+
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.contenttypes.models import ContentType
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.db import transaction
 from django.template import  RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
-
-from copy import deepcopy
-import hashlib
-
 from django.template.loader import get_template
 
 from op_associazione.models import OrderedModel, Membership, Associate
@@ -31,17 +32,19 @@ def payment(request):
 
 
 def renewal(request, user_hash):
-    associate = Associate.objects.get(hash_key=user_hash)
+    try:
+        associate = Associate.objects.get(hash_key=user_hash)
+    except Associate.DoesNotExist:
+        messages.error(request, 'Il codice non corrisponde a nessuna utenza, prova a inserire la mail con la quale ti sei registrato.')
+        return HttpResponseRedirect(reverse('subscribe-renewal-request')) # Problems! Redirect to mail form
+        
     try:
         last_membership = associate.membership_set.latest('expire_at')
+        next_expire = last_membership.expire_at + timedelta(days=365)
     except Membership.DoesNotExist:
+        messages.error(request, "L'utenza non contiene iscrizioni precedenti. Contattaci via email per segnalare il problema." )
         return HttpResponseRedirect(reverse('subscribe-renewal-request')) # Problems! Redirect to mail form
     
-    if not last_membership.is_active:
-        return HttpResponseRedirect(reverse('subscribe-renewal-request')) # Problems! Redirect to mail form
-    
-    from datetime import timedelta
-    next_expire = last_membership.expire_at + timedelta(days=365)
     
     form = build_membership_form(request, membership=last_membership)
     if request.method == 'POST':
@@ -74,7 +77,7 @@ def renewal_request(request):
             associate = form.associate   
 
             # Send mail to confirm
-            notifications.send_renewal_email(associate)
+            notifications.send_renewal_verification_email(associate)
     else : 
         form = forms.RenewalRequestForm()
     

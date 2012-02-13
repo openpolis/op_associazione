@@ -1,0 +1,20 @@
+Questo è il report quotidiano del controllo delle iscrizioni all'associazione.
+
+In scadenza tra 15 giorni ({{ expiring_date|date:"d/m/Y" }})
+======================================
+{% for membership in  expiring %}{{ membership.associate }} - {{ membership.associate.email }} - {{ membership.fee }} euri
+{% endfor %}
+
+Questi utenti hanno gia' ricevuto l'email di avviso.
+
+
+
+
+
+Scadute oggi
+============
+{% for membership in  expired %}{{ membership.associate }} - {{ membership.associate.email }} - {{ membership.fee }} euri ({{ membership.expire_at }})
+{% endfor %}
+
+Questi utenti non hanno ricevuto alcuna email, 
+l'intervento di disattivazione deve essere manuale.

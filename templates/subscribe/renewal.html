@@ -8,11 +8,11 @@
         <h1>Rinnova l'associazione ad Openpolis</h1>
             
         <p>
-            Ciao {{ associate.first_name|capfirst }}, 
+            Ciao <strong>{{ associate.first_name|capfirst }}</strong>, 
             <br />
             ci richiedi il rinnovo dell’associazione ad Openpolis fino al <strong>{{ next_expire|date:'d F Y' }}</strong>
             <br />
-            come socio ordinario. La quota da versare è di {{ last_membership.fee }} euro.
+            come socio ordinario. La quota versata la volta scorsa è di <strong>{{ last_membership.fee }}</strong>&euro;.
         </p>
         
         <form action="{{ renewal_url }}" method="POST">
@@ -20,7 +20,7 @@
             <input type="hidden" name="{{ form.type_of_membership.html_name }}" value="{{ form.type_of_membership.value }}" />
             <input type="hidden" name="{{ form.fee.html_name }}" value="{{ form.fee.value|safe }}" />
             <input type="hidden" name="{{ form.public_subscription.html_name }}" value="{{ form.public_subscription.value }}" />
-            <button type="submit" class="btn btn-primary">Conferma</button>
+            <button type="submit" class="btn btn-primary">Conferma il rinnovo</button>
         </form>
         
     </div>
@@ -30,7 +30,7 @@
         {% csrf_token %}
         <fieldset>
 
-          <legend>Oppure modifica il tipo di iscrizione</legend>
+          <legend>Oppure modifica la tua iscrizione</legend>
 
           <label>{{ form.type_of_membership.label_tag }}</label>
           {{ form.type_of_membership }}
