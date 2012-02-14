@@ -1,47 +1,61 @@
 # -*- coding: utf-8 -*-
+import datetime
+from copy import deepcopy
+import hashlib
+
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.contenttypes.models import ContentType
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.db import transaction
 from django.template import  RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
-
-from copy import deepcopy
-import hashlib
-
 from django.template.loader import get_template
 
 from op_associazione.models import OrderedModel, Membership, Associate
 from op_associazione import forms
 from op_associazione import notifications
+from op_associazione import settings_local
+
+
+import sys
 
 
 def static_page(request, page_slug):
-    return render_to_response('statics/'+ page_slug +'.html', {'page_slug': page_slug},context_instance=RequestContext(request))
+    return render_to_response('statics/'+ page_slug +'.html', 
+        {
+            'page_slug': page_slug,
+            'paypal_test': settings_local.PAYPAL_TEST,            
+        }, context_instance=RequestContext(request))
 
 def payment(request):
     if request.session.get('associate-name', False) == False :
         return HttpResponse("Non siamo riusciti ad identificarti")
-    return render_to_response( 'subscribe/payment.html' , {
-        'associate_name' : request.session.get('associate-name'),
-        'associate_fee' : request.session.get('associate-fee'),
-        'renewal' : request.session.get('associate-renewal')
-    },context_instance=RequestContext(request))
+    return render_to_response( 'subscribe/payment.html' , 
+        {
+            'associate_name' : request.session.get('associate-name'),
+            'associate_fee' : request.session.get('associate-fee'),
+            'renewal' : request.session.get('associate-renewal'),
+            'paypal_test': settings_local.PAYPAL_TEST,
+        }, context_instance=RequestContext(request))
 
 
 def renewal(request, user_hash):
-    associate = Associate.objects.get(hash_key=user_hash)
+    try:
+        associate = Associate.objects.get(hash_key=user_hash)
+    except Associate.DoesNotExist:
+        messages.error(request, 'Il codice non corrisponde a nessuna utenza, prova a inserire la mail con la quale ti sei registrato.')
+        return HttpResponseRedirect(reverse('subscribe-renewal-request')) # Problems! Redirect to mail form
+        
     try:
         last_membership = associate.membership_set.latest('expire_at')
+        next_expire = last_membership.expire_at + datetime.timedelta(days=365)
     except Membership.DoesNotExist:
-        return HttpResponseRedirect(reverse('subscribe-renewal-request')) # Problems! Redirect to mail form
+        messages.warning(request, "Non riusciamo a trovare iscrizioni precedenti attivate. Aggiungine una nuova." )
+        last_membership = None
+        next_expire = None
     
-    if not last_membership.is_active:
-        return HttpResponseRedirect(reverse('subscribe-renewal-request')) # Problems! Redirect to mail form
-    
-    from datetime import timedelta
-    next_expire = last_membership.expire_at + timedelta(days=365)
     
     form = build_membership_form(request, membership=last_membership)
     if request.method == 'POST':
@@ -74,7 +88,7 @@ def renewal_request(request):
             associate = form.associate   
 
             # Send mail to confirm
-            notifications.send_renewal_email(associate)
+            notifications.send_renewal_verification_email(associate)
     else : 
         form = forms.RenewalRequestForm()
     

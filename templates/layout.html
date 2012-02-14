@@ -41,6 +41,21 @@
     
     {% block payoff %}{% endblock %}
 
+    {% block alerts %}
+    {% if messages %}
+      <div class="container" style="margin-top: 1em">
+        {% for message in messages %}
+          <div class="row">        
+            <div{% if message.tags %} class="alert alert-{{ message.tags }}"{%else %} class="alert"{% endif %}>
+              <strong>Attenzione!</strong>
+              {{ message }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% endblock %}
+    
     {% block article %}
     <!--  Main Content -->
     <article id="main" class="container">

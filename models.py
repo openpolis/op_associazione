@@ -3,6 +3,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db import models
 
+from op_associazione import notifications
+
 class Membership(models.Model):
     MEMBER_TYPE = (
         ('fondatore', 'Socio fondatore'),
@@ -38,6 +40,15 @@ class Membership(models.Model):
             if entry[0] == member_type:
                 return entry[1]
         return u'Tipologia di utente %s non trovata' % member_type
+        
+    def notify(self):
+        """
+        notify owner of the subscription that the subscription is being 
+        deactivated; invite to renew
+        """
+        self.is_active = False
+        self.save()
+        notifications.send_expired_email(self)
 
     def __unicode__(self):
         return "%s at %s" % (self.associate, self.created_at.isoformat())
