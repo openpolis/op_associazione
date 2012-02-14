@@ -34,25 +34,47 @@
         <h2>Carta di credito o Paypal</h2>
         <small>Paga la quota associativa tramite il tuo conto Paypal o carta di credito</small>
         
-        <form method="post" action="https://www.paypal.com/cgi-bin/webscr" class="form-inline">
-            <input type="hidden" value="_xclick" name="cmd">
-            <input type="hidden" value="v.alvino@openpolis.it" name="business">
-            <input type="hidden" value="Donazione occasionale per l'associazione openpolis" name="item_name">
-            <input type="hidden" value="openpolis" name="page_style">
-            <input type="hidden" value="1" name="no_shipping">
-            <input type="hidden" value="http://www.openpolis.it" name="return">
-            <input type="hidden" value="1" name="no_note">
-            <input type="hidden" value="EUR" name="currency_code">
-            <input type="hidden" value="0" name="tax">
-            <input type="hidden" value="IT" name="lc">
-            <input type="hidden" value="PP-DonationsBF" name="bn">
-            <span class="add-on">&euro;</span>
-            <span class="input-append" style="margin-bottom: -12px">
-              <input value="{{ associate_fee }}" name="amount" size="5" class="span1" style="text-align: right">
-              <span class="add-on">,00</span>
-            </span>
-            <button type="submit" class="btn btn-success" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Paga subito</button>
-        </form>
+        {% if paypal_test %}
+          <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" class="form-inline">
+              <input type="hidden" value="_xclick" name="cmd">
+              <input type="hidden" value="guglie_1329207169_biz@gmail.com" name="business">
+              <input type="hidden" value="Test Iscrizione per un anno all'associazione Openpolis" name="item_name">
+              <input type="hidden" value="openpolis" name="page_style">
+              <input type="hidden" value="1" name="no_shipping">
+              <input type="hidden" value="http://www.openpolis.it" name="return">
+              <input type="hidden" value="1" name="no_note">
+              <input type="hidden" value="EUR" name="currency_code">
+              <input type="hidden" value="0" name="tax">
+              <input type="hidden" value="IT" name="lc">
+              <input type="hidden" value="PP-DonationsBF" name="bn">
+              <span class="add-on">&euro;</span>
+              <span class="input-append" style="margin-bottom: -12px">
+                <input value="{{ associate_fee }}" name="amount" size="5" class="span1" style="text-align: right">
+                <span class="add-on">,00</span>
+              </span>
+              <button type="submit" class="btn btn-info" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Dona ora</button>
+          </form>
+        {% else %}
+          <form method="post" action="https://www.paypal.com/cgi-bin/webscr" class="form-inline">
+              <input type="hidden" value="_xclick" name="cmd">
+              <input type="hidden" value="v.alvino@openpolis.it" name="business">
+              <input type="hidden" value="Iscrizione per un anno all'associazione Openpolis" name="item_name">
+              <input type="hidden" value="openpolis" name="page_style">
+              <input type="hidden" value="1" name="no_shipping">
+              <input type="hidden" value="http://www.openpolis.it" name="return">
+              <input type="hidden" value="1" name="no_note">
+              <input type="hidden" value="EUR" name="currency_code">
+              <input type="hidden" value="0" name="tax">
+              <input type="hidden" value="IT" name="lc">
+              <input type="hidden" value="PP-DonationsBF" name="bn">
+              <span class="add-on">&euro;</span>
+              <span class="input-append" style="margin-bottom: -12px">
+                <input value="{{ associate_fee }}" name="amount" size="5" class="span1" style="text-align: right">
+                <span class="add-on">,00</span>
+              </span>
+              <button type="submit" class="btn btn-success" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Paga subito</button>
+          </form>
+        {% endif %}
     </aside>
 
 {% endblock %}

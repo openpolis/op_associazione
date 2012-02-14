@@ -4,37 +4,43 @@
 
 {% block content %}
 {% url subscribe-renewal user_hash=associate.hash_key as renewal_url %}
-    <div class="yellow">
-        <h1>Rinnova l'associazione ad Openpolis</h1>
+    {% if last_membership %}
+      <div class="yellow">
+          <h1>Rinnova l'associazione ad Openpolis</h1>
             
-        <p>
-            Ciao <strong>{{ associate.first_name|capfirst }}</strong>, 
-            <br />
-            ci richiedi il rinnovo dell’associazione ad Openpolis fino al <strong>{{ next_expire|date:'d F Y' }}</strong>
-            <br />
-            come socio ordinario. La quota versata la volta scorsa è di <strong>{{ last_membership.fee }}</strong>&euro;.
-        </p>
+          <p>
+              Ciao <strong>{{ associate.first_name|capfirst }}</strong>, 
+              <br />
+              ci richiedi il rinnovo dell’associazione ad Openpolis fino al <strong>{{ next_expire|date:'d F Y' }}</strong>
+              <br />
+              come socio ordinario. La quota versata la volta scorsa è di <strong>{{ last_membership.fee }}</strong>&euro;.
+          </p>
         
-        <form action="{{ renewal_url }}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="{{ form.type_of_membership.html_name }}" value="{{ form.type_of_membership.value }}" />
-            <input type="hidden" name="{{ form.fee.html_name }}" value="{{ form.fee.value|safe }}" />
-            <input type="hidden" name="{{ form.public_subscription.html_name }}" value="{{ form.public_subscription.value }}" />
-            <button type="submit" class="btn btn-primary">Conferma il rinnovo</button>
-        </form>
+          <form action="{{ renewal_url }}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="{{ form.type_of_membership.html_name }}" value="{{ form.type_of_membership.value }}" />
+              <input type="hidden" name="{{ form.fee.html_name }}" value="{{ form.fee.value|safe }}" />
+              <input type="hidden" name="{{ form.public_subscription.html_name }}" value="{{ form.public_subscription.value }}" />
+              <button type="submit" class="btn btn-primary">Conferma il rinnovo</button>
+          </form>
         
-    </div>
+      </div>
+    {% endif %}
     <div style="padding: 1em;">
 
       <form action="{{ renewal_url }}" method="POST">
         {% csrf_token %}
         <fieldset>
-
-          <legend>Oppure modifica la tua iscrizione</legend>
+          {% if last_membership %}
+            <legend>Oppure modifica la tua iscrizione</legend>
+          {% else %}
+            <legend>Completa la tua iscrizione</legend>
+          {% endif %}
 
           <label>{{ form.type_of_membership.label_tag }}</label>
           {{ form.type_of_membership }}
-          <span class="help-inline">Scegli una nuova tipologia di associazione per modificare la tua iscrizione.</span>
+          
+          <span class="help-inline">Scegli una {% if last_membership %}nuova{% endif %} tipologia di associazione per modificare la tua iscrizione.</span>
 
           <div class="control-group {% if form.fee.errors %}error{% endif %}">
             <label for="id_{{ form.fee.html_name }}">*{{ form.fee.label }}</label>

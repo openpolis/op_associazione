@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import timedelta
+import datetime
 from copy import deepcopy
 import hashlib
 
@@ -16,19 +16,29 @@ from django.template.loader import get_template
 from op_associazione.models import OrderedModel, Membership, Associate
 from op_associazione import forms
 from op_associazione import notifications
+from op_associazione import settings_local
+
+
+import sys
 
 
 def static_page(request, page_slug):
-    return render_to_response('statics/'+ page_slug +'.html', {'page_slug': page_slug},context_instance=RequestContext(request))
+    return render_to_response('statics/'+ page_slug +'.html', 
+        {
+            'page_slug': page_slug,
+            'paypal_test': settings_local.PAYPAL_TEST,            
+        }, context_instance=RequestContext(request))
 
 def payment(request):
     if request.session.get('associate-name', False) == False :
         return HttpResponse("Non siamo riusciti ad identificarti")
-    return render_to_response( 'subscribe/payment.html' , {
-        'associate_name' : request.session.get('associate-name'),
-        'associate_fee' : request.session.get('associate-fee'),
-        'renewal' : request.session.get('associate-renewal')
-    },context_instance=RequestContext(request))
+    return render_to_response( 'subscribe/payment.html' , 
+        {
+            'associate_name' : request.session.get('associate-name'),
+            'associate_fee' : request.session.get('associate-fee'),
+            'renewal' : request.session.get('associate-renewal'),
+            'paypal_test': settings_local.PAYPAL_TEST,
+        }, context_instance=RequestContext(request))
 
 
 def renewal(request, user_hash):
@@ -40,10 +50,11 @@ def renewal(request, user_hash):
         
     try:
         last_membership = associate.membership_set.latest('expire_at')
-        next_expire = last_membership.expire_at + timedelta(days=365)
+        next_expire = last_membership.expire_at + datetime.timedelta(days=365)
     except Membership.DoesNotExist:
-        messages.error(request, "L'utenza non contiene iscrizioni precedenti. Contattaci via email per segnalare il problema." )
-        return HttpResponseRedirect(reverse('subscribe-renewal-request')) # Problems! Redirect to mail form
+        messages.warning(request, "Non riusciamo a trovare iscrizioni precedenti attivate. Aggiungine una nuova." )
+        last_membership = None
+        next_expire = None
     
     
     form = build_membership_form(request, membership=last_membership)
