@@ -15,7 +15,7 @@ class Command(BaseCommand):
             dest='dryrun',
             default=False,
             help='List expiring and expired memberships and send mild notifications'),
-        ),
+    )
 
     def handle(self, *args, **options):
         """
@@ -48,7 +48,7 @@ class Command(BaseCommand):
                     expiring.append(last_membership)
                     if not options['dryrun']:
                         # send mail to associate
-                        notifications.send_expiring_warning_email(membership)
+                        notifications.send_expiring_warning_email(last_membership)
 
                     # log 
                     self.stdout.write('Associate: %s - payed_at: %s, expire_at: %s - Expiring!\n' % 

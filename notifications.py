@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 
 
-from op_associazione import settings_local
+from django.conf import settings
 
 def send_mail(subject, txt_content, from_address, to_addresses, html_content=None):
     """send a multipart email according to arguments passed"""
@@ -20,7 +20,7 @@ def send_mail(subject, txt_content, from_address, to_addresses, html_content=Non
 
 
 def send_checksubscriptions_report(expiring, expired):
-    d = Context({ 'current_site': Site.objects.get(id=settings_local.SITE_ID),
+    d = Context({ 'current_site': Site.objects.get(id=settings.SITE_ID),
                   'expiring': expiring, 'expired': expired, 'expiring_date': datetime.date.today() + datetime.timedelta(days=15) })
 
     # send notification to managers
@@ -29,7 +29,7 @@ def send_checksubscriptions_report(expiring, expired):
     
 
 def send_expiring_warning_email(membership):
-    d = Context({ 'current_site': Site.objects.get(id=settings_local.SITE_ID),
+    d = Context({ 'current_site': Site.objects.get(id=settings.SITE_ID),
                   'associate': membership.associate,
                   'expire_at': membership.expire_at.strftime("%d/%m/%Y"),
                   'renewal_url': reverse('subscribe-renewal', args=[membership.associate.hash_key]) })
@@ -39,13 +39,13 @@ def send_expiring_warning_email(membership):
     send_mail(
         '[openpolis] Tua iscrizione in scadenza il %s' % (membership.expire_at.strftime("%d/%m/%Y")),
         plaintext.render(d),
-        settings_local.SERVER_EMAIL,
+        settings.SERVER_EMAIL,
         membership.associate.email,
         html_content=htmly.render(d)
     )
 
 def send_expired_email(membership):
-    d = Context({ 'current_site': Site.objects.get(id=settings_local.SITE_ID),
+    d = Context({ 'current_site': Site.objects.get(id=settings.SITE_ID),
                   'associate': membership.associate,
                   'renewal_url': reverse('subscribe-renewal', args=[membership.associate.hash_key]) })
     plaintext = get_template('email/expired_email.txt')
@@ -54,13 +54,13 @@ def send_expired_email(membership):
     send_mail(
         '[openpolis] Tua iscrizione scaduta!',
         plaintext.render(d),
-        settings_local.SERVER_EMAIL,
+        settings.SERVER_EMAIL,
         membership.associate.email,
         html_content=htmly.render(d)
     )
     
 def send_renewal_verification_email(associate):
-    d = Context({ 'current_site': Site.objects.get(id=settings_local.SITE_ID),
+    d = Context({ 'current_site': Site.objects.get(id=settings.SITE_ID),
                   'associate': associate,
                   'renewal_url': reverse('subscribe-renewal', args=[associate.hash_key]) })
     plaintext = get_template('email/renewal_verification_email.txt')
@@ -69,13 +69,13 @@ def send_renewal_verification_email(associate):
     send_mail(
         '[openpolis] Resta qui', 
         plaintext.render(d), 
-        settings_local.SERVER_EMAIL, 
+        settings.SERVER_EMAIL, 
         associate.email,
         html_content=htmly.render(d)
     )
 
 def subscription_received(membership, request_type):
-    d = Context({ 'current_site': Site.objects.get(id=settings_local.SITE_ID),
+    d = Context({ 'current_site': Site.objects.get(id=settings.SITE_ID),
                   'membership': membership, 'request_type': request_type })
 
     # send mail to requiring associate
@@ -90,7 +90,7 @@ def subscription_received(membership, request_type):
     send_mail(
         subject, 
         plaintext.render(d), 
-        settings_local.SERVER_EMAIL, 
+        settings.SERVER_EMAIL, 
         membership.associate.email,
         html_content=htmly.render(d)
     )

@@ -9,7 +9,7 @@ from django import forms
 from django.http import HttpResponseRedirect
 
 from op_associazione.easycms.models import Page, PageAside, Project, Dossier
-from op_associazione import settings_local
+from django.conf import settings
 
 import feedparser
 
@@ -51,9 +51,9 @@ def homepage(request):
     feeds = cache.get('op_associazione_home_feeds')
     if feeds is None:
         feeds = {}
-        feeds['blog'] = feedparser.parse(settings_local.OP_BLOG_FEED)
-        feeds['tw'] = feedparser.parse(settings_local.OP_TW_FEED)
-        feeds['fb'] = feedparser.parse(settings_local.OP_FB_FEED)
+        feeds['blog'] = feedparser.parse(settings.OP_BLOG_FEED)
+        feeds['tw'] = feedparser.parse(settings.OP_TW_FEED)
+        feeds['fb'] = feedparser.parse(settings.OP_FB_FEED)
         cache.set('op_associazione_home_feeds', feeds, 3600)
     
     return render_to_response('easycms/home.html', 
@@ -76,7 +76,7 @@ def project( request, page_slug ):
     # feeds are extracted and cached for one hour (memcached)
     feed = cache.get('op_associazione_buzz_feed')
     if feed is None:
-        feed = feedparser.parse(settings_local.BUZZ_FEED)
+        feed = feedparser.parse(settings.BUZZ_FEED)
         cache.set('op_associazione_buzz_feed', feed, 3600)
     
     return render_to_response('easycms/project.html',     {

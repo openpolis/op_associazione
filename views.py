@@ -16,7 +16,7 @@ from django.template.loader import get_template
 from op_associazione.models import OrderedModel, Membership, Associate
 from op_associazione import forms
 from op_associazione import notifications
-from op_associazione import settings_local
+from django.conf import settings
 
 
 import sys
@@ -26,7 +26,7 @@ def static_page(request, page_slug):
     return render_to_response('statics/'+ page_slug +'.html', 
         {
             'page_slug': page_slug,
-            'paypal_test': settings_local.PAYPAL_TEST,            
+            'paypal_test': settings.PAYPAL_TEST,            
         }, context_instance=RequestContext(request))
 
 def payment(request):
@@ -37,7 +37,7 @@ def payment(request):
             'associate_name' : request.session.get('associate-name'),
             'associate_fee' : request.session.get('associate-fee'),
             'renewal' : request.session.get('associate-renewal'),
-            'paypal_test': settings_local.PAYPAL_TEST,
+            'paypal_test': settings.PAYPAL_TEST,
         }, context_instance=RequestContext(request))
 
 
