@@ -29,6 +29,7 @@ class Command(BaseCommand):
         memberships = Membership.objects.filter(payed_at__isnull=False)
         if options['year'] is not None:
             memberships = memberships.filter(payed_at__year=options['year'])
+        memberships = memberships.order_by('payed_at')
             
         self.stdout.write('Associato,Data pagamento,Quota\n')
         for m in memberships:
