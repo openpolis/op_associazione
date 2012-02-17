@@ -23,7 +23,7 @@ class MembershipInline(TabularLinkedInline):
 class MembershipAdmin(admin.ModelAdmin):
     fields = ['associate', 'type_of_membership', 'fee', 'payed', 'payed_at', 'expire_at', 'sent_card_at', 'is_active', 'notes', 'public_subscription', 'created_at', 'updated_at']
     readonly_fields = ['associate', 'fee', 'type_of_membership', 'created_at', 'updated_at']
-    search_fields = ('associate__last_name', 'associate__firs_name', 'associate__email')
+    search_fields = ('associate__last_name', 'associate__first_name', 'associate__email')
     list_filter = ('is_active', 'expire_at', 'payed_at')
     list_display = ('associate', 'created_at', 'payed_at', 'expire_at', 'is_active')
 
@@ -36,11 +36,13 @@ class MembershipAdmin(admin.ModelAdmin):
 
 
 class AssociateAdmin(admin.ModelAdmin):
+    readonly_fields = ['created_at']
+    list_display = ('__unicode__', 'created_at', 'last_membership')
     inlines = [MembershipInline,]
     search_fields = ('first_name', 'last_name', 'email' )
     fieldsets = (
         (None, {
-            'fields': ('first_name', 'last_name', 'birth_date', 'gender')
+            'fields': ('first_name', 'last_name', 'birth_date', 'gender', 'created_at')
         }),
         ('Contatti', {
             'classes': ('collapse',),

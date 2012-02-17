@@ -12,11 +12,18 @@
       <small>I Campi con * sono obbligatori</small>
 
       {% if membership_form.errors or associate_form.errors %}
-        <div class="alert alert-error">
-          <strong>Attenzione!</strong> 
-          C'&egrave; qualche errore nella compilazione del form. 
-          Controlla ci&ograve; che &egrave; segnalato in rosso.
-        </div>
+        {% if email_known %}
+          <div class="alert alert-error">
+            <strong>Attenzione!</strong> 
+            Il tuo indirizzo email è già nei nostri archivi. Procedi al <a href="/rinnovo-iscrizione?email={{associate_form.email.value}}">rinnovo della tua iscrizione</a>.
+          </div>
+        {% else %}
+          <div class="alert alert-error">
+            <strong>Attenzione!</strong> 
+            C'&egrave; qualche errore nella compilazione del form. 
+            Controlla ci&ograve; che &egrave; segnalato in rosso.
+          </div>
+        {% endif %}
       {% endif %}
 
       <form class="action={% url subscribe-module member_type=member_type %}" 

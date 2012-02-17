@@ -12,11 +12,11 @@ from django.template import  RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.template.loader import get_template
-
+from django.conf import settings
+from django import forms as django_forms
 from op_associazione.models import OrderedModel, Membership, Associate
 from op_associazione import forms
 from op_associazione import notifications
-from django.conf import settings
 
 
 import sys
@@ -90,7 +90,16 @@ def renewal_request(request):
             # Send mail to confirm
             notifications.send_renewal_verification_email(associate)
     else : 
-        form = forms.RenewalRequestForm()
+        if 'email' in request.GET:
+            f = django_forms.EmailField()
+            try:
+                f.clean(request.GET['email'])
+                email = request.GET['email']
+                form = forms.RenewalRequestForm({'email' : email})
+            except django_forms.ValidationError:
+                form = forms.RenewalRequestForm()
+        else:
+            form = forms.RenewalRequestForm()   
     
     return render_to_response( 'subscribe/renewal_request.html' , {
         'form': form,
@@ -109,6 +118,7 @@ def subscribe_module(request, member_type):
     associate_form = build_associate_form(request,member_type)
     membership_form = build_membership_form(request,member_type=member_type)
     exp_address_provided = request.POST.get('exp_address_provided', False)
+    email_known = False
     if request.method == 'POST': # If the form has been submitted...
 
         if associate_form.is_valid() & membership_form.is_valid(): # All validation rules pass
@@ -138,11 +148,16 @@ def subscribe_module(request, member_type):
             request.session['associate-fee'] = membership.fee
 
             return HttpResponseRedirect(reverse('subscribe-pay')) # Redirect after POST
+        else:
+            if 'email' in associate_form.errors:
+                if u'Associato con questo Email esiste già.' in associate_form.errors['email']:
+                    email_known = True
         
     return render_to_response('subscribe/'+ member_type +'_form.html', {
         'associate_form' : associate_form,
         'membership_form' : membership_form,
-        'member_type' : member_type
+        'member_type' : member_type,
+        'email_known': email_known
     }, context_instance=RequestContext(request))
 
 def build_membership_form(request, membership=None, member_type=None):
