@@ -30,7 +30,7 @@
                       {{ error|escape }}
                   {% endfor %}
                 {% else %}
-                  {% if form.email.value == "" %}
+                  {% if form.email.value == None %}
                     {{ form.email.help_text }}
                   {% endif %}
                 {% endif %}
