@@ -77,7 +77,7 @@ def send_renewal_verification_email(associate):
 def subscription_received(membership, request_type):
     d = Context({ 'current_site': Site.objects.get(id=settings.SITE_ID),
                   'membership': membership, 'request_type': request_type })
-
+                  
     # send mail to requiring associate
     plaintext = get_template('email/your_subscription_received.txt')
     htmly     = get_template('email/your_subscription_received.html')
@@ -86,7 +86,7 @@ def subscription_received(membership, request_type):
         subject = '[openpolis] Ancora insieme'
     else:
         subject = '[openpolis] Benvenuto!'
-
+        
     send_mail(
         subject, 
         plaintext.render(d), 
@@ -98,5 +98,21 @@ def subscription_received(membership, request_type):
     # send notification to managers
     plaintext = get_template('email/new_subscription_received.txt')
     mail_managers('[openpolis] nuova iscrizione ricevuta', plaintext.render(d))
+
+
+def send_subscription_activated_email(membership):
+    d = Context({ 'current_site': Site.objects.get(id=settings.SITE_ID),
+                  'membership': membership })
     
+    # send mail to requiring associate
+    plaintext = get_template('email/your_subscription_activated.txt')
+    htmly     = get_template('email/your_subscription_activated.html')
+    
+    send_mail(
+        '[openpolis] Attivazione iscrizione', 
+        plaintext.render(d), 
+        settings.SERVER_EMAIL, 
+        membership.associate.email,
+        html_content=htmly.render(d)
+    )
     

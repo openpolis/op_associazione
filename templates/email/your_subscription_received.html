@@ -18,7 +18,9 @@ oppure usare la carta di credito o paypal:<br/>
   <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=v.alvino@openpolis.it&item_name=QUOTA+ISCRIZIONE+ANNUALE+ALL'ASSOCIAZIONE+OPENPOLIS&amount={{membership.fee}}&currency_code=EUR&lc=IT&no_shipping=1&return=http://www.openpolis.it"><strong>Versa ora la quota associativa con carta di credito</strong></a><br/>
 <br/>
 Attiveremo la tua iscrizione non appena verificati i dati e gli estremi del pagamento.<br/>
+{% if request_type == 'renew' %}
 Riceverai un’email con la conferma dell'attivazione e successivamente tessera e gadget.<br/>
+{% endif %}
 <br/>
 Grazie di cuore.<br/>
 L'associazione Openpolis<br/>

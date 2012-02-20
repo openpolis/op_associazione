@@ -25,14 +25,19 @@ class MembershipAdmin(admin.ModelAdmin):
     readonly_fields = ['associate', 'fee', 'type_of_membership', 'created_at', 'updated_at']
     search_fields = ('associate__last_name', 'associate__first_name', 'associate__email')
     list_filter = ('is_active', 'expire_at', 'payed_at')
-    list_display = ('associate', 'created_at', 'payed_at', 'expire_at', 'is_active')
+    list_display = ('associate', 'fee', 'payed', 'payed_at', 'expire_at', 'is_active', 'associate_has_subscribed')
 
-    def notify(self, request, queryset):
+    def bulk_deactivate(self, request, queryset):
         for obj in queryset:
-            obj.notify()
-    notify.short_description = "Notifica disattivazione e rinnovo via email"
+            obj.deactivate_and_notify()
+    bulk_deactivate.short_description = "Disattiva e invia richiesta rinnovo via email"
+
+    def bulk_activate(self, request, queryset):
+        for obj in queryset:
+            obj.activate_and_notify()
+    bulk_activate.short_description = "Attiva velocamente"
     
-    actions = [notify]
+    actions = [bulk_activate, bulk_deactivate]
 
 
 class AssociateAdmin(admin.ModelAdmin):

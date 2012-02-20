@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -40,16 +42,39 @@ class Membership(models.Model):
             if entry[0] == member_type:
                 return entry[1]
         return u'Tipologia di utente %s non trovata' % member_type
-        
-    def notify(self):
+
+    def deactivate_and_notify(self):
         """
-        notify owner of the subscription that the subscription is being 
-        deactivated; invite to renew
+        notify subscriber that her subscription has been deactivated; 
+        invite to renew
         """
         self.is_active = False
         self.save()
         notifications.send_expired_email(self)
 
+    def activate_and_notify(self):
+        """
+        works as a bulk activation action
+        payed fee is set equal to what user said
+        payment date is set today
+        expiratin date is set in one year
+        new subscribers are notified
+        old subscribers are not bothered
+        """
+        self.is_active = True
+        if self.payed is None:
+            self.payed = self.fee
+            self.payed_at = datetime.date.today()
+            self.expire_at = self.payed_at + datetime.timedelta(days=365)
+        self.save()
+        
+        # send notification only if associate has old payed subscriptions
+        if not self.associate.has_subscribed():
+            notifications.send_subscription_activated_email(self)
+
+    def associate_has_subscribed(self):
+        return self.associate.has_subscribed()
+        
     def __unicode__(self):
         if self.payed_at is not None:
             return u"%s (%s€), pagati il %s" % (self.get_type_of_membership_display(), self.fee, self.payed_at.strftime('%d/%m/%Y'))            
@@ -105,6 +130,14 @@ class Associate(models.Model):
             return active_memberships[0]
         else:
             return None
+
+    def has_subscribed(self):
+        """returns true if the associate has at least one payed and deactivated membership"""
+        previous_memberships = self.memberships.filter(is_active=False, payed_at__isnull=False)
+        if len(previous_memberships) > 0:
+            return True
+        else:
+            return False
         
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name
