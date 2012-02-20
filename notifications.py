@@ -79,8 +79,10 @@ def subscription_received(membership, request_type):
                   'membership': membership, 'request_type': request_type })
                   
     # send mail to requiring associate
-    plaintext = get_template('email/your_subscription_received.txt')
-    htmly     = get_template('email/your_subscription_received.html')
+    #plaintext = get_template('email/your_subscription_received.txt')
+    #htmly     = get_template('email/your_subscription_received.html')
+    plaintext = get_template('email/expiring_warning_email.txt')
+    htmly     = get_template('email/expiring_warning_email.html')
     
     if  request_type == 'renew':
         subject = '[openpolis] Ancora insieme'
