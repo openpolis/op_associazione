@@ -30,7 +30,11 @@ DATABASES = {
 }
 
 EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
+
+# reset to port 25 when in production (in settings_local.py)
+# 1025 is used to test smtp connections
+# see https://docs.djangoproject.com/en/dev/topics/email/#testing-email-sending
+EMAIL_PORT = 1025
 
 # rss feeds for openpolis blog, twitter account and facebook page
 OP_BLOG_FEED = "http://feeds.feedburner.com/openpolis?format=xml"
