@@ -30,7 +30,7 @@ DATABASES = {
 }
 
 EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
+EMAIL_PORT = 25
 
 # rss feeds for openpolis blog, twitter account and facebook page
 OP_BLOG_FEED = "http://feeds.feedburner.com/openpolis?format=xml"
