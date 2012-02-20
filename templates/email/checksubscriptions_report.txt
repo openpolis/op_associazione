@@ -11,8 +11,8 @@ Questi utenti hanno gia' ricevuto l'email di avviso.
 
 
 
-Scadute oggi
-============
+Scadute ad oggi
+===============
 {% for membership in  expired %}{{ membership.associate }} - {{ membership.associate.email }} - {{ membership.fee }} euri ({{ membership.expire_at }})
 {% endfor %}
 
