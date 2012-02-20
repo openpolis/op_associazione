@@ -10,11 +10,11 @@ class Command(BaseCommand):
     help = 'Check memberhips for expiration and optionally notify consequently (send reminder to expiring, send report to site managers for both expiring and expired)'
 
     option_list = BaseCommand.option_list + (
-        make_option('--dry-run',
+        make_option('--send',
             action='store_true',
-            dest='dryrun',
+            dest='send',
             default=False,
-            help='List expiring and expired memberships and send mild notifications'),
+            help='Send notifications to site managers and mail reminders to expiring memberships\' owners'),
     )
 
     def handle(self, *args, **options):
@@ -46,7 +46,7 @@ class Command(BaseCommand):
                 if last_membership.expire_at == datetime.date.today() + datetime.timedelta(days=15):
                     # append to axpiring array, to send summary to managers
                     expiring.append(last_membership)
-                    if not options['dryrun']:
+                    if options['send']:
                         # send mail to associate
                         notifications.send_expiring_warning_email(last_membership)
 
@@ -62,5 +62,5 @@ class Command(BaseCommand):
                     self.stdout.write('Associate: %s - payed_at: %s, expire_at: %s - EXPIRED!\n' % 
                                       (associate, last_membership.payed_at, last_membership.expire_at))
                     
-        if not options['dryrun']:
+        if options['send']:
             notifications.send_checksubscriptions_report(expiring, expired)
