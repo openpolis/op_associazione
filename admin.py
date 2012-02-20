@@ -26,6 +26,8 @@ class MembershipAdmin(admin.ModelAdmin):
     search_fields = ('associate__last_name', 'associate__first_name', 'associate__email')
     list_filter = ('is_active', 'expire_at', 'payed_at')
     list_display = ('associate', 'fee', 'payed', 'payed_at', 'expire_at', 'is_active', 'associate_has_subscribed')
+    list_per_page = 500
+    ordering = ['expire_at']
 
     def bulk_deactivate(self, request, queryset):
         for obj in queryset:
@@ -66,6 +68,6 @@ class AssociateAdmin(admin.ModelAdmin):
 
 admin.site.register(Membership, MembershipAdmin)
 admin.site.register(Associate, AssociateAdmin)
-admin.site.register(Citizen) 
-admin.site.register(Organization) 
-admin.site.register(Politician) 
+admin.site.register(Citizen, AssociateAdmin) 
+admin.site.register(Organization, AssociateAdmin) 
+admin.site.register(Politician, AssociateAdmin) 
