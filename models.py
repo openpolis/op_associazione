@@ -96,7 +96,7 @@ class Associate(models.Model):
     birth_date            = models.DateField('Data di nascita')
     gender                = models.CharField('Sesso',max_length=1, choices=GENDERS, null=False, blank=False)
     fiscal_code           = models.CharField('Codice fiscale',max_length=20, help_text="Inserisci codice fiscale (16 caratteri)")
-    phone_number          = models.CharField('Telefono',max_length=200)
+    phone_number          = models.CharField('Telefono',max_length=200, blank=True, null=True)
     wants_newsletter      = models.BooleanField('Newsletter',help_text='Voglio ricevere la newsletter via email')
     email                 = models.EmailField(unique=True)
     street                = models.CharField('Via, viale, ecc', max_length=200)

@@ -339,7 +339,7 @@
             </label>
 
             <div class="control-group {% if associate_form.phone_number.errors %}error{% endif %}">
-              <label for="id_{{ associate_form.phone_number.html_name }}">*{{ associate_form.phone_number.label }}</label>
+              <label for="id_{{ associate_form.phone_number.html_name }}">{{ associate_form.phone_number.label }}</label>
               <div class="input-prepend">
                 <span class="add-on">Tel</span>
                 {{ associate_form.phone_number }}
