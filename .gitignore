@@ -18,3 +18,6 @@ urls_local.py
 urls_prod.py
 apache
 site-packages
+
+soci.sql
+transfer_dati_soci.py

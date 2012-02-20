@@ -30,7 +30,9 @@
                       {{ error|escape }}
                   {% endfor %}
                 {% else %}
-                  {{ form.email.help_text }}
+                  {% if form.email.value == None %}
+                    {{ form.email.help_text }}
+                  {% endif %}
                 {% endif %}
               </span>
             </div>
@@ -44,3 +46,6 @@
     </div>
 
 {% endblock %}
+
+{% block fblike %}{% endblock %}
+

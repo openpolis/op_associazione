@@ -18,7 +18,7 @@
 </ul>
 <p>ma anche</p>
 <ul>
-    <li>la crescita delle piattaforme Open polis, Open parlamento, Voi siete qui</li>
+    <li>la crescita delle piattaforme Open politici, Open parlamento, Voi siete qui</li>
     <li>la realizzazione dei nuovi progetti Open municipio, Open bilanci, Open action</li>
     <li>l’osservatorio civico della politica e i suoi progetti d’informazione: i dossier e Camere Aperte</li>
 </ul>
@@ -36,25 +36,48 @@
         Se vuoi puoi naturalmente cambiare l'importo, dona quello che puoi.
     </p>
 
-    <form method="post" action="https://www.paypal.com/cgi-bin/webscr" class="form-inline">
-        <input type="hidden" value="_xclick" name="cmd">
-        <input type="hidden" value="v.alvino@openpolis.it" name="business">
-        <input type="hidden" value="Donazione occasionale per l'associazione openpolis" name="item_name">
-        <input type="hidden" value="openpolis" name="page_style">
-        <input type="hidden" value="1" name="no_shipping">
-        <input type="hidden" value="http://www.openpolis.it" name="return">
-        <input type="hidden" value="1" name="no_note">
-        <input type="hidden" value="EUR" name="currency_code">
-        <input type="hidden" value="0" name="tax">
-        <input type="hidden" value="IT" name="lc">
-        <input type="hidden" value="PP-DonationsBF" name="bn">
-        <span class="add-on">&euro;</span>
-        <span class="input-append" style="margin-bottom: -12px">
-          <input value="20" name="amount" size="5" class="span1" style="text-align: right">
-          <span class="add-on">,00</span>
-        </span>
-        <button type="submit" class="btn btn-success" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Dona ora</button>
-    </form>
+    {% if paypal_test %}
+      <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" class="form-inline">
+          <input type="hidden" value="_xclick" name="cmd">
+          <input type="hidden" value="guglie_1329207169_biz@gmail.com" name="business">
+          <input type="hidden" value="Test Donazione occasionale per l'associazione openpolis" name="item_name">
+          <input type="hidden" value="openpolis" name="page_style">
+          <input type="hidden" value="1" name="no_shipping">
+          <input type="hidden" value="http://www.openpolis.it" name="return">
+          <input type="hidden" value="1" name="no_note">
+          <input type="hidden" value="EUR" name="currency_code">
+          <input type="hidden" value="0" name="tax">
+          <input type="hidden" value="IT" name="lc">
+          <input type="hidden" value="PP-DonationsBF" name="bn">
+          <span class="add-on">&euro;</span>
+          <span class="input-append" style="margin-bottom: -12px">
+            <input value="20" name="amount" size="5" class="span1" style="text-align: right">
+            <span class="add-on">,00</span>
+          </span>
+          <button type="submit" class="btn btn-info" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Dona ora</button>
+      </form>
+    {% else %}
+      <form method="post" action="https://www.paypal.com/cgi-bin/webscr" class="form-inline">
+          <input type="hidden" value="_xclick" name="cmd">
+          <input type="hidden" value="v.alvino@openpolis.it" name="business">
+          <input type="hidden" value="Donazione occasionale per l'associazione openpolis" name="item_name">
+          <input type="hidden" value="openpolis" name="page_style">
+          <input type="hidden" value="1" name="no_shipping">
+          <input type="hidden" value="http://www.openpolis.it" name="return">
+          <input type="hidden" value="1" name="no_note">
+          <input type="hidden" value="EUR" name="currency_code">
+          <input type="hidden" value="0" name="tax">
+          <input type="hidden" value="IT" name="lc">
+          <input type="hidden" value="PP-DonationsBF" name="bn">
+          <span class="add-on">&euro;</span>
+          <span class="input-append" style="margin-bottom: -12px">
+            <input value="20" name="amount" size="5" class="span1" style="text-align: right">
+            <span class="add-on">,00</span>
+          </span>
+          <button type="submit" class="btn btn-success" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Dona ora</button>
+      </form>
+    {% endif %}
+
 
     <p><strong>Donazione mensile per un anno</strong>
         <br />
@@ -62,32 +85,52 @@
         (Potrai in ogni momento interrompere le donazioni mensili scrivendo una mail a associazione@openpolis.it).<br />
         Se vuoi puoi naturalmente cambiare l'importo, dona quello che puoi.
     </p>
+    {% if paypal_test %}
+      <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" class="form-inline">
+          <input type="hidden" value="_xclick" name="cmd">
+          <input type="hidden" value="guglie_1329207169_biz@gmail.com" name="business">
+          <input type="hidden" value="Test Donazione mensile per l'associazione openpolis" name="item_name">
+          <input type="hidden" value="openpolis" name="page_style">
+          <input type="hidden" value="1" name="no_shipping">
+          <input type="hidden" value="http://www.openpolis.it" name="return">
+          <input type="hidden" value="1" name="no_note">
+          <input type="hidden" value="EUR" name="currency_code">
+          <input type="hidden" value="0" name="tax">
+          <input type="hidden" value="IT" name="lc">
+          <input type="hidden" value="PP-DonationsBF" name="bn">
+          <span class="add-on">&euro;</span>
+          <span class="input-append" style="margin-bottom: -12px">
+            <input value="5" name="a3" size="5" class="span1" style="text-align: right">
+            <span class="add-on">,00</span>
+          </span>
+          <button type="submit" class="btn btn-info" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Dona ora</button>
+      </form>
+    {% else %}
+      <form method="post" action="https://www.paypal.com/cgi-bin/webscr" class="form-inline">
+          <input type="hidden" value="_xclick-subscriptions" name="cmd">
+          <input type="hidden" value="v.alvino@openpolis.it" name="business">
+          <input type="hidden" value="Donazione mensile per l'associazione openpolis" name="item_name">
+          <input type="hidden" value="openpolis" name="page_style">
+          <input type="hidden" value="1" name="no_shipping">
+          <input type="hidden" value="http://www.openpolis.it" name="return">
+          <input type="hidden" value="1" name="no_note">
+          <input type="hidden" value="EUR" name="currency_code">
+          <input type="hidden" value="IT" name="lc">
+          <input type="hidden" value="PP-SubscriptionsBF" name="bn">
+          <input type="hidden" value="1" name="p3">
+          <input type="hidden" value="M" name="t3">
+          <input type="hidden" value="1" name="src">
+          <input type="hidden" value="1" name="sra">
+          <span class="add-on">&euro;</span>
+          <span class="input-append" style="margin-bottom: -12px">
+            <input value="5" name="a3" size="5" class="span1" style="text-align: right">
+            <span class="add-on">,00</span>
+          </span>
+          <button type="submit" class="btn btn-success" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Dona ogni mese</button>
+      </form>
+    {% endif %}
 
-    <form method="post" action="https://www.paypal.com/cgi-bin/webscr" class="form-inline">
-        <input type="hidden" value="_xclick-subscriptions" name="cmd">
-        <input type="hidden" value="v.alvino@openpolis.it" name="business">
-        <input type="hidden" value="Donazione mensile per l'associazione openpolis" name="item_name">
-        <input type="hidden" value="openpolis" name="page_style">
-        <input type="hidden" value="1" name="no_shipping">
-        <input type="hidden" value="http://www.openpolis.it" name="return">
-        <input type="hidden" value="1" name="no_note">
-        <input type="hidden" value="EUR" name="currency_code">
-        <input type="hidden" value="IT" name="lc">
-        <input type="hidden" value="PP-SubscriptionsBF" name="bn">
-        <input type="hidden" value="1" name="p3">
-        <input type="hidden" value="M" name="t3">
-        <input type="hidden" value="1" name="src">
-        <input type="hidden" value="1" name="sra">
-        <span class="add-on">&euro;</span>
-        <span class="input-append" style="margin-bottom: -12px">
-          <input value="5" name="a3" size="5" class="span1" style="text-align: right">
-          <span class="add-on">,00</span>
-        </span>
-        <button type="submit" class="btn btn-success" alt="PayPal - Il sistema di pagamento online più facile e sicuro! ">Dona ogni mese</button>
-    </form>
-    
 </section>
-
 
 {% endblock %}
 
@@ -111,3 +154,9 @@
 </section>
 {% endblock %}
 
+
+{% block sidebar %}
+    <aside>
+      {% include "supporting_quotes.html" %}
+    </aside>
+{% endblock %}

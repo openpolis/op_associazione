@@ -9,7 +9,7 @@ from django import forms
 from django.http import HttpResponseRedirect
 
 from op_associazione.easycms.models import Page, PageAside, Project, Dossier
-from op_associazione import settings
+from django.conf import settings
 
 import feedparser
 
@@ -36,7 +36,7 @@ def page(request, page_slug=None):
     try:
         page = Page.objects.get(title_slug=page_slug)
     except Page.DoesNotExist:
-        return render_to_response('easycms/home.html', {},context_instance=RequestContext(request))
+        raise Http404 
     template = 'page'
     if ( page.template != 'default' ):
         template = 'easycms/' + page.template + '.html'

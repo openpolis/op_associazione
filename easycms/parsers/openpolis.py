@@ -21,7 +21,7 @@ def parse(kwargs):
     """ % align
     
 
-    op_url = 'http://openpolis.it/'
+    op_url = 'http://politici.openpolis.it/'
     opp_url = 'http://parlamento.openpolis.it/'
     stats = (
             ('Incarichi censiti', op_url + 'api/chargeNumber/', 

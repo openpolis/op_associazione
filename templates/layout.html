@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="utf-8">
     <title>Openpolis{% block title %}{% endblock %}</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Sito dell'Associazione Openpolis">
+    <meta name="author" content="Associazione Openpolis">
+    <meta name="google-site-verification" content="pUD79-TXeNtrU29AiD3HTRt4bntUyBBrGtA5prUo2oM" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -20,10 +20,12 @@
     {% endblock %}
     
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <!-- 
+    <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/images/apple-touch-icon-114x114.png">
+    -->
   </head>
 
   <body>
@@ -39,6 +41,21 @@
     
     {% block payoff %}{% endblock %}
 
+    {% block alerts %}
+    {% if messages %}
+      <div class="container" style="margin-top: 1em">
+        {% for message in messages %}
+          <div class="row">        
+            <div{% if message.tags %} class="alert alert-{{ message.tags }}"{%else %} class="alert"{% endif %}>
+              <strong>Attenzione!</strong>
+              {{ message }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% endblock %}
+    
     {% block article %}
     <!--  Main Content -->
     <article id="main" class="container">
@@ -86,6 +103,23 @@
         js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));</script>
+      
+      <!-- Google Analytics -->
+      <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-980632-14']);
+        _gaq.push(['_setDomainName', 'openpolis.it']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+      </script>
+     
     
     {% endblock %}
   </body>

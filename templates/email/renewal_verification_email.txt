@@ -1,0 +1,23 @@
+Ciao **{{ associate.first_name|lower|capfirst }}**,
+
+abbiamo ricevuto, in collegamento a questo indirizzo di posta elettronica, 
+una richiesta di rinnovo per l'iscrizione all'Associazione Openpolis.
+
+Per confermare che la richiesta di rinnovo proviene da te, visita questo indirizzo.
+
+http://{{current_site.domain}}{{ renewal_url }}
+
+(Copia la riga qui sopra e incollala nella barra degli indirizzi del tuo browser)
+
+
+Grazie,
+L'Associazione Openpolis
+
+--
+Associazione Openpolis
+Via Dei Sabelli 215 - 00185 Roma
+Tel.: +39.06.83608392
+http://associazione.openpolis.it
+
+Openpolis. Fatti di trasparenza.
+http://openpolitici.it | http://openparlamento.it | http://voisietequi.it

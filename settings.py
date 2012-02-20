@@ -5,7 +5,7 @@ from django.conf import global_settings
 
 BASE_PATH = os.path.dirname(__file__)
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -40,6 +40,7 @@ BUZZ_FEED = "http://news.google.it/news?q=openpolis+-%22ettore+di+cesare%22+-sit
 
 SERVER_EMAIL = "noreply@openpolis.it"
 
+PAYPAL_TEST = False
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
