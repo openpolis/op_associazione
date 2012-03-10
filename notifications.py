@@ -48,10 +48,8 @@ def send_expired_email(membership):
     d = Context({ 'current_site': Site.objects.get(id=settings.SITE_ID),
                   'associate': membership.associate,
                   'renewal_url': reverse('subscribe-renewal', args=[membership.associate.hash_key]) })
-    #plaintext = get_template('email/expired_email.txt')
-    #htmly     = get_template('email/expired_email.html')
-    plaintext = get_template('email/expiring_warning_email.txt')
-    htmly     = get_template('email/expiring_warning_email.html')
+    plaintext = get_template('email/expired_email.txt')
+    htmly     = get_template('email/expired_email.html')
 
     send_mail(
         '[openpolis] Tua iscrizione scaduta!',

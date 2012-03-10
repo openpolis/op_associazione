@@ -49,6 +49,12 @@
               {% else %}
                 <li><a href="{% url subscribe %}">Diventa socio</a></li>
               {% endif %}
+
+              {% if current_route_name == 'subscribe-renewal-request'%}
+                <li class="active"><a>Rinnova la tua iscrizione</a></li>
+              {% else %}
+                <li><a href="{% url subscribe-renewal-request %}">Rinnova la tua iscrizione</a></li>
+              {% endif %}
               
               {% if page_slug == 'dona' %}
                 <li class="active"><a>Fai una donazione</a></li>
