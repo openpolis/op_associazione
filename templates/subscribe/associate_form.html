@@ -7,7 +7,7 @@
 
 <article id="main" class="container">       
     <div class="row">
-
+        <div class="span12">
       <h1>Richiesta di iscrizione all’associazione Openpolis come {{ member_type|capfirst }}</h1>
       <small>I Campi con * sono obbligatori</small>
 
@@ -337,7 +337,9 @@
               {{ associate_form.wants_newsletter }}
               <div>{{ associate_form.wants_newsletter.help_text }}</div>
             </label>
-
+            
+            <br>
+            
             <div class="control-group {% if associate_form.phone_number.errors %}error{% endif %}">
               <label for="id_{{ associate_form.phone_number.html_name }}">{{ associate_form.phone_number.label }}</label>
               <div class="input-prepend">
@@ -359,39 +361,39 @@
 
           <div class="orange">
             <fieldset>
-              <legend>{{ associate_form.accept_policy.help_text }}</legend>
+              
 
               <div class="control-group {% if associate_form.accept_policy.errors %}error{% endif %}">
                 <label class="checkbox">
                   {{ associate_form.accept_policy }}
                   <div>Approvo i principi e le regole dello <a href="{% url static-page page_slug='statuto' %}" target="_blank">statuto dell'Associazione Openpolis</a></div>
                 </label>
+                {% if associate_form.accept_policy.errors %}
                 <span class="help-inline">
-                  {% if associate_form.accept_policy.errors %}
                     {% for error in associate_form.accept_policy.errors %}
                         {{ error|escape }}
                     {% endfor %}
-                  {% endif %}
                 </span>
+                {% endif %}
               </div>
             </fieldset>
 
 
             <fieldset>
-              <legend>{{ associate_form.accept_privacy_policy.help_text }}</legend>
+              
 
               <div class="control-group {% if associate_form.accept_privacy_policy.errors %}error{% endif %}">
                 <label class="checkbox">
                   {{ associate_form.accept_privacy_policy }}
                   <div>Autorizzo l'Associazione Openpolis al trattamento dei miei dati personali per gli scopi indicati nell'<a href="{% url static-page page_slug='privacy' %}" target="_blank">apposita informativa</a></div>
                 </label>
-                <span class="help-inline">
-                  {% if associate_form.accept_privacy_policy.errors %}
+                {% if associate_form.accept_privacy_policy.errors %}
+                <span class="help-inline">                
                     {% for error in associate_form.accept_privacy_policy.errors %}
                         {{ error|escape }}
                     {% endfor %}
-                  {% endif %}
                 </span>
+                {% endif %}
               </div>
             </fieldset>
             
@@ -400,6 +402,7 @@
       <input type="submit" class="btn btn-primary" value="Invia" id="submit_button" />
       </form>
 
+        </div>
     </div>
 </article>
 

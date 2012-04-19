@@ -95,7 +95,7 @@ class OrganizationForm(AssociateForm):
 
 # Form per la richiesta di rinnovo
 class RenewalRequestForm(forms.Form):
-    email = forms.EmailField(help_text="Inserisci l'email con la quale ti sei registrato/a all'associazione")
+    email = forms.EmailField(help_text="Inserisci l'indirizzo email che ci ha indicato al momento dell'associazione, riceverai una email con il link per il rinnovo. Grazie.")
     def clean_email(self):
         email = self.cleaned_data['email']
         try :

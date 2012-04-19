@@ -1,16 +1,6 @@
 {% load cms_extras %}
 
-<nav class="navbar navbar-static">
-  <div class="navbar-inner">
-    <div class="container">
-
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
       
-      <div class="nav-collapse offset1">
         <ul class="nav" style="margin-left: -10px">
           <li{% is_active "about-us" "active" %}><a href="{% url about-us %}">Chi siamo</a></li>
           <li{% is_active "progetti" "dropdown active" "dropdown" %}>
@@ -40,7 +30,9 @@
           </li>
           
           <li><a href="http://blog.openpolis.it">Open blog</a></li>
-          
+
+          <!-- Waiting Vincenzo <li><a href="{% url static-page page_slug='campagne' %}">Campagne</a></li>-->
+
           <li{% is_active "subscribe" "dropdown active" "dropdown" %}>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-heart icon-white"></i> Sostienici <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -72,7 +64,7 @@
           
           
         </ul>
-      </div><!--/.nav-collapse -->
-    </div>
-  </div>
-</nav>
+        
+        <ul class="nav pull-right">
+            <li><a href="{% url static-page page_slug='eng' %}">English Version</a></li>
+        </ul>

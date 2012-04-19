@@ -36,8 +36,24 @@
           </h1>                  
       </div>
     </header>
+    
+    <nav class="navbar navbar-static">
+      <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
 
-    {% include "nav.html"%}
+            <div class="nav-collapse offset1">
+            {% block nav %}
+            {% include "nav.html"%}
+            {% endblock nav %}
+            </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </nav>
     
     {% block payoff %}{% endblock %}
 
@@ -85,7 +101,9 @@
     
     {% block buzz %}{% endblock %}
     
+    {% block footer %}
     {% include "footer.html"%}
+    {% endblock footer %}
 
     {% block js_footer %}
       <!-- Le javascript

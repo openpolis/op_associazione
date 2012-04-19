@@ -14,7 +14,11 @@
 {% block js_footer %}
     {{ block.super }}
     <script>
-    $('#biopictures .popoverable').popover({placement: 'left'});    
-    $('.popoverable').popover({placement: 'right'});    
+    $('#biopictures .popoverable').click(function(){
+        $(this).siblings('.popoverable').popover('hide')
+        $(this).popover('toggle')
+    })
+    $('#biopictures .popoverable').popover({placement: 'left', trigger:'manual'});    
+    $('#op_realtime .popoverable').popover({placement: 'right'});    
     </script>
 {% endblock %}
