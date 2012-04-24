@@ -11,6 +11,15 @@
     </aside>
 {% endblock %}
 
+{% block css_styles %}
+    {{ block.super }}
+    <style type="text/css" media="screen">
+        #biopictures .popoverable:hover {
+            cursor:pointer;
+        }
+    </style>
+{% endblock %}
+
 {% block js_footer %}
     {{ block.super }}
     <script>
