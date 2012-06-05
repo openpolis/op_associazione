@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     
-    url(r'^(?P<page_slug>statuto|privacy|campagne|eng)/','op_associazione.views.static_page', name='static-page'),
+    url(r'^(?P<page_slug>statuto|privacy|campagne|eng|bilancio)/','op_associazione.views.static_page', name='static-page'),
     
     # Subscribe urls
     url(r'^sostienici/(?P<member_type>politico|cittadino|organizzazione)/$', 'op_associazione.views.subscribe_module', {}, name="subscribe-module"),
