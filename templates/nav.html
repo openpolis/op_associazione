@@ -1,8 +1,13 @@
 {% load cms_extras %}
 
-      
         <ul class="nav" style="margin-left: -10px">
-          <li{% is_active "about-us" "active" %}><a href="{% url about-us %}">Chi siamo</a></li>
+          <li{% is_active "about-us" "dropdown active" "dropdown" %}>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Associazione <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url about-us %}">Chi siamo</a></li>
+              <li><a href="{% url static-page page_slug='statuto' %}">Statuto e bilancio</a></li>
+            </ul>
+          </li>
           <li{% is_active "progetti" "dropdown active" "dropdown" %}>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Progetti <b class="caret"></b></a>
             <ul class="dropdown-menu">
