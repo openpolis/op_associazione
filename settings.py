@@ -38,7 +38,9 @@ EMAIL_PORT = 1025
 
 # rss feeds for openpolis blog, twitter account and facebook page
 OP_BLOG_FEED = "http://feeds.feedburner.com/openpolis?format=xml"
-OP_TW_FEED = "https://twitter.com/statuses/user_timeline/83212310.rss"
+# changed!
+# OP_TW_FEED = "https://twitter.com/statuses/user_timeline/83212310.rss"
+OP_TW_FEED = "https://api.twitter.com/1/statuses/user_timeline.rss?screen_name=openpolis"
 OP_FB_FEED = "http://www.facebook.com/feeds/page.php?id=129419747068352&format=rss20"
 BUZZ_FEED = "http://news.google.it/news?q=openpolis+-%22ettore+di+cesare%22+-site:openpolis.it&hl=it&prmd=imvns&bav=on.2,or.r_gc.r_pw.r_cp.,cf.osb&biw=1269&bih=669&um=1&ie=UTF-8&output=rss"
 
