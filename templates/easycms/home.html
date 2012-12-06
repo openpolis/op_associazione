@@ -61,7 +61,7 @@
               {% for blog_entry in  blog_entries%}
                 <li>
                   <a href="{{blog_entry.link}}" target="_blank">
-                    {{blog_entry.title}} ({{blog_entry.updated_parsed.tm_mday}}.{{blog_entry.updated_parsed.tm_mon}}.{{blog_entry.updated_parsed.tm_year}})
+                    {{blog_entry.title|safe}} ({{blog_entry.updated_parsed.tm_mday}}.{{blog_entry.updated_parsed.tm_mon}}.{{blog_entry.updated_parsed.tm_year}})
                   </a>
                 </li>
               {% endfor %}
@@ -73,7 +73,7 @@
               {% for tw_entry in  tw_entries%}
                 <li>
                   <a href="{{tw_entry.link}}" target="_blank">
-                    {{tw_entry.title}} ({{tw_entry.updated_parsed.tm_mday}}.{{tw_entry.updated_parsed.tm_mon}}.{{tw_entry.updated_parsed.tm_year}})
+                    {{tw_entry.title|safe}} ({{tw_entry.updated_parsed.tm_mday}}.{{tw_entry.updated_parsed.tm_mon}}.{{tw_entry.updated_parsed.tm_year}})
                   </a>
                 </li>
               {% endfor %}
@@ -85,7 +85,7 @@
               {% for fb_entry in  fb_entries%}
                 <li>
                   <a href="{{fb_entry.link}}" target="_blank">
-                    {{fb_entry.title}} ({{fb_entry.updated_parsed.tm_mday}}.{{fb_entry.updated_parsed.tm_mon}}.{{fb_entry.updated_parsed.tm_year}})
+                    {{fb_entry.title|safe}} ({{fb_entry.updated_parsed.tm_mday}}.{{fb_entry.updated_parsed.tm_mon}}.{{fb_entry.updated_parsed.tm_year}})
                   </a>
                 </li>
               {% endfor %}
