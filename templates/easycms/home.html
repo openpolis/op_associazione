@@ -19,10 +19,9 @@
             </p>
         </div>
         <div class="span3">
-            <a href="http://voisietequi.openpolis.it"><img src="/static/img/logos/logo-voisietequi.png" alt="Voi Siete Qui" title="Voi Siete Qui" class="sublogo" /></a>
+            <a href="http://www.openmunicipio.it"><img src="/static/img/logos/logo-openmunicipio.png" alt="Open municipio" title="Open municipio" class="sublogo" /></a>
             <p>
-            <a href="http://voisietequi.openpolis.it">Test politico-elettorale</a> per capire quali partiti rappresentano di più le proprie posizioni politiche in base ai programmi elettorali e alle dichiarazioni pubbliche dei leader prima delle elezioni.
-            
+                <a href="http://www.openmunicipio.it">La piattaforma web nazionale</a>  per monitorare, informarsi e partecipare alla vita politica della propria città. (Con dati politico-amministrativi ufficiali dei comuni aderenti)
             </p>
         </div>
         <div class="span3">
@@ -43,7 +42,7 @@
     </div>
     <div id="arrows" class="row-fluid">
         <div class="span3"><a href="http://indice.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-green.png" alt="Vai su Indice di Produttività parlamentare" /></a></div>
-        <div class="span3"><a href="http://voisietequi.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-red.png" alt="Vai su Voi Siete Qui" /></a></div>
+        <div class="span3"><a href="http://www.openmunicipio.it" class="arrow"><img src="/static/img/arrows/arrow-gray.png" alt="Vai su Open municipio" /></a></div>
         <div class="span3"><a href="http://politici.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-orange.png" alt="Vai su Open Politici" /></a></div>
         <div class="span3"><a href="http://parlamento.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-fucsia.png" alt="Vai su Open Parlamento" /></a></div>
     </div>
@@ -62,7 +61,7 @@
               {% for blog_entry in  blog_entries%}
                 <li>
                   <a href="{{blog_entry.link}}" target="_blank">
-                    {{blog_entry.title}} ({{blog_entry.updated_parsed.tm_mday}}.{{blog_entry.updated_parsed.tm_mon}}.{{blog_entry.updated_parsed.tm_year}})
+                    {{blog_entry.title|safe}} ({{blog_entry.updated_parsed.tm_mday}}.{{blog_entry.updated_parsed.tm_mon}}.{{blog_entry.updated_parsed.tm_year}})
                   </a>
                 </li>
               {% endfor %}
@@ -74,7 +73,7 @@
               {% for tw_entry in  tw_entries%}
                 <li>
                   <a href="{{tw_entry.link}}" target="_blank">
-                    {{tw_entry.title}} ({{tw_entry.updated_parsed.tm_mday}}.{{tw_entry.updated_parsed.tm_mon}}.{{tw_entry.updated_parsed.tm_year}})
+                    {{tw_entry.title|safe}} ({{tw_entry.updated_parsed.tm_mday}}.{{tw_entry.updated_parsed.tm_mon}}.{{tw_entry.updated_parsed.tm_year}})
                   </a>
                 </li>
               {% endfor %}
@@ -86,7 +85,7 @@
               {% for fb_entry in  fb_entries%}
                 <li>
                   <a href="{{fb_entry.link}}" target="_blank">
-                    {{fb_entry.title}} ({{fb_entry.updated_parsed.tm_mday}}.{{fb_entry.updated_parsed.tm_mon}}.{{fb_entry.updated_parsed.tm_year}})
+                    {{fb_entry.title|safe}} ({{fb_entry.updated_parsed.tm_mday}}.{{fb_entry.updated_parsed.tm_mon}}.{{fb_entry.updated_parsed.tm_year}})
                   </a>
                 </li>
               {% endfor %}
