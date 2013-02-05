@@ -56,7 +56,19 @@
 <section id="extra" class="container-fluid">
   <div class="container">
     <div class="row">
-        <div class="span3 offset3">
+        <div class="span3" style="padding-top: 10px;">
+          <a 
+           href="https://s3-eu-west-1.amazonaws.com/camereaperte2013.openpolis.it/dossier_camereaperte2013.pdf">
+            <img
+             src="{{STATIC_URL}}img/CA13_banner_openpolis.png"/>
+          </a><br/>
+          <strong>Camere aperte 2013</strong>, rapporto sull'attività del Parlamento italiano nella XVI Legislatura.<br/>
+          <a 
+           href="https://s3-eu-west-1.amazonaws.com/camereaperte2013.openpolis.it/dossier_camereaperte2013.pdf">
+           Scarica il file (pdf, 1,6Mb).
+          </a>
+        </div>
+        <div class="span3">
             <ul class="feed unstyled">
               {% for blog_entry in  blog_entries%}
                 <li>
