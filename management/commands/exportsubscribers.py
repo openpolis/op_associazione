@@ -18,8 +18,8 @@ class Command(BaseCommand):
 
         subscribers = Associate.objects.all()
             
-        self.stdout.write('nome;cognome;email;location\n')
+        print('nome;cognome;email;location')
         for s in subscribers:
-            self.stdout.write('%s;%s;%s;%s\n' % 
-                              (s.first_name, s.last_name, s.email, s.location,))
+            print(u'%s;%s;%s;%s' % 
+                              (s.first_name, s.last_name, s.email, s.location,)).encode('utf-8')
             
