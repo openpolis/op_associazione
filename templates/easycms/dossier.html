@@ -3,11 +3,15 @@
 {% block title %} - {{page.title}} {% endblock %}
 
 {% block content_header %}
-  
+
     {% if page.title_slug ==  'camere-aperte' %}
       <img src="/static/img/icons/dossier_camere_aperte.png" id="dossier-logo" alt="Dossier Camere Aperte" />
     {% else %}
-      <img src="/static/img/icons/minidossier.png" id="dossier-logo" alt="MiniDossier di OpenPolis" />
+      {% if page.title_slug ==  'camere-aperte-2013' %}
+        <img src="/static/img/icons/dossier_camere_aperte2013.png" id="dossier-logo" alt="Dossier Camere Aperte 2013" />
+      {% else %}
+        <img src="/static/img/icons/minidossier.png" id="dossier-logo" alt="MiniDossier di OpenPolis" />
+      {% endif %}
     {% endif %}
     <h1>{{ page.title }}</h1>
 {% endblock %}
@@ -17,7 +21,7 @@
     <div class="row">
       <div class="span12">
           <ul class="breadcrumb">
-              <li class="first">Dossier</li><span class="divider">/</span>
+              <li class="first">Dossier</li><li class="divider">/</li>
               <li>{{ page.title }}</li>
           </ul>
       </div>
