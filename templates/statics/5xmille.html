@@ -43,10 +43,39 @@
         Con Voi siete qui abbiamo provato a capire i programmi elettorali di ogni partito politico.
         Poi c’è Camere Aperte, il rapporto annuale sullo stato della politica italiana e i mini-dossier
         di giornalismo dei dati che periodicamente promuoviamo.
-        <b>Adesso abbiamo bisogno di te.
+    <br/>
+        <b>Adesso abbiamo bisogno di te.<br/>
         Per continuare a donarti trasparenza donaci il tuo 5 per mille.</b>
     </p>
 
+    <div class="cxm_main_cf container-fluid">
+        <div class="row-fluid number_row">
+            <div class="span6 number">
+                97532050586
+            </div>
+        </div>
+        <div class="row-fluid subtitle_row">
+            <div class="span7 subtitle">
+                Il nostro codice fiscale da inserire nel modello per la dichiarazione dei redditi.
+            </div>
+        </div>
+    </div>
+
+    <div class="come_fare_row">
+        <div class="title">
+            Come fare
+        </div>
+        <div class="subtitle">
+            Scarica e stampa un promemoria da portare al tuo commercialista e da distribuire ai tuoi amici.
+        </div>
+    </div>
+
+    <div class="download_img">
+        <a href="#">
+            <img src="../static/img/5xmille/5xmille_download.png" />
+        </a>
+
+    </div>
 
     <p>
         Nel tuo modello per la dichiarazione dei redditi (CUD, 730 o UNICO – qui sotto trovi i fac simile)
@@ -58,6 +87,36 @@
         riconosciute che operano nei settori di cui all’art. 10, c. 1, lett a), del D.Lgs. n. 460 del 1997"
         Inserisci <b>la tua firma</b> e il numero del Codice fiscale dell’Associazione Openpolis: 97532050586.
     </p>
+
+
+
+    <div class="slider-wrapper theme-default">
+        <div id="slider" class="nivoSlider">
+            <img src="../static/img/5xmille/5xmille_download.png"
+                 data-thumb="../static/img/5xmille/5xmille_download.png"
+                 data-transition="slideInLeft"
+                 alt="" title="This is an example of a caption" />
+
+            <img src="../static/img/5xmille/5xmille_download.png"
+                 data-thumb="../static/img/5xmille/5xmille_download.png"
+                 data-transition="slideInLeft"
+                 alt="" title="This is an example of a caption" />
+
+            <img src="../static/img/5xmille/5xmille_download.png"
+                 data-thumb="../static/img/5xmille/5xmille_download.png" alt=""
+                 data-transition="slideInLeft"
+                 title="This is an example of a caption" />
+            <img src="../static/img/5xmille/5xmille_download.png"
+                 data-thumb="../static/img/5xmille/5xmille_download.png" alt=""
+                 data-transition="slideInLeft"
+                 title="This is an example of a caption" />
+        </div>
+    </div>
+
+
+
+
+
 {% endblock %}
 
 
@@ -78,5 +137,23 @@
         </div>
 
     </div>
+{% endblock %}
+
+
+{% block js_custom %}
+
+
+    <script type="text/javascript" src="../static/js/jquery.nivo.slider.js"></script>
+    <script type="text/javascript">
+        $(window).load(function() {
+            $('#slider').nivoSlider({
+                prevText: '', // Prev directionNav text
+                nextText: '', // Next directionNav text
+                pauseOnHover: true,
+                controlNav: false // 1,2,3... navigation
+            });
+        });
+    </script>
+
 {% endblock %}
 

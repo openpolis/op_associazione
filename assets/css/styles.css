@@ -1,4 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
+
 
 body {
   padding: 0;
@@ -364,6 +366,9 @@ label {
   padding: 1em 0;
 }
 
+
+/*campagna 5xmille 2013*/
+
 .no_margin {
     margin-right: 0!important;
     margin-left: 0!important;
@@ -378,21 +383,20 @@ label {
     -moz-background-size:100% 100%;
     -webkit-background-size:100% 100%;
     background-size:100% 100%;
-
     margin-bottom: 25px;
   }
 
 .cxm_header_container{
     margin-top: 25px;
     margin-left: 50px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
 
 }
 
 .cxm_header_container .top{
     background-color: #000;
     color: #fff;
-    font-size: 60px;
+    font-size: 75px;
     font-weight: bold;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -404,14 +408,14 @@ label {
 .cxm_header_container .bottom{
     background-color: #fff;
     color: #000;
-    font-size: 33px;
-    font-weight: normal;
+    font-size: 40px;
+    font-weight: bold;
     padding: 25px;
 
 }
 
 .cxm_side_cf{
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .cxm_side_cf .top{
@@ -420,27 +424,80 @@ label {
     color: #fff;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 .cxm_side_cf .top .left{
+    padding-top: 2px;
     text-align: justify;
     font-size: 20px;
 }
 .cxm_side_cf .top .right{
-    font-size: 45px;
+    font-size: 50px;
+    letter-spacing:4px;
     line-height: 45px;
-    letter-spacing:0px;
+
 }
 
 .cxm_side_cf .bottom{
     background-color: #ddd704;
     color: #000;
-    font-size: 30px;
+    font-size: 45px;
+    letter-spacing:12px;
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 12px;
+    padding-right: 12px;
     text-align: center;
+}
+
+.cxm_main_cf{
+    font-family: 'Open Sans Condensed', sans-serif;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.cxm_main_cf .number_row{
+
+    color: #000;
+    font-size: 45px;
+    line-height: 45px;
+    letter-spacing:12px;
+    padding-top: 20;
+    padding-left: 0;
+    padding-right: 12px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.cxm_main_cf .number_row .number{
+    background-color: #ddd704;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.cxm_main_cf .subtitle_row{
+    margin-bottom: 20px;
+    color: #797b73;
+}
+
+.come_fare_row{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.come_fare_row .title{
+    font-family: 'Arial',sans-serif;
+    color:#d10423;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.come_fare_row .subtitle{
+
+}
+
+.download_img{
+    margin-bottom: 50px;
 }
