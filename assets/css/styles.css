@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
 body {
   padding: 0;
 }
@@ -369,12 +371,76 @@ label {
     width: 100%!important;
 }
 
-.cinquexmille{
+.cxm_header_bg{
     min-height: 222px;
-
     background-image: url('../img/5xmille/5xmille_header.jpg');
     background-repeat: no-repeat;
     -moz-background-size:100% 100%;
     -webkit-background-size:100% 100%;
     background-size:100% 100%;
+
+    margin-bottom: 25px;
   }
+
+.cxm_header_container{
+    margin-top: 25px;
+    margin-left: 50px;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.cxm_header_container .top{
+    background-color: #000;
+    color: #fff;
+    font-size: 60px;
+    font-weight: bold;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
+
+}
+
+.cxm_header_container .bottom{
+    background-color: #fff;
+    color: #000;
+    font-size: 33px;
+    font-weight: normal;
+    padding: 25px;
+
+}
+
+.cxm_side_cf{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.cxm_side_cf .top{
+    margin: 0!important;
+    background-color: #000;
+    color: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.cxm_side_cf .top .left{
+    text-align: justify;
+    font-size: 20px;
+}
+.cxm_side_cf .top .right{
+    font-size: 45px;
+    line-height: 45px;
+    letter-spacing:0px;
+}
+
+.cxm_side_cf .bottom{
+    background-color: #ddd704;
+    color: #000;
+    font-size: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+}
