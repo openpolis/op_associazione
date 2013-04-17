@@ -64,6 +64,12 @@
               {% else %}
                 <li><a href="{% url subscribe-other page_slug='collabora' %}">Collabora con noi</a></li>
               {% endif %}
+
+                {% if  page_slug == '5xmille' %}
+                    <li class="active"><a>Campagna 5 x mille</a></li>
+                {% else %}
+                    <li><a href="{% url 5xmille %}">Campagna 5 x mille</a></li>
+                {% endif %}
             </ul>
           </li>
           

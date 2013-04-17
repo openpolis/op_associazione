@@ -2,12 +2,14 @@ from django.conf.urls.defaults import patterns, include, url
 
 # Aministration
 from django.contrib import admin
+from django.views.generic import TemplateView
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    
     url(r'^(?P<page_slug>statuto|privacy|campagne|eng|bilancio)/','op_associazione.views.static_page', name='static-page'),
-    
+    url(r'^5xmille/$', TemplateView.as_view(template_name='statics/5xmille.html'), name="5xmille"),
+
     # Subscribe urls
     url(r'^sostienici/(?P<member_type>politico|cittadino|organizzazione)/$', 'op_associazione.views.subscribe_module', {}, name="subscribe-module"),
     url(r'^sostienici/completa-associazione/$', 'op_associazione.views.payment', {}, name="subscribe-pay"),
