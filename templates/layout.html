@@ -66,18 +66,39 @@
     {% block payoff %}{% endblock %}
 
     {% block alerts %}
-    {% if messages %}
-      <div class="container" style="margin-top: 1em">
-        {% for message in messages %}
-          <div class="row">        
-            <div{% if message.tags %} class="alert alert-{{ message.tags }}"{%else %} class="alert"{% endif %}>
-              <strong>Attenzione!</strong>
-              {{ message }}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
+        {% if subscription_form %}
+            <div class="container">
+            <div class="row">
+            <div class="span12">
+            {% if not subscription_form.is_valid %}
+                <div{% if message.tags %} class="alert subscription_alert alert-{{ message.tags }}"{%else %} class="subscription_alert alert"{% endif %}>
+                    <strong>Attenzione!</strong>
+                    Ci sono errori nel form, controlla i valori inseriti <a href="#subscription_form">nel form</a>
+                </div>
+            {% else %}
+                <div class="alert subscription_alert alert-success">
+                    Iscrizione avvenuta correttamente.
+                </div>
+            {% endif %}
+            </div></div></div>
+        {% else %}
+            {% if messages %}
+                <div class="container">
+                    {% for message in messages %}
+                        {% if 'email' not in message.tags %}
+                            <div class="row"  style="margin-top: 1em">
+                                <div{% if message.tags %} class="alert alert-{{ message.tags }}"{%else %} class="alert"{% endif %}>
+                                    <strong>Attenzione!</strong>
+                                    {{ message }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        {% endif %}
+
     {% endblock %}
     
     {% block article %}

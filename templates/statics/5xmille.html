@@ -91,7 +91,7 @@
         Sai che usiamo l'analisi dei dati per vederci chiaro.
         Usiamo i numeri per dimostrarti che il Re è Nudo. Siamo in nove in ufficio e la mole di
         lavoro che affrontiamo è davvero tanta.
-        Sai che <b>i servizi che ti offriamo sono tutti gratuiti</b>.
+        Sai che <b>i servizi che ti offriamo sono tutti gratuiti e senza pubblicit&agrave;</b>.
         Abbiamo creato per te
         <a href="http://www.openparlamento.it" title="Vai al sito Open parlamento" target="_blank">
             Open parlamento
@@ -304,6 +304,7 @@
         </div>
         <div class="row-fluid">
             <div class="span12" >
+                <a name="subscription_form"></a>
                 <article><h1>Ci hai donato il tuo 5xmille?</h1></article>
             </div>
         </div>
@@ -314,25 +315,49 @@
         </div>
         <div class="row-fluid">
             <div class="span10 email_well" style="padding-left: 0;">
-                <form action="/subscription" method="post">
+                <form id="cxm_subscriptionform" action="{% url 5xmille %}" method="post">{% csrf_token %}
                     <fieldset>
-                        <input name="first_name" placeholder="Il tuo nome" class="span10" maxlength="200" type="text" id="first_name">
-                        <input name="last_name" placeholder="Il tuo cognome" class="span10" maxlength="200" type="text" id="last_name">
+                        {% if subscription_form.first_name.errors %}
+                            <div class="alert alert-error">
+                                {{ subscription_form.first_name.errors.0 }}
+                            </div>
+                        {% endif %}
+                        <input name="first_name"
+                               placeholder="Il tuo nome" class="span10" maxlength="200" type="text" id="first_name"
+                               value="{{ subscription_form.first_name.value  }}">
+
+
+                        {% if subscription_form.last_name.errors %}
+                            <div class="alert alert-error">
+                                {{ subscription_form.last_name.errors.0 }}
+                            </div>
+                        {% endif %}
+                        <input name="last_name"
+                               placeholder="Il tuo cognome" class="span10" maxlength="200" type="text" id="last_name"
+                                value="{{ subscription_form.last_name.value  }}"
+                                >
                         <div class="input-prepend">
+
+                            {% if subscription_form.email.errors %}
+                                <div class="alert alert-error">
+                                    {{ subscription_form.email.errors.0 }}
+                                </div>
+                            {% endif %}
                             <span class="add-on">@</span>
-                            <input type="text" class="span9" placeholder="La tua Email" id="email" name="email">
+                            <input type="text" class="span9" placeholder="La tua Email" id="email" name="email"
+                                   value="{{ subscription_form.email.value  }}">
                         </div>
                         <p class="muted ">
                             <small>I tuoi dati verranno utilizzati unicamente per informarti sulle iniziative di Openpolis</small>
                         </p>
                     </fieldset>
                     <fieldset>
-                        <input type="hidden" name="csrf_token" value="17e3a01429f443b4844db2e82366a634">
                         <button class="btn pull-left" type="submit">Invio</button>
                     </fieldset>
                 </form>
             </div>
         </div>
+
 
     </div>
 {% endblock %}
