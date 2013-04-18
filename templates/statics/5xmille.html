@@ -2,6 +2,17 @@
 
 {% block title %} - Campagna 5 x mille {% endblock %}
 
+{% block js_custom %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.carousel').carousel();
+        });
+    </script>
+
+{% endblock %}
+
+
+
 {% block header_image %}
     <div class="container no_margin cxm_header_bg">
         <div class="span5  cxm_header_container">
@@ -71,7 +82,7 @@
     </div>
 
     <div class="download_img">
-        <a href="#">
+        <a href="../static/doc/5xmille-PromemoriaA4.pdf" target="_blank">
             <img src="../static/img/5xmille/5xmille_download.png" />
         </a>
 
@@ -89,7 +100,7 @@
     </p>
 
 
-    <div id="myCarousel" class="carousel slide">
+    <div id="cxmilleCarousel" class="carousel slide">
         <!-- Carousel items -->
         <div class="carousel-inner">
             <div class="item">
@@ -119,8 +130,8 @@
             </div>
         </div>
         <!-- Carousel nav -->
-        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        <a class="carousel-control left" href="#cxmilleCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#cxmilleCarousel" data-slide="next">&rsaquo;</a>
     </div>
 
 {% endblock %}
@@ -142,16 +153,34 @@
             </div>
         </div>
 
+        <div class="row-fluid ">
+            <div class="span12 cxmille_well">
+                Il mio 5 per mille ad Openpolis per continuare a gridare
+                "Il Re &egrave; nudo!" Codice fiscale 97532050586</br>
+                http://www.openpolis.it/5xmille
+            </div>
+
+        </div>
+
+        <div class="row-fluid ">
+            <div class="span12 cxmille_well">
+                Il mio <strong>#5xmille</strong> ad @openpolis per continuare a gridare
+                "Il Re &egrave;
+                nudo!" Codice fiscale 97532050586</br>
+                http://www.openpolis.it/5xmille
+            </div>
+
+        </div>
+        <div class="row-fluid ">
+            <div class="span12 cxmille_well">
+                Il mio 5 per mille ad Openpolis per continuare a gridare
+                "Il Re &egrave; nudo!" Codice fiscale 97532050586</br>
+                http://www.openpolis.it/5xmille
+            </div>
+
+        </div>
+
     </div>
 {% endblock %}
 
-
-{% block js_custom %}
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('.carousel').carousel();
-        });
-        </script>
-
-{% endblock %}
 
