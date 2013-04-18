@@ -3,11 +3,55 @@
 {% block title %} - Campagna 5 x mille {% endblock %}
 
 {% block js_custom %}
+
+{#    include for facebook like button #}
+    <script>
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
     <script type="text/javascript">
         $(document).ready(function(){
             $('.carousel').carousel();
         });
     </script>
+
+{% endblock %}
+
+{% block social_tags %}
+{#  facebook#}
+    <meta property="og:title" content="Openpolis: il tuo 5 x mille per continuare a gridare insieme 'Il Re è nudo!'"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="http://www.openpolis.it/static/img/5xmille/fb_img.png"/>
+    <meta property="og:description" content="Tutte le informazioni per donarci il tuo 5 x mille."/>
+    <meta property="og:url" content="http://www.openpolis.it/5xmille/"/>
+
+
+{#    twitter#}
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@openpolis">
+    <meta name="twitter:title" content="Il tuo 5 x mille per continuare a gridare insieme &quot;Il Re è nudo!&quot;">
+    <meta name="twitter:description" content="Tutte le informazioni per donarci il tuo 5 x mille.">
+    <meta name="twitter:creator" content="@creator_username">
+    <meta name="twitter:image:src" content="http://www.openpolis.it/static/img/5xmille/tw_img.png">
+    <meta name="twitter:domain" content="www.openpolis.com/5xmille">
+
+{#    plus#}
+
+    <!-- Update your html tag to include the itemscope and itemtype attributes. -->
+    <html itemscope itemtype="http://schema.org/Article">
+
+    <!-- Add the following three tags inside head. -->
+    <meta itemprop="name" content="Openpolis: il tuo 5 x mille per continuare a gridare insieme &quot;Il Re è nudo!&quot;">
+    <meta itemprop="description" content="Ricordi la storia di quell'imperatore vanitoso che indossava abiti trasparenti? I cortigiani vedevano chiaramente che non portava niente, eppure restavano zitti. Solo un ragazzino strillò: &quot;ma il re non ha i vestiti!&quot; Ecco, noi cerchiamo tutti giorni di essere quel ragazzino coraggioso. Quel ragazzino che non conosce ipocrisia e ti dice come stanno le cose.">
+    <meta itemprop="image" content="http://www.openpolis.it/static/img/5xmille/gplus_img.png">
 
 {% endblock %}
 
@@ -158,8 +202,11 @@
                 Il mio 5 per mille ad Openpolis per continuare a gridare
                 "Il Re &egrave; nudo!" Codice fiscale 97532050586</br>
                 http://www.openpolis.it/5xmille
+                <div style="margin-top: 10px;" id="fb-root"></div>
+                <div class="fb-like"
+                     data-href="http://www.openpolis.it/5xmille"
+                     data-send="false" data-width="300" data-show-faces="false"></div>
             </div>
-
         </div>
 
         <div class="row-fluid ">
@@ -168,6 +215,31 @@
                 "Il Re &egrave;
                 nudo!" Codice fiscale 97532050586</br>
                 http://www.openpolis.it/5xmille
+                <br/>
+                <span style="float:right">
+                    <a href="https://twitter.com/share"
+                       class="twitter-share-button"
+                       data-dnt="true" data-count="none"
+                       data-url="http://www.openpolis.it/5xmille"
+                       data-lang="it"
+                       data-counturl="http://www.openpolis.it/5xmille"
+                       data-hashtags="#5xmille"
+                       data-text='Il mio #5xmille ad @openpolis per continuare a gridare "Il Re è nudo!" Codice fiscale 97532050586'
+
+                            >
+                        Tweet
+                    </a>
+                    <script>
+                        !function(d,s,id){
+                            var js,fjs=d.getElementsByTagName(s)[0];
+                            if(!d.getElementById(id)){
+                                js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";
+                                fjs.parentNode.insertBefore(js,fjs);
+                            }
+                        }
+                                (document,"script","twitter-wjs");
+                    </script>
+                </span>
             </div>
 
         </div>
@@ -176,6 +248,11 @@
                 Il mio 5 per mille ad Openpolis per continuare a gridare
                 "Il Re &egrave; nudo!" Codice fiscale 97532050586</br>
                 http://www.openpolis.it/5xmille
+
+                <a href="https://plus.google.com/share?url=http://www.openpolis.it/5xmille/"
+                   onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                    <img style="float:right;"
+                        src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Condividi su Google+"/></a>
             </div>
 
         </div>
