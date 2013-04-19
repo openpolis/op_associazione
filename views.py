@@ -18,7 +18,6 @@ from op_associazione.models import OrderedModel, Membership, Associate
 from op_associazione import forms
 from op_associazione import notifications
 from forms import ContactForm
-
 import sys
 
 def cinquexmille(request):
@@ -29,18 +28,24 @@ def cinquexmille(request):
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
-
+            
             import zmq
             context = zmq.Context()
 
             # socket to sending messages to save
-            save_sender = context.socket(zmq.PUSH)
+            try:
+                save_sender = context.socket(zmq.PUSH)
+            except Exception, e:
+                print "Error defining zmq context: %s" % e
+
 
             try:
                 save_sender.connect(settings.MAILBIN_QUEUE_ADDR)
             except Exception, e:
-                print "Error connecting: %s" % e
-
+                messages.add_message(request, messages.ERROR, "Error connecting: %s" % e)
+                return render_to_response('statics/5xmille.html',
+                                          context_instance=RequestContext(request, dict={'subscription_form': form}))
+            
             data = {
                 'first_name': first_name,
                 'last_name': last_name,
@@ -51,11 +56,16 @@ def cinquexmille(request):
             }
 
             # send message to receiver
-            save_sender.send_json(data)
-            from django.contrib import messages
-            messages.add_message(request,messages.INFO,'Iscrizione avvenuta con successo',extra_tags='email')
-            return render_to_response('statics/5xmille.html',
-                                      context_instance=RequestContext(request,dict={'subscription_form':form}))
+            try:
+                save_sender.send_json(data)
+                messages.add_message(request,messages.INFO,'Iscrizione avvenuta con successo',extra_tags='email')
+                return render_to_response('statics/5xmille.html',
+                                          context_instance=RequestContext(request,dict={'subscription_form':form}))
+            except Exception, e:
+                messages.add_message(request, messages.ERROR, "Error sending message: %s" % e)
+                return render_to_response('statics/5xmille.html',
+                                          context_instance=RequestContext(request, dict={'subscription_form': form}))
+
         else:
 
             return render_to_response('statics/5xmille.html',
