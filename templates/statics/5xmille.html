@@ -58,6 +58,10 @@
 
 
 {% block header_image %}
+{#    hidden img for ADDTHIS facebook share#}
+    <div ><img class="hidden" src="http://www.openpolis.it/static/img/5xmille/fb_img.png"/></div>
+
+
     <div class=" no_margin cxm_header_bg">
         <div class="container">
             <div class="span5  cxm_header_container">
@@ -86,13 +90,13 @@
                     <a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
                 </div>
                 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-516c0e78663ccbd3">
-{#                    var addthis_share =#}
-{#                    {#}
-{##}
-{#                        templates: {#}
-{#                            twitter: 'Il tuo #5xmille per continuare a gridare insieme &quot;Il Re è nudo!&quot; {{url}}'#}
-{#                        }#}
-{#                    }#}
+                    var addthis_share =
+                    {
+
+                        templates: {
+                            twitter: 'Il tuo #5xmille per continuare a gridare insieme &quot;Il Re è nudo!&quot; {{url}}'
+                        }
+                    }
                 </script>
                 <!-- AddThis Button END -->
 
