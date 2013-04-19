@@ -388,7 +388,8 @@ label {
 
 .cxm_header_container{
     margin-top: 25px;
-    margin-left: 50px;
+    /*margin-left: 50px;*/
+    margin-left:0!important;
     font-family: 'Open Sans Condensed', sans-serif;
 
 }
