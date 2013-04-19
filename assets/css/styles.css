@@ -476,8 +476,19 @@ label {
     text-align: center;
 }
 
+.number_row .span2{
+    height: 75px;
+    width: 75px;
+}
+
+.number_row .span2 img{
+    height: 75px;
+    width: 75px;
+}
+
 .cxm_main_cf .number_row .number{
     background-color: #ddd704;
+    margin-left: 10px;
     padding-top: 15px;
     padding-bottom: 15px;
 }
