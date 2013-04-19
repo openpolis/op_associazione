@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.db import transaction
 from django.template import  RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.core.urlresolvers import reverse
 from django.template.loader import get_template
 from django.conf import settings
@@ -17,9 +17,52 @@ from django import forms as django_forms
 from op_associazione.models import OrderedModel, Membership, Associate
 from op_associazione import forms
 from op_associazione import notifications
-
+from forms import ContactForm
 
 import sys
+
+def cinquexmille(request):
+
+    if request.method == 'POST': # If the form has been submitted...
+        form = ContactForm(request.POST) # A form bound to the POST data
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+
+            import zmq
+            context = zmq.Context()
+
+            # socket to sending messages to save
+            save_sender = context.socket(zmq.PUSH)
+
+            try:
+                save_sender.connect(settings.MAILBIN_QUEUE_ADDR)
+            except Exception, e:
+                print "Error connecting: %s" % e
+
+            data = {
+                'first_name': first_name,
+                'last_name': last_name,
+                'email': email,
+                'ip_address':request.META.get('REMOTE_ADDR'),
+                'user_agent':request.META.get('HTTP_USER_AGENT'),
+                'service_uri':settings.MAILBIN_SERVICE,
+            }
+
+            # send message to receiver
+            save_sender.send_json(data)
+            from django.contrib import messages
+            messages.add_message(request,messages.INFO,'Iscrizione avvenuta con successo',extra_tags='email')
+            return render_to_response('statics/5xmille.html',
+                                      context_instance=RequestContext(request,dict={'subscription_form':form}))
+        else:
+
+            return render_to_response('statics/5xmille.html',
+                                      context_instance=RequestContext(request, dict={'subscription_form':form}))
+    else:
+        return render_to_response('statics/5xmille.html',
+                                  context_instance=RequestContext(request))
 
 
 def static_page(request, page_slug):
@@ -28,6 +71,7 @@ def static_page(request, page_slug):
             'page_slug': page_slug,
             'paypal_test': settings.PAYPAL_TEST,            
         }, context_instance=RequestContext(request))
+
 
 def payment(request):
     if request.session.get('associate-name', False) == False :

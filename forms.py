@@ -103,3 +103,9 @@ class RenewalRequestForm(forms.Form):
         except Associate.DoesNotExist:
             raise forms.ValidationError("Email non associata a nessun utente.")
         return email
+
+
+class ContactForm(forms.Form):
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
+    email = forms.EmailField()
