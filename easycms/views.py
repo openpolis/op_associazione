@@ -49,6 +49,7 @@ def page(request, page_slug=None):
 def homepage(request):
     # feeds are extracted and cached for one hour (memcached)
     feeds = cache.get('op_associazione_home_feeds')
+
     if feeds is None:
         feeds = {}
         feeds['blog'] = feedparser.parse(settings.OP_BLOG_FEED)
