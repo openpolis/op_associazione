@@ -22,3 +22,6 @@ site-packages
 
 soci.sql
 transfer_dati_soci.py
+
+*.csv
+daily.sh
