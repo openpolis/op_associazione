@@ -46,22 +46,22 @@ def page(request, page_slug=None):
             'asides' : page.asides.all()
         },context_instance=RequestContext(request))
 
+
 def homepage(request):
     # feeds are extracted and cached for one hour (memcached)
     feeds = cache.get('op_associazione_home_feeds')
 
     if feeds is None:
-        feeds = {}
-        feeds['blog'] = feedparser.parse(settings.OP_BLOG_FEED)
-        feeds['tw'] = feedparser.parse(settings.OP_TW_FEED)
-        feeds['fb'] = feedparser.parse(settings.OP_FB_FEED)
+        feeds = {'blog': feedparser.parse(settings.OP_BLOG_FEED).entries[0:5],
+                 'tw': feedparser.parse(settings.OP_TW_FEED).entries[0:3],
+                 'fb': feedparser.parse(settings.OP_FB_FEED).entries[0:3]}
         cache.set('op_associazione_home_feeds', feeds, 3600)
-    
-    return render_to_response('easycms/home.html', 
-      {'blog_entries': feeds['blog'].entries[0:5],
-       'tw_entries': feeds['tw'].entries[0:3],
-       'fb_entries': feeds['fb'].entries[0:3]}, 
-      context_instance=RequestContext(request))
+
+    return render_to_response('easycms/home.html', {
+        'blog_entries': feeds['blog'],
+        'tw_entries': feeds['tw'],
+        'fb_entries': feeds['fb']
+    }, context_instance=RequestContext(request))
 
 
 def dossier( request, page_slug=None ):
