@@ -19,15 +19,18 @@ class MembershipInline(TabularLinkedInline):
     readonly_fields = ['associate', 'type_of_membership', 'created_at', 'updated_at']
     model = Membership
     extra = 0
-    
+
+
 class MembershipAdmin(admin.ModelAdmin):
-    fields = ['associate', 'type_of_membership', 'fee', 'payed', 'payed_at', 'expire_at', 'sent_card_at', 'is_active', 'notes', 'public_subscription', 'created_at', 'updated_at']
-    readonly_fields = ['associate', 'type_of_membership', 'created_at', 'updated_at']
+    fields = ['associate','associate_email', 'type_of_membership', 'fee', 'payed', 'payed_at', 'expire_at', 'sent_card_at',
+              'is_active', 'notes', 'public_subscription', 'created_at', 'updated_at',]
+    readonly_fields = ['associate','associate_email', 'type_of_membership', 'created_at', 'updated_at']
     search_fields = ('associate__last_name', 'associate__first_name', 'associate__email')
     list_filter = ('is_active', 'expire_at', 'payed_at')
-    list_display = ('associate', 'fee', 'payed', 'payed_at', 'expire_at', 'is_active', 'associate_has_subscribed')
+    list_display = ('associate', 'associate_email', 'fee', 'payed', 'payed_at', 'expire_at', 'is_active', 'associate_has_subscribed')
     list_per_page = 500
     ordering = ['expire_at']
+
 
     def bulk_deactivate(self, request, queryset):
         for obj in queryset:
@@ -40,6 +43,7 @@ class MembershipAdmin(admin.ModelAdmin):
     bulk_activate.short_description = "Attiva velocamente"
     
     actions = [bulk_activate, bulk_deactivate]
+
 
 
 class AssociateAdmin(admin.ModelAdmin):
