@@ -46,6 +46,7 @@ def page(request, page_slug=None):
             'asides' : page.asides.all()
         },context_instance=RequestContext(request))
 
+
 def homepage(request):
     # feeds are extracted and cached for one hour (memcached)
     feeds = cache.get('op_associazione_home_feeds')
@@ -56,7 +57,7 @@ def homepage(request):
         feeds['tw'] = feedparser.parse(settings.OP_TW_FEED)
         feeds['fb'] = feedparser.parse(settings.OP_FB_FEED)
         cache.set('op_associazione_home_feeds', feeds, 3600)
-    
+
     return render_to_response('easycms/home.html', 
       {'blog_entries': feeds['blog'].entries[0:5],
        'tw_entries': feeds['tw'].entries[0:3],
