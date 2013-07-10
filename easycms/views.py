@@ -13,7 +13,6 @@ from django.conf import settings
 
 import feedparser
 from twitter import Twitter, OAuth
-from settings_local import TW_CONSUMER_KEY,TW_CONSUMER_SECRET,TW_OAUTH_SECRET,TW_OAUTH_TOKEN
 from datetime import datetime
 
 class SearchForm(forms.Form):
@@ -55,8 +54,7 @@ def homepage(request):
     feeds = cache.get('op_associazione_home_feeds')
 
     # the condition about feeds[tw] is necessary to clear the feed cache after Twitter API migration from 1 to 1.1
-    # if feeds is None or len(feeds['tw']['entries'])<3:
-    if True:
+    if feeds is None or len(feeds['tw']['entries'])<3:
         feeds = {}
         feeds['blog'] = feedparser.parse(settings.OP_BLOG_FEED)
         feeds['fb'] = feedparser.parse(settings.OP_FB_FEED)
@@ -64,10 +62,10 @@ def homepage(request):
 
         tw_connection = Twitter(
             auth=OAuth(
-                TW_OAUTH_TOKEN,
-                TW_OAUTH_SECRET,
-                TW_CONSUMER_KEY,
-                TW_CONSUMER_SECRET
+                settings.TW_OAUTH_TOKEN,
+                settings.TW_OAUTH_SECRET,
+                settings.TW_CONSUMER_KEY,
+                settings.TW_CONSUMER_SECRET
             )
         )
 
