@@ -12,6 +12,9 @@ from op_associazione.easycms.models import Page, PageAside, Project, Dossier
 from django.conf import settings
 
 import feedparser
+from twitter import Twitter, OAuth
+from settings_local import TW_CONSUMER_KEY,TW_CONSUMER_SECRET,TW_OAUTH_SECRET,TW_OAUTH_TOKEN
+from datetime import datetime
 
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=30, min_length=3)
@@ -51,16 +54,45 @@ def homepage(request):
     # feeds are extracted and cached for one hour (memcached)
     feeds = cache.get('op_associazione_home_feeds')
 
-    if feeds is None:
+    # the condition about feeds[tw] is necessary to clear the feed cache after Twitter API migration from 1 to 1.1
+    # if feeds is None or len(feeds['tw']['entries'])<3:
+    if True:
         feeds = {}
         feeds['blog'] = feedparser.parse(settings.OP_BLOG_FEED)
-        feeds['tw'] = feedparser.parse(settings.OP_TW_FEED)
         feeds['fb'] = feedparser.parse(settings.OP_FB_FEED)
+
+
+        tw_connection = Twitter(
+            auth=OAuth(
+                TW_OAUTH_TOKEN,
+                TW_OAUTH_SECRET,
+                TW_CONSUMER_KEY,
+                TW_CONSUMER_SECRET
+            )
+        )
+
+        latest_tweets=tw_connection.statuses.user_timeline(count=3,user_trim=True)
+        twitter_feeds = []
+        for sigle_tw in latest_tweets:
+            tweet = {}
+            tweet_date = datetime.strptime(sigle_tw['created_at'], '%a %b %d %H:%M:%S +0000 %Y')
+            tweet['link'] = 'http://twitter.com/openpolis/status/'+sigle_tw['id_str']
+            tweet['title'] = sigle_tw['text']
+            tweet['day']=tweet_date.day
+            tweet['mon']=tweet_date.month
+            tweet['year']=tweet_date.year
+
+            twitter_feeds.append(tweet)
+
+        feeds['tw']={}
+        feeds['tw']['entries']=twitter_feeds
+
         cache.set('op_associazione_home_feeds', feeds, 3600)
+
 
     return render_to_response('easycms/home.html', 
       {'blog_entries': feeds['blog'].entries[0:5],
-       'tw_entries': feeds['tw'].entries[0:3],
+       'tw_entries': feeds['tw']['entries'],
        'fb_entries': feeds['fb'].entries[0:3]}, 
       context_instance=RequestContext(request))
 

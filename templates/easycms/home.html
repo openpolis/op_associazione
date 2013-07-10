@@ -100,7 +100,7 @@
               {% for tw_entry in  tw_entries%}
                 <li>
                   <a href="{{tw_entry.link}}" target="_blank">
-                    {{tw_entry.title|safe}} ({{tw_entry.updated_parsed.tm_mday}}.{{tw_entry.updated_parsed.tm_mon}}.{{tw_entry.updated_parsed.tm_year}})
+                    {{tw_entry.title|safe}} ({{tw_entry.day}}.{{tw_entry.mon}}.{{tw_entry.year}})
                   </a>
                 </li>
               {% endfor %}

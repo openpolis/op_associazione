@@ -8,4 +8,5 @@ django-extensions==0.7.1
 feedparser==5.1
 python-memcached==1.48
 pyzmq==13.0.2
+twitter==1.10.0
 wsgiref==0.1.2
