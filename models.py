@@ -74,6 +74,9 @@ class Membership(models.Model):
 
     def associate_has_subscribed(self):
         return self.associate.has_subscribed()
+
+    def associate_email(self):
+        return self.associate.email
         
     def __unicode__(self):
         if self.payed_at is not None:
@@ -138,7 +141,7 @@ class Associate(models.Model):
             return True
         else:
             return False
-        
+
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name
 
