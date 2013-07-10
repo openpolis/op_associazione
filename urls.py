@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     url(r'^rinnovo-iscrizione/(?P<user_hash>[-\w]+)/$', 'op_associazione.views.renewal', {}, name="subscribe-renewal"),
     url(r'^rinnovo-iscrizione/', 'op_associazione.views.renewal_request', {}, name="subscribe-renewal-request"),
 
-    (r'^qrcode/$', lambda x: HttpResponseRedirect('/')),
+    (r'^qrcode/$', lambda x: HttpResponseRedirect('http://www.openpolis.it')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
