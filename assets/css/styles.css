@@ -64,6 +64,7 @@ body {
 #payoff #claim {
   margin: 1em 0 30px 0;
 }
+
 #payoff #arrows > div {
   text-align: right;
 }
@@ -80,6 +81,26 @@ body {
 #payoff #texts a:hover {
   color: white;
   font-weight: bold;
+}
+
+#pcv_outer_container{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    padding-top: 50px;
+    height: 200px;
+    background: url(/static/img/pcv/bg_pcv.jpg) no-repeat;
+    background-size: 100% 100%;
+}
+
+#pcv_outer_container #hash {
+    font-size: 82px;
+    line-height: 71px;
+    text-align: right;
+}
+
+#pcv_whitebar{
+    background-color: white;
+    height: 15px;
 }
 
 
