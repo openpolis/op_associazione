@@ -83,26 +83,73 @@ body {
   font-weight: bold;
 }
 
-#pcv_outer_container{
-    font-family: 'Montserrat', sans-serif;
-    padding-top: 50px;
-    min-height: 200px;
-    background: url(/static/img/pcv/bg_pcv.jpg) no-repeat;
-    background-size: 100% 100%;
+@media (min-width: 1101px){
+
+    #pcv_outer_container{
+        font-family: 'Montserrat', sans-serif;
+        padding-top: 50px;
+        min-height: 200px;
+        background: url(/static/img/pcv/bg_pcv.jpg) no-repeat;
+        background-size: 100% 100%;
+    }
 }
 
-#pcv_outer_container #slogan_container {
-    margin-left: 45px;padding-top: 40px;
+@media (max-width: 1100px){
+
+    #pcv_outer_container{
+        font-family: 'Montserrat', sans-serif;
+        padding-top: 50px;
+        min-height: 200px;
+        background-color: #9dd4cf;
+    }
+}
+
+@media (min-width: 1101px){
+    #pcv_outer_container #slogan_container {
+        margin-left: 45px;
+        padding-top: 40px;
+    }
+}
+@media (max-width: 1100px){
+    #pcv_outer_container #slogan_container {
+        text-align: center;
+        margin-bottom: 10px;
+        padding-top: 40px;
+    }
 }
 
 #pcv_outer_container #slogan{
     color: white;
 }
-#pcv_outer_container #hash {
-    font-size: 82px;
-    line-height: 71px;
-    text-align: right;
+
+@media (min-width: 1101px){
+    #pcv_outer_container #slogan #pcv{
+        font-size: 40px;
+        line-height: 35px;
+    }
 }
+@media (max-width: 1100px){
+    #pcv_outer_container #slogan #pcv{
+        font-size: 30px;
+        line-height: 25px;
+    }
+}
+
+@media (min-width: 1101px){
+    #pcv_outer_container #hash {
+        font-size: 82px;
+        line-height: 71px;
+    }
+}
+
+
+@media (max-width: 1100px){
+    #pcv_outer_container #hash {
+        font-size: 60px;
+        line-height: 50px;
+    }
+}
+
 #pcv_outer_container #descrizione{
     text-align: center;
     color: #4e4d4d;
