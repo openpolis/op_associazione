@@ -78,4 +78,16 @@ class DossierLink(OrderedModel):
     class Meta(OrderedModel.Meta):
         verbose_name = "Risorsa Dossier"
         verbose_name_plural = "Risorse Dossier"
-        
+
+
+class Banner(models.Model):
+
+    link_url = models.URLField()
+    body = models.TextField(blank=True)
+    background_image = models.ImageField(upload_to='banners/', null=True, blank=True)
+    is_active = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, auto_now_add=True)
+
+    def __unicode__(self):
+        return self.link_url
