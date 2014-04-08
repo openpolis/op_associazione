@@ -11,4 +11,4 @@ except ImportError:
 import settings_local
 
 if __name__ == "__main__":
-    execute_manager(settings)
+    execute_manager(settings_local)
