@@ -6,7 +6,7 @@ import hashlib
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.db import transaction
 from django.template import  RequestContext
 from django.shortcuts import render_to_response, redirect
