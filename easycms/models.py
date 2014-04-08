@@ -1,4 +1,5 @@
 import datetime
+from django.core.urlresolvers import reverse
 from django.db import models
 from op_associazione.models import OrderedModel
 from markdown import markdown
@@ -89,6 +90,9 @@ class Banner(models.Model):
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=True)
+
+    def get_absolute_url(self):
+        return '/home-preview/?banner=%d' % self.pk
 
     def __unicode__(self):
         return self.link_url

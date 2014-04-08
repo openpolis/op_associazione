@@ -49,7 +49,7 @@ def page(request, page_slug=None):
         },context_instance=RequestContext(request))
 
 
-def homepage(request):
+def homepage(request, preview=False):
     # feeds are extracted and cached for one hour (memcached)
     feeds = cache.get('op_associazione_home_feeds')
 
@@ -87,13 +87,16 @@ def homepage(request):
 
         cache.set('op_associazione_home_feeds', feeds, 3600)
 
-    # retrieve the active Banner
-    try:
-        banner = Banner.objects.get(is_active=True)
-    except Banner.DoesNotExist:
-        banner = None
-    except Banner.MultipleObjectsReturned:
-        banner = Banner.objects.filter(is_active=True).order_by('-updated_at')[0]
+    if preview:
+        banner = get_object_or_404(Banner, pk=request.GET.get('banner', None))
+    else:
+        # retrieve the active Banner
+        try:
+            banner = Banner.objects.get(is_active=True)
+        except Banner.DoesNotExist:
+            banner = None
+        except Banner.MultipleObjectsReturned:
+            banner = Banner.objects.filter(is_active=True).order_by('-updated_at')[0]
 
     return render_to_response('easycms/home.html', 
       {'blog_entries': feeds['blog'].entries[0:5],

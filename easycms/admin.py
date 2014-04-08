@@ -42,7 +42,7 @@ class PageAsideAdmin(admin.ModelAdmin):
 	list_display = ('author', 'url', 'order', 'order_link')
 
 class BannerAdmin(admin.ModelAdmin):
-	list_display = ('link_url', 'body', 'background_image', 'updated_at', 'is_active')
+	list_display = ('name', 'link_url', 'background_image', 'updated_at', 'is_active')
 
 admin.site.register(Page, PageAdmin) 
 admin.site.register(PageAside, PageAsideAdmin) 

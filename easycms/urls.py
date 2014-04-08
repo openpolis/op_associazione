@@ -8,6 +8,7 @@ urlpatterns = patterns('op_associazione.easycms.views',
     url(r'^progetti/(?P<page_slug>[-\w]+)/$',     'project',         name='progetti'),
     url(r'^dossier/(?P<page_slug>[-\w]+)/$', 'dossier', name='dossier'),
     url(r'^chi-siamo/$', 'page', {'page_slug': 'chi-siamo'}, name="about-us"),
+    url(r'^home-preview/$', 'homepage', {'preview': True}),
     url(r'^(?P<page_slug>[-\w]+)/$', 'page', name='generic-page'),
     url(r'^$', 'homepage', {}),
 )
