@@ -3,14 +3,20 @@
 
 {% block payoff %}
 
+{% if banner.body %}
+<div id="pcv_outer_container"{% if banner.background_image %} style="background-image: url('{{ banner.background_image.url }}');"{% endif %}>
+    {{ banner.body|safe }}
+</div>
+{% else %}
+<div id="pcv_outer_container">
+    <a href="{{ banner.link_url }}">
+        <img src="{{ banner.background_image.url }}" alt=""/>
+    </a>
+</div>
+{% endif %}
+<div id="pcv_whitebar"></div>
+
 <section id="payoff" class="container-fluid">
-	<div class="container">
-	  <div id="claim" class="row">
-	    <div class="span12">
-		    <a href="{{ banner.link_url }}"><img src="{{ banner.background_image.url }}" alt="{{ banner.body }}" /></a>
-	    </div>
-	  </div>
-	</div>
 
   <div class="container">
     <div id="texts" class="row">

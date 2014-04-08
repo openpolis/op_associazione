@@ -82,9 +82,10 @@ class DossierLink(OrderedModel):
 
 class Banner(models.Model):
 
-    link_url = models.URLField()
+    name = models.CharField(max_length=500)
     body = models.TextField(blank=True)
-    background_image = models.ImageField(upload_to='banners/', null=True, blank=True)
+    link_url = models.URLField(blank=True, help_text="Utilizzato solo se il Body risulta vuoto, viene applicato alla Background image")
+    background_image = models.ImageField(upload_to='banners/', null=True, blank=True, help_text="Diventa cliccabile se il Body risulta vuoto")
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=True)
