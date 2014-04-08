@@ -90,7 +90,7 @@ body {
         font-family: 'Montserrat', sans-serif;
         padding-top: 50px;
         min-height: 200px;
-        background: url(/static/img/pcv/bg_pcv.jpg) no-repeat;
+        /*background: url(/static/img/pcv/bg_pcv.jpg) no-repeat;*/
         background-size: 100% 100%;
     }
 }
