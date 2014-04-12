@@ -1,7 +1,5 @@
 from optparse import make_option
-import datetime
 from django.core.management.base import BaseCommand, CommandError
-from django.db.models import Count
 
 from op_associazione.models import Associate, Membership
 
@@ -23,7 +21,7 @@ class Command(BaseCommand):
 
         if options['active']:
             subscribers = [m.associate for m in Membership.objects.filter(is_active=True)]
-	else:
+        else:
             subscribers = Associate.objects.all()
             
         print('nome;cognome;email;location')
