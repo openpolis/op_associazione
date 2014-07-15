@@ -699,3 +699,7 @@ label {
 .subscription_alert{
     margin-bottom: 0;
 }
+
+@media (max-width: 980px) {
+    .navbar .btn.btn-navbar { float: left; }
+}
