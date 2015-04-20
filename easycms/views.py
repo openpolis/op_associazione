@@ -8,7 +8,7 @@ from django.core.cache import cache
 from django import forms
 from django.http import HttpResponseRedirect
 
-from op_associazione.easycms.models import Page, PageAside, Project, Dossier
+from op_associazione.easycms.models import Page, PageAside, Project, Dossier, Banner
 from django.conf import settings
 
 import feedparser
@@ -49,12 +49,12 @@ def page(request, page_slug=None):
         },context_instance=RequestContext(request))
 
 
-def homepage(request):
+def homepage(request, preview=False):
     # feeds are extracted and cached for one hour (memcached)
     feeds = cache.get('op_associazione_home_feeds')
 
     # the condition about feeds[tw] is necessary to clear the feed cache after Twitter API migration from 1 to 1.1
-    if feeds is None or len(feeds['tw']['entries'])<3:
+    if feeds is None or not ('entries' in feeds['tw']) or len(feeds['tw']['entries'])<3:
         feeds = {}
         feeds['blog'] = feedparser.parse(settings.OP_BLOG_FEED)
         feeds['fb'] = feedparser.parse(settings.OP_FB_FEED)
@@ -87,11 +87,21 @@ def homepage(request):
 
         cache.set('op_associazione_home_feeds', feeds, 3600)
 
+    if preview:
+        banner = get_object_or_404(Banner, pk=request.GET.get('banner', None))
+    else:
+        # retrieve the active Banner
+        try:
+            banner = Banner.objects.get(is_active=True)
+        except Banner.DoesNotExist:
+            banner = None
+        except Banner.MultipleObjectsReturned:
+            banner = Banner.objects.filter(is_active=True).order_by('-updated_at')[0]
 
     return render_to_response('easycms/home.html', 
       {'blog_entries': feeds['blog'].entries[0:5],
        'tw_entries': feeds['tw']['entries'],
-       'fb_entries': feeds['fb'].entries[0:3]}, 
+       'fb_entries': feeds['fb'].entries[0:3], 'banner': banner},
       context_instance=RequestContext(request))
 
 

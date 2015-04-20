@@ -62,7 +62,8 @@ body {
 }
 
 #payoff #claim {
-  margin: 1em 0 30px 0;
+    text-align: center;
+  /*margin: 1em 0 30px 0;*/
 }
 
 #payoff #arrows > div {
@@ -89,7 +90,7 @@ body {
         font-family: 'Montserrat', sans-serif;
         padding-top: 50px;
         min-height: 200px;
-        background: url(/static/img/pcv/bg_pcv.jpg) no-repeat;
+        /*background: url(/static/img/pcv/bg_pcv.jpg) no-repeat;*/
         background-size: 100% 100%;
     }
 }
@@ -100,7 +101,7 @@ body {
         font-family: 'Montserrat', sans-serif;
         padding-top: 20px;
         min-height: 200px;
-        background-color: #9dd4cf;
+        /*background-color: #9dd4cf;*/
     }
 }
 
@@ -575,6 +576,16 @@ label {
     text-align: center;
 }
 
+@media (max-width: 1200px) {
+    .cxm_side_cf .top > * {
+        width: auto;
+        display: block;
+    }
+    .cxm_side_cf .bottom {
+        letter-spacing: normal;
+    }
+}
+
 .cxm_main_cf{
     margin-top: 20px;
     font-family: 'Open Sans Condensed', sans-serif;
@@ -687,4 +698,8 @@ label {
 
 .subscription_alert{
     margin-bottom: 0;
+}
+
+@media (max-width: 980px) {
+    .navbar .btn.btn-navbar { float: left; }
 }

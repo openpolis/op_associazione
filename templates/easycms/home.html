@@ -2,49 +2,22 @@
 {% block article %}{% endblock %}
 
 {% block payoff %}
-<!--pcv banner start -->
-<div id="pcv_outer_container">
-  <div class="container-fluid">
-    <div class="container">
-      <div id="claim" class="row">
-        <div class="span5" id="slogan_container">
-          <div id="slogan" class="row-fluid">
-            <div class="span2" style="height: 65px;">
-              <div id="hash">
-                  #
-              </div>
-            </div>
-            <div class="span10" id="pcv">
-              PARLAMENTO<br/>CASA DI VETRO
-            </div>
-          </div>
-        </div>
-        <div class="span6">
-          <div id="descrizione">
-            <div id="titolo">
-              <strong>Chiediamo trasparenza <br />nei lavori delle commissioni parlamentari.</strong><br />
-            </div>
-            <div id="catenaccio">
-              Scrivi ai parlamentari<br />per chiedergli di aderire alla campagna
-            </div>
-            <div class="button_container">
-              <a href="http://parlamentocasadivetro.openpolis.it">
-                  <div id="button">
-                    <img src="/static/img/pcv/buttons.png" />
-                  </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
+{% if banner.body %}
+<div id="pcv_outer_container"{% if banner.background_image %} style="background-image: url('{{ banner.background_image.url }}');"{% endif %}>
+    {{ banner.body|safe }}
+</div>
+{% else %}
+<div id="pcv_outer_container" style="text-align: center;">
+    <a href="{{ banner.link_url }}">
+        <img src="{{ banner.background_image.url }}" alt=""/>
+    </a>
+</div>
+{% endif %}
 <div id="pcv_whitebar"></div>
-<!-- pcv banner end -->
 
 <section id="payoff" class="container-fluid">
+
   <div class="container">
     <div id="texts" class="row">
 {#        <div class="span3">#}
@@ -54,9 +27,15 @@
 {#            </p>#}
 {#        </div>#}
         <div class="span3">
-            <a href="http://www.voisietequi.it"><img src="/static/img/logos/logo-voisietequi.png" alt="Voi siete qui: Politiche 2013" title="Voi siete qui: Politiche 2013" class="sublogo" /></a>
+            <a href="http://www.voisietequi.it"><img src="/static/img/logos/logo-voisietequi.png" alt="Voi siete qui: Europee 2014" title="Voi siete qui: Europee 2014" class="sublogo" /></a>
             <p style="margin:0">
                 Test di orientamento elettorale: scopri a quali liste sei più vicino in base ai programmi elettorali e alle dichiarazioni pubbliche dei leader prima delle elezioni. Edizione Politiche 2013.
+            </p>
+        </div>
+        <div class="span3">
+            <a href="http://www.openbilanci.it"><img src="/static/img/logos/logo-openbilanci.png" alt="Open bilanci" title="Open bilanci" class="sublogo" /></a>
+            <p>
+                <a href="http://www.openbilanci.it">La piattaforma web</a> per analizzare, confrontare e visualizzare su mappe i bilanci di tutti i Comuni italiani negli ultimi 10 anni. (Con dati ufficiali del Ministero dell’Interno)
             </p>
         </div>
         <div class="span3">
@@ -65,13 +44,13 @@
                 <a href="http://www.openmunicipio.it">La piattaforma web nazionale</a>  per monitorare, informarsi e partecipare alla vita politica della propria città. (Con dati politico-amministrativi ufficiali dei comuni aderenti)
             </p>
         </div>
-        <div class="span3">
-            <a href="http://politici.openpolis.it"><img src="/static/img/logos/logo-openpolitici.png" alt="Open Politici" title="Open Politici" class="sublogo" /></a>
-            <p>
-            <a href="http://politici.openpolis.it">La piattaforma web</a> per conoscere, monitorare e seguire i politici eletti, dal <strong>più piccolo comune al parlamento europeo</strong>. (Con dati ufficiali del Ministero dell'Interno, Parlamento italiano)
-            
-            </p>                        
-        </div>
+{#        <div class="span3">#}
+{#            <a href="http://politici.openpolis.it"><img src="/static/img/logos/logo-openpolitici.png" alt="Open Politici" title="Open Politici" class="sublogo" /></a>#}
+{#            <p>#}
+{#            <a href="http://politici.openpolis.it">La piattaforma web</a> per conoscere, monitorare e seguire i politici eletti, dal <strong>più piccolo comune al parlamento europeo</strong>. (Con dati ufficiali del Ministero dell'Interno, Parlamento italiano)#}
+{#            #}
+{#            </p>                        #}
+{#        </div>#}
         <div class="span3 last">
             <a href="http://parlamento.openpolis.it"><img src="/static/img/logos/logo-parlamento.png" alt="Open parlamento" title="Open parlamento" class="sublogo" /></a>
             <p>
@@ -82,10 +61,11 @@
         </div>
     </div>
     <div id="arrows" class="row-fluid">
-        <div class="span3"><a href="http://www.voisietequi.it" class="arrow"><img src="/static/img/arrows/arrow-fucsia.png" alt="Vai su Voi siete qui" /></a></div>
-        <div class="span3"><a href="http://www.openmunicipio.it" class="arrow"><img src="/static/img/arrows/arrow-gray.png" alt="Vai su Open municipio" /></a></div>
-        <div class="span3"><a href="http://politici.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-orange.png" alt="Vai su Open Politici" /></a></div>
-        <div class="span3"><a href="http://parlamento.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-fucsia.png" alt="Vai su Open Parlamento" /></a></div>
+        <div class="span3"><a href="http://www.voisietequi.it" class="arrow"><img src="/static/img/arrows/arrow-fucsia.png" alt="Vai su VoiSieteQui" /></a></div>
+        <div class="span3"><a href="http://www.openbilanci.it" class="arrow"><img src="/static/img/arrows/arrow-bilanci.png" alt="Vai su openbilanci" /></a></div>
+        <div class="span3"><a href="http://www.openmunicipio.it" class="arrow"><img src="/static/img/arrows/arrow-gray.png" alt="Vai su openmunicipio" /></a></div>
+{#        <div class="span3"><a href="http://politici.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-orange.png" alt="Vai su Open Politici" /></a></div>#}
+        <div class="span3"><a href="http://parlamento.openpolis.it" class="arrow"><img src="/static/img/arrows/arrow-fucsia.png" alt="Vai su openparlamento" /></a></div>
     </div>
 
   </div>
@@ -98,18 +78,25 @@
   <div class="container">
     <div class="row">
         <div class="span3" style="padding-top: 10px;">
-          <a 
-           href="https://s3-eu-west-1.amazonaws.com/camereaperte2013.openpolis.it/dossier_camereaperte2013.pdf">
-            <img
-             src="{{STATIC_URL}}img/CA13_banner_openpolis.png"/>
-          </a><br/>
-          <strong>Camere aperte 2013</strong>, rapporto sull'attività
-            del Parlamento italiano nella XVI Legislatura. <br/>
-            Collegato all'<a href="http://indice.openpolis.it">indice di produttività parlamentare</a>.
-          <a 
-           href="https://s3-eu-west-1.amazonaws.com/camereaperte2013.openpolis.it/dossier_camereaperte2013.pdf">
-           Scarica il file (pdf, 1,6Mb).
-          </a>
+
+            <a href="http://www.openbilanci.it" target="_blank">
+                    <img src="{{ STATIC_URL }}img/banner_openbilanci.png" alt="Openbilanci"/><br/>
+                </a><br/>
+            <strong>openbilanci.it</strong>, i bilanci di tutti i Comuni italiani degli ultimi dieci anni
+                    i Sindaci a cui chiedere conto
+
+{#          <a #}
+{#           href="https://s3-eu-west-1.amazonaws.com/camereaperte2013.openpolis.it/dossier_camereaperte2013.pdf">#}
+{#            <img#}
+{#             src="{{STATIC_URL}}img/CA13_banner_openpolis.png"/>#}
+{#          </a><br/>#}
+{#          <strong>Camere aperte 2013</strong>, rapporto sull'attività#}
+{#            del Parlamento italiano nella XVI Legislatura. <br/>#}
+{#            Collegato all'<a href="http://indice.openpolis.it">indice di produttività parlamentare</a>.#}
+{#          <a#}
+{#           href="https://s3-eu-west-1.amazonaws.com/camereaperte2013.openpolis.it/dossier_camereaperte2013.pdf">#}
+{#           Scarica il file (pdf, 1,6Mb).#}
+{#          </a>#}
         </div>
         <div class="span3">
             <ul class="feed unstyled">

@@ -1,4 +1,5 @@
 import datetime
+from django.core.urlresolvers import reverse
 from django.db import models
 from op_associazione.models import OrderedModel
 from markdown import markdown
@@ -78,4 +79,20 @@ class DossierLink(OrderedModel):
     class Meta(OrderedModel.Meta):
         verbose_name = "Risorsa Dossier"
         verbose_name_plural = "Risorse Dossier"
-        
+
+
+class Banner(models.Model):
+
+    name = models.CharField(max_length=500)
+    body = models.TextField(blank=True)
+    link_url = models.URLField(blank=True, help_text="Utilizzato solo se il Body risulta vuoto, viene applicato alla Background image")
+    background_image = models.ImageField(upload_to='banners/', null=True, blank=True, help_text="Diventa cliccabile se il Body risulta vuoto")
+    is_active = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, auto_now_add=True)
+
+    def get_absolute_url(self):
+        return '/home-preview/?banner=%d' % self.pk
+
+    def __unicode__(self):
+        return self.link_url

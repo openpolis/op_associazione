@@ -2,6 +2,8 @@
 
 {% block title %} - Campagna 5 x mille {% endblock %}
 
+{% block html_fixtures %} itemscope itemtype="http://schema.org/Article"{% endblock %}
+
 {% block js_custom %}
 
 {#    include for facebook like button #}
@@ -42,11 +44,6 @@
     <meta name="twitter:creator" content="@openpolis">
     <meta name="twitter:image:src" content="http://www.openpolis.it/static/img/5xmille/tw_img.png">
     <meta name="twitter:domain" content="www.openpolis.com/5xmille">
-
-{#    plus#}
-
-    <!-- Update your html tag to include the itemscope and itemtype attributes. -->
-    <html itemscope itemtype="http://schema.org/Article">
 
     <!-- Add the following three tags inside head. -->
     <meta itemprop="name" content="Openpolis: il tuo 5 x mille per continuare a gridare insieme &quot;Il Re è nudo!&quot;">
@@ -215,15 +212,15 @@
                 <img src="../static/img/5xmille/slider_730.png"
                         />
                 <div class="carousel-caption">
-                    <h4>730 2013</h4>
-                    <p>Questo spazio da compilare e firmare si trova a pagina 5 del Modello 730 2013, (per la dichiarazione dei redditi dei lavoratori dipendenti e pensionati).</p>
+                    <h4>730 2014</h4>
+                    <p>Questo spazio da compilare e firmare si trova a pagina 5 del Modello 730 2014, (per la dichiarazione dei redditi dei lavoratori dipendenti e pensionati).</p>
                 </div>
             </div>
             <div class="item">
                 <img src="../static/img/5xmille/slider_cud.png"
                         />
                 <div class="carousel-caption">
-                    <h4>CUD 2013</h4>
+                    <h4>CUD 2014</h4>
                     <p>Questo spazio da compilare e firmare due volte si trova a pagina 3 del Certificato Unico Dipendente (CUD, certificazione unica dei redditi di lavoro dipendente).</p>
                 </div>
 
@@ -232,8 +229,8 @@
                 <img src="../static/img/5xmille/slider_pf.png"
                         />
                 <div class="carousel-caption">
-                    <h4>Unico P/F 2013</h4>
-                    <p>Questo spazio da compilare e firmare si trova a pagina 2 del Modello Unico Persone fisiche (Unico P/F 2013 è un modello unificato che permette di presentare più dichiarazioni fiscali).</p>
+                    <h4>Unico P/F 2014</h4>
+                    <p>Questo spazio da compilare e firmare si trova a pagina 2 del Modello Unico Persone fisiche (Unico P/F 2014 è un modello unificato che permette di presentare più dichiarazioni fiscali).</p>
                 </div>
             </div>
         </div>
@@ -267,9 +264,13 @@
                 "Il Re &egrave; nudo!" Codice fiscale 97532050586</br>
                 http://www.openpolis.it/5xmille
                 <div style="margin-top: 10px;" id="fb-root"></div>
-                <div class="fb-like"
-                     data-href="http://www.openpolis.it/5xmille"
-                     data-send="false" data-width="300" data-show-faces="false"></div>
+                <div class="fb-share-button"
+                     data-href="http://www.openpolis.it/5xmille/"
+                     data-type="button"
+                     style="float: right"></div>
+{#                <div class="fb-like"#}
+{#                     data-href="http://www.openpolis.it/5xmille"#}
+{#                     data-send="false" data-width="300" data-show-faces="false"></div>#}
             </div>
         </div>
 
