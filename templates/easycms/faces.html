@@ -6,7 +6,7 @@
 {% block sidebar %}
     <aside id="biopictures">
         {% for aside in asides %}
-        <div class="popoverable" rel="popover" data-content="{{aside.text}}" data-original-title="{{aside.author}}"><img src="{{ aside.url }}" alt="{{ aside.author }}" /></div>
+        <div class="popoverable" rel="popover" data-content="{{aside.text}}" data-original-title="{{aside.author}}"><img src="{{ aside.url }}" style="width:222px;" alt="{{ aside.author }}" /></div>
         {% endfor %}
     </aside>
 {% endblock %}
