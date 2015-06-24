@@ -62,8 +62,18 @@ def homepage(request, preview=False):
         except Banner.MultipleObjectsReturned:
             banner = Banner.objects.filter(is_active=True).order_by('-updated_at')[0]
 
-    return render_to_response('easycms/home.html', 
-      {'banner': banner},
+    op_blog_posts = cache.get('blog-posts')
+    if op_blog_posts is None:
+        op_blog_posts = feedparser.parse(settings.OP_BLOG_FEED).entries[:3]
+        for post in op_blog_posts:
+            try:
+                post['excerpt'] = post.content[0].value.split('<span id="more-')[0]
+            except:
+                pass
+        cache.set('blog-posts', op_blog_posts, timeout=120)
+
+    return render_to_response('easycms/home.html',
+      {'op_blog_posts': op_blog_posts, 'banner': banner},
       context_instance=RequestContext(request))
 
 
