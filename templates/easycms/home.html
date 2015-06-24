@@ -8,13 +8,10 @@
     {{ banner.body|safe }}
 </div>
 {% else %}
-<div id="pcv_outer_container" style="text-align: center;">
-    <a href="{{ banner.link_url }}">
-        <img src="{{ banner.background_image.url }}" alt=""/>
-    </a>
+<div id="pcv_outer_container" style="text-align: center; padding-top:0; margin-bottom: -5px">
+  <a href="{{ banner.link_url }}"><img src="{{ banner.background_image.url }}" alt=""/></a>
 </div>
 {% endif %}
-<div id="pcv_whitebar"></div>
 
 <section id="payoff" class="container-fluid">
 
