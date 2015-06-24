@@ -223,7 +223,22 @@ body {
 #extra p {
     font-family: Helvetica, Arial, sans-serif!important;
     font-size: 16px;
+    line-height: normal;
 }
+
+#extra div.text {
+    line-height: normal;
+}
+
+#extra div.row.last, #extra div.row.tags {
+    margin-bottom: 1.5em;
+}
+
+#extra div.row.last {
+    font-size: 20px;
+    text-align: right;
+}
+
 #extra a,
 #extra a:hover {
     color: white;

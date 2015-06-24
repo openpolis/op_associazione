@@ -70,25 +70,30 @@
             <h2>Dal blog</h2>
         </div>
     </div>
-    <div class="row">
+    <div class="row posts">
         {% for blog_post in op_blog_posts %}
         <div class="span4">
             <h3><a href="{{blog_post.link}}" target="_blank">
             {{blog_post.title|safe}}
             </a></h3>
             <p class="date">{{blog_post.updated_parsed|time_to_datetime|date:'d F Y'}}</p>
-            <div class="text" style="line-height: normal;">{% if blog_post.excerpt %}
+            <div class="text">{% if blog_post.excerpt %}
             {{ blog_post.excerpt|safe }}{% else %}{{ blog_post.content.0.value|truncatewords_html:40|safe }}{% endif %}
             </div>
         </div>
         {% endfor %}
     </div>
-    <div class="row">
+    <div class="row tags">
         {% for blog_post in op_blog_posts %}
         <div class="span4">
             <p class="small tags" style="font-size: smaller; line-height: normal;"><em><b>Tags: </b>{% for tag in blog_post.tags %}{% if tag.term.0|lower == tag.term.0 %}<a href="http://blog.openpolis.it/argomenti/{{ tag.term|lower|slugify }}/">{{ tag.term }}</a>{% if not forloop.last %}, {% endif %}{% endif %}{% endfor %}</em></p>
         </div>
         {% endfor %}
+    </div>
+    <div class="row last">
+        <div class="span2 offset10">
+            <a href="http://blog.openpolis.it">Leggi tutti</a>
+        </div>
     </div>
   </div>
 </section>
