@@ -50,42 +50,6 @@ def page(request, page_slug=None):
 
 
 def homepage(request, preview=False):
-    # feeds are extracted and cached for one hour (memcached)
-    feeds = cache.get('op_associazione_home_feeds')
-
-    # the condition about feeds[tw] is necessary to clear the feed cache after Twitter API migration from 1 to 1.1
-    if feeds is None or not ('entries' in feeds['tw']) or len(feeds['tw']['entries'])<3:
-        feeds = {}
-        feeds['blog'] = feedparser.parse(settings.OP_BLOG_FEED)
-        feeds['fb'] = feedparser.parse(settings.OP_FB_FEED)
-
-
-        tw_connection = Twitter(
-            auth=OAuth(
-                settings.TW_OAUTH_TOKEN,
-                settings.TW_OAUTH_SECRET,
-                settings.TW_CONSUMER_KEY,
-                settings.TW_CONSUMER_SECRET
-            )
-        )
-
-        latest_tweets=tw_connection.statuses.user_timeline(count=3,user_trim=True)
-        twitter_feeds = []
-        for sigle_tw in latest_tweets:
-            tweet = {}
-            tweet_date = datetime.strptime(sigle_tw['created_at'], '%a %b %d %H:%M:%S +0000 %Y')
-            tweet['link'] = 'http://twitter.com/openpolis/status/'+sigle_tw['id_str']
-            tweet['title'] = sigle_tw['text']
-            tweet['day']=tweet_date.day
-            tweet['mon']=tweet_date.month
-            tweet['year']=tweet_date.year
-
-            twitter_feeds.append(tweet)
-
-        feeds['tw']={}
-        feeds['tw']['entries']=twitter_feeds
-
-        cache.set('op_associazione_home_feeds', feeds, 3600)
 
     if preview:
         banner = get_object_or_404(Banner, pk=request.GET.get('banner', None))
@@ -99,9 +63,7 @@ def homepage(request, preview=False):
             banner = Banner.objects.filter(is_active=True).order_by('-updated_at')[0]
 
     return render_to_response('easycms/home.html', 
-      {'blog_entries': feeds['blog'].entries[0:5],
-       'tw_entries': feeds['tw']['entries'],
-       'fb_entries': feeds['fb'].entries[0:3], 'banner': banner},
+      {'banner': banner},
       context_instance=RequestContext(request))
 
 
