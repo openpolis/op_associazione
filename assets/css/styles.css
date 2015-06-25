@@ -230,11 +230,11 @@ body {
     line-height: normal;
 }
 
-#extra div.row.last, #extra div.row.tags {
+#extra div.last, #extra div.tags {
     margin-bottom: 1.5em;
 }
 
-#extra div.row.last {
+#extra div.last {
     font-size: 20px;
     text-align: right;
 }
@@ -707,6 +707,46 @@ label {
 
 .subscription_alert{
     margin-bottom: 0;
+}
+
+
+#mailup_widget {
+    text-align: center;
+    background-color: white;
+    margin-top: 4em;
+    padding: 1.2em;
+    font-family: "helvetica neue", helvetica, arial, sans-serif;
+}
+
+#mailup_widget h1 {
+    color: red;
+    font-size: 150%;
+    margin-bottom: 1em;
+}
+
+#mailup_widget h3 {
+    font-size: 120%;
+    margin-bottom: 1em;
+}
+
+#mailup_widget form {
+    color: black;
+}
+
+#mailup_widget .field {
+    text-align: left;
+}
+
+#mailup_widget label {
+    font-family: "helvetica neue", helvetica, arial, sans-serif;
+}
+
+#mailup_widget button {
+    margin-top: 1em;
+}
+
+.red {
+    color: red;
 }
 
 @media (max-width: 980px) {
