@@ -1,4 +1,5 @@
-from django.conf.urls.defaults import patterns, include, url
+#from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, url, include
 from op_associazione.easycms.models import Dossier
 from django.views.generic import DetailView, ListView
 

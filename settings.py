@@ -5,7 +5,7 @@ from django.conf import global_settings
 
 BASE_PATH = os.path.dirname(__file__)
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -145,13 +145,14 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_extensions',
     # Uncomment the next line to enable the admin:
+    #'django.contrib.markup',
     'django.contrib.admin',
+    #'markup_deprecated',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    # Markup Ext
-    'django.contrib.markup',
+    'markdown',
     # Applicazioni dell'associazione
-    'south',
+    #'south',
     'op_associazione',
     'op_associazione.easycms',
 )
@@ -197,5 +198,4 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'op_associazione.easycms.context_processors.navigation',
 )
 
-
-
+#LLOWED_HOSTS = ['localhost', '127.0.0.1'] 

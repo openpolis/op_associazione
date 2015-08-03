@@ -351,7 +351,7 @@
         </div>
         <div class="row-fluid">
             <div class="span10 email_well" style="padding-left: 0;">
-                <form id="cxm_subscriptionform" action="{% url 5xmille %}" method="post">{% csrf_token %}
+                <form id="cxm_subscriptionform" action="{% url '5xmille' %}" method="post">{% csrf_token %}
                     <fieldset>
                         {% if subscription_form.first_name.errors %}
                             <div class="alert alert-error">

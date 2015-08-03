@@ -26,7 +26,7 @@
       <tr><th>Socio ordinario</th><td>da 50 euro l'anno</td></tr>
       <tr><th>Socio studente/precario</th><td>da 20 euro l'anno</td></tr>
       <tr><th>Socio sostenitore</th><td>da 500 euro l'anno</td></tr>
-      <tr><th></th><td><a href="{% url subscribe-module member_type='cittadino' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
+      <tr><th></th><td><a href="{% url 'subscribe-module' member_type='cittadino' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
     </table>
     
     <h2>Organizzazione</h2>
@@ -35,7 +35,7 @@
       <caption>Persona giuridica (associazione, azienda, ente, eccetera) privata o pubblica</caption>
       <tr><th>Socio ordinario</th><td>da 50 euro l'anno</td></tr>
       <tr><th>Socio sostenitore</th><td>da 500 euro l'anno</td></tr>
-      <tr><th></th><td><a href="{% url subscribe-module member_type='organizzazione' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
+      <tr><th></th><td><a href="{% url 'subscribe-module' member_type='organizzazione' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
     </table>
     
     <h2>Politici eletti</h2>
@@ -46,7 +46,7 @@
       la dichiarazione dei redditi e le spese elettorali da pubblicare online senza limitazioni.</caption>
       <tr><th>Socio ordinario</th><td>da 50 euro l'anno</td></tr>
       <tr><th>Socio sostenitore</th><td>da 500 euro l'anno</td></tr>
-      <tr><th></th><td><a href="{% url subscribe-module member_type='politico' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
+      <tr><th></th><td><a href="{% url 'subscribe-module' member_type='politico' %}" class="button-forward">Vai al modulo<br /> di adesione</a></td></tr>
     </table>
     
 </section>

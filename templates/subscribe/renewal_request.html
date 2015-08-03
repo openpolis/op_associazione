@@ -16,7 +16,7 @@
         
         {% else %}
         
-        <form action="{% url subscribe-renewal-request %}" method="POST" id="renewal_request_form">
+        <form action="{% url 'subscribe-renewal-request' %}" method="POST" id="renewal_request_form">
             {% csrf_token %}
             <div class="control-group {% if form.email.errors %}error{% endif %}">
               <div class="input-prepend">
