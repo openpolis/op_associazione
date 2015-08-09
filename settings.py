@@ -145,12 +145,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_extensions',
     # Uncomment the next line to enable the admin:
-    #'django.contrib.markup',
+    'django.contrib.markup',
     'django.contrib.admin',
     #'markup_deprecated',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    'markdown',
+    #'markdown',
     # Applicazioni dell'associazione
     #'south',
     'op_associazione',
