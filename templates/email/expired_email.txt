@@ -1,5 +1,5 @@
 Ciao {{ associate.first_name|lower|capfirst }},
-la tua iscrizione all'Associazione Openpolis è scaduta.
+la tua iscrizione all'Associazione OpenCorato è scaduta.
 
 
 Sei ancora in tempo per rinnovarla, abbiamo sempre bisogno di te!
@@ -8,13 +8,13 @@ Ti basta visitare il link qui sotto:
 http://{{current_site.domain}}{{ renewal_url }}
 
 Grazie,
-L'Associazione Openpolis
+L'Associazione OpenCorato
 
 --
-Associazione Openpolis
-via degli Equi 42 - 00185 Roma
-Tel.: +39.06.83608392
-http://associazione.openpolis.it
+Associazione OpenCorato
+Via Verdi 41 - 70033 Corato BA
+Tel.: +080 000 0000
+http://associazione.opencorato.org
 
 Openpolis. Fatti di trasparenza.
 http://openpolitici.it | http://openparlamento.it | http://voisietequi.it

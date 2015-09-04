@@ -27,13 +27,13 @@ http://{{current_site.domain}}{{ renewal_url }}
 
 
 E ancora grazie,
-L'Associazione Openpolis
+L'Associazione OpenCorato
 
 --
-Associazione Openpolis
-via degli Equi 42 - 00185 Roma
-Tel.: +39.06.83608392
-http://associazione.openpolis.it
+Associazione OpenCorato
+Via Verdi 41 - 70033
+Tel.: +080 000 0000
+http://associazione.opencorato.org
 
 Openpolis. Fatti di trasparenza.
 http://openpolitici.it | http://openparlamento.it | http://voisietequi.it
