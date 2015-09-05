@@ -114,6 +114,7 @@
             <div class="span4">{% block sidebar %}{% endblock %}</div>
         </div>
     </article>
+     
     <!--  /Main Content -->
     {% endblock %}
 
@@ -173,7 +174,16 @@
           jQuery('.email-nascosta').each(function(){ jQuery(this).text(jQuery(this).text().replace('[chioccia]', '@').replace('[punto]','.')); });
       </script>
 
-
+      <script>
+       window.addEventListener('load', function() {
+          // add button dynamically
+          var buttonEl = document.createElement('button');
+          buttonEl.className = 'mui-btn mui-btn-primary mui-btn-raised';
+          buttonEl.innerHTML = 'My dynamic button';
+          document.body.appendChild(buttonEl);
+          });
+      </script>
+    
       <script src="/static/js/cookiechoices.js"></script>
       <script>
         /*
