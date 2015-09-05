@@ -121,7 +121,8 @@
                 </div>
                 <div class="row-fluid posts">
                     {% for blog_post in op_blog_posts %}
-                    <div class="span4">
+                    <style>.bordo_dx {border-right: 1px solid;}</style>
+                    <div class="span4 bordo_dx" >
                         <h3 style="line-height: 18px !important;"><a href="{{blog_post.link}}" target="_blank">
                         {{blog_post.title|safe}}
                         </a></h3>
