@@ -119,7 +119,7 @@
                 <div class="row-fluid posts">
                     {% for blog_post in op_blog_posts %}
                     <div class="span4">
-                        <h3 style="line_height: 18px !important;"><a href="{{blog_post.link}}" target="_blank">
+                        <h3 style="line-height: 18px !important;"><a href="{{blog_post.link}}" target="_blank">
                         {{blog_post.title|safe}}
                         </a></h3>
                         <p class="date">{{blog_post.updated_parsed|time_to_datetime|date:'d F Y'}}</p>
