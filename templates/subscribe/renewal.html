@@ -6,12 +6,12 @@
 {% url subscribe-renewal user_hash=associate.hash_key as renewal_url %}
     {% if last_membership %}
       <div class="yellow">
-          <h1>Rinnova l'associazione ad Openpolis</h1>
+          <h1>Rinnova l'associazione ad OpenCorato</h1>
             
           <p>
               Ciao <strong>{{ associate.first_name|capfirst }}</strong>, 
               <br />
-              ci richiedi il rinnovo dell’associazione ad Openpolis fino al <strong>{{ next_expire|date:'d F Y' }}</strong>
+              ci richiedi il rinnovo dell’associazione ad OpenCorato fino al <strong>{{ next_expire|date:'d F Y' }}</strong>
               <br />
               come socio ordinario. La quota versata la volta scorsa è di <strong>{{ last_membership.fee }}</strong>&euro;.
           </p>

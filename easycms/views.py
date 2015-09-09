@@ -12,7 +12,7 @@ from op_associazione.easycms.models import Page, PageAside, Project, Dossier, Ba
 from django.conf import settings
 
 import feedparser
-from twitter import Twitter, OAuth
+#from twitter import Twitter, OAuth
 from datetime import datetime
 
 class SearchForm(forms.Form):

@@ -2,9 +2,9 @@
 <html lang="it"{% block html_fixtures %}{% endblock %}>
   <head>
     <meta charset="utf-8"/>
-    <title>Openpolis{% block title %}{% endblock %}</title>
-    <meta name="description" content="Sito dell'Associazione Openpolis"/>
-    <meta name="author" content="Associazione Openpolis"/>
+    <title>OpenCorato{% block title %}{% endblock %}</title>
+    <meta name="description" content="Sito dell'Associazione OpenCorato"/>
+    <meta name="author" content="Associazione OpenCorato"/>
     <meta name="google-site-verification" content="pUD79-TXeNtrU29AiD3HTRt4bntUyBBrGtA5prUo2oM" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -14,12 +14,15 @@
 
     <!-- Le styles -->
     {% block css_styles %}
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,700" rel="stylesheet" type="text/css" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="//cdn.muicss.com/mui-0.1.22-rc1/css/mui.min.css" rel="stylesheet" type="text/css" />
     <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet"/>
     <link href="/static/css/styles.css" rel="stylesheet"/>
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-
-
+    <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/component.css" />
     {% endblock %}
 
     <!-- Le fav and touch icons -->
@@ -45,7 +48,7 @@
           </h1>
       </div>
     </header>
-
+    
     <nav class="navbar navbar-static">
       <div class="navbar-inner">
         <div class="container">
@@ -56,7 +59,8 @@
             </a>
 
             <div class="nav-collapse offset1">
-            {% block nav %}
+            {% block nav %}    <!-- content goes here -->
+            <i class="fa fa-globe"></i>
             {% include "nav.html"%}
             {% endblock nav %}
             </div><!--/.nav-collapse -->
@@ -113,6 +117,7 @@
             <div class="span4">{% block sidebar %}{% endblock %}</div>
         </div>
     </article>
+     
     <!--  /Main Content -->
     {% endblock %}
 
@@ -142,12 +147,21 @@
       <!-- Le javascript
       ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
+      <script src="//cdn.muicss.com/mui-0.1.22-rc1/js/mui.min.js"></script>
+      <script type="text/javascript" src="//cdn.muicss.com/mui-0.1.22-rc1/webcomponents/mui-webcomponents.js"></script>
       <script src="/static/js/jquery-1.7.1.min.js"></script>
+      <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
       <script src="/static/js/bootstrap.min.js"></script>
-
-        {% block js_custom %}
-
-        {% endblock %}
+      <script src="/static/js/modernizr.custom.js"></script>
+      <script src="/static/js/grid.js"></script>
+      <script type="text/javascript">
+			jQuery(function() {
+				Grid.init();
+			});
+      </script>
+      {% block js_custom %}
+ 
+      {% endblock %}
 
       <!-- 5xmille  -->
       <script src="https://s3.eu-central-1.amazonaws.com/op-5xmille/5xmille.js"></script>
@@ -164,7 +178,16 @@
           jQuery('.email-nascosta').each(function(){ jQuery(this).text(jQuery(this).text().replace('[chioccia]', '@').replace('[punto]','.')); });
       </script>
 
-
+      <script>
+       window.addEventListener('load', function() {
+          // add button dynamically
+          var buttonEl = document.createElement('button');
+          buttonEl.className = 'mui-btn mui-btn-primary mui-btn-raised';
+          buttonEl.innerHTML = 'bottone di prova, test lib';
+          document.body.appendChild(buttonEl);
+          });
+      </script>
+    
       <script src="/static/js/cookiechoices.js"></script>
       <script>
         /*

@@ -1,9 +1,9 @@
-E' arrivata una nuova richiesta di iscrizione all'Associazione Openpolis
+E' arrivata una nuova richiesta di iscrizione all'Associazione OpenCorato
 da parte dell'utente {{membership.associate}}. 
 
 Verifica i dati e che abbia effettuato i pagamenti sull'account paypal 
 o nel bonifico ed attivalo, visitando questo link:
 
-  http://www.openpolis.it/admin/op_associazione/associate/{{membership.associate.id}}
+  http://associazione.opencorato.org/admin/op_associazione/associate/{{membership.associate.id}}
 
 

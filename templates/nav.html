@@ -1,11 +1,13 @@
+{% load i18n %}
+{% load url from future %}
 {% load cms_extras %}
 
         <ul class="nav" style="margin-left: -10px">
           <li{% is_active "about-us" "dropdown active" "dropdown" %}>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Associazione <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="{% url about-us %}">Chi siamo</a></li>
-              <li><a href="{% url static-page page_slug='statuto' %}">Statuto e bilancio</a></li>
+              <li><a href="{% url 'about-us' %}">Chi siamo</a></li>
+              <li><a href="{% url 'static-page' page_slug='statuto' %}">Statuto e bilancio</a></li>
             </ul>
           </li>
           <li {% is_active "campagne" "dropdown active" "dropdown" %}>
@@ -50,31 +52,31 @@
               {% if current_route_name == 'subscribe'%}
                 <li class="active"><a>Diventa socio</a></li>
               {% else %}
-                <li><a href="{% url subscribe %}">Diventa socio</a></li>
+                <li><a href="{% url 'subscribe' %}">Diventa socio</a></li>
               {% endif %}
 
               {% if current_route_name == 'subscribe-renewal-request'%}
                 <li class="active"><a>Rinnova la tua iscrizione</a></li>
               {% else %}
-                <li><a href="{% url subscribe-renewal-request %}">Rinnova la tua iscrizione</a></li>
+                <li><a href="{% url 'subscribe-renewal-request' %}">Rinnova la tua iscrizione</a></li>
               {% endif %}
               
               {% if page_slug == 'dona' %}
                 <li class="active"><a>Fai una donazione</a></li>
               {% else %}
-                <li><a href="{% url subscribe-other page_slug='dona' %}">Fai una donazione</a></li>
+                <li><a href="{% url 'subscribe-other' page_slug='dona' %}">Fai una donazione</a></li>
               {% endif %}
               
               {% if  page_slug == 'collabora' %}
                 <li class="active"><a>Collabora con noi</a></li>
               {% else %}
-                <li><a href="{% url subscribe-other page_slug='collabora' %}">Collabora con noi</a></li>
+                <li><a href="{% url 'subscribe-other' page_slug='collabora' %}">Collabora con noi</a></li>
               {% endif %}
 
                 {% if  page_slug == '5xmille' %}
                     <li class="active"><a>5 x mille</a></li>
                 {% else %}
-                    <li><a href="{% url 5xmille %}">5 x mille</a></li>
+                    <li><a href="{% url '5xmille' %}">5 x mille</a></li>
                 {% endif %}
             </ul>
           </li>
@@ -83,5 +85,5 @@
         </ul>
         
         <ul class="nav pull-right">
-            <li><a href="{% url static-page page_slug='eng' %}">English Version</a></li>
+            <li><a href="{% url 'static-page' page_slug='eng' %}">English Version</a></li>
         </ul>

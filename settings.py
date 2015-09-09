@@ -5,7 +5,7 @@ from django.conf import global_settings
 
 BASE_PATH = os.path.dirname(__file__)
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -39,7 +39,7 @@ EMAIL_PORT = 1025
 # rss feeds for openpolis blog, twitter account and facebook page
 OP_BLOG_FEED = "http://blog.openpolis.it/feed"
 # OP_FB_FEED = "http://www.facebook.com/feeds/page.php?id=129419747068352&format=rss20"
-BUZZ_FEED = "http://news.google.it/news?q=openpolis+-%22ettore+di+cesare%22+-site:openpolis.it&hl=it&prmd=imvns&bav=on.2,or.r_gc.r_pw.r_cp.,cf.osb&biw=1269&bih=669&um=1&ie=UTF-8&output=rss"
+#BUZZ_FEED = "http://news.google.it/news?q=openpolis+-%22ettore+di+cesare%22+-site:openpolis.it&hl=it&prmd=imvns&bav=on.2,or.r_gc.r_pw.r_cp.,cf.osb&biw=1269&bih=669&um=1&ie=UTF-8&output=rss"
 
 SERVER_EMAIL = "noreply@openpolis.it"
 
@@ -145,13 +145,14 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_extensions',
     # Uncomment the next line to enable the admin:
+    'django.contrib.markup',
     'django.contrib.admin',
+    #'markup_deprecated',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    # Markup Ext
-    'django.contrib.markup',
+    #'markdown',
     # Applicazioni dell'associazione
-    'south',
+    #'south',
     'op_associazione',
     'op_associazione.easycms',
 )
@@ -197,5 +198,4 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'op_associazione.easycms.context_processors.navigation',
 )
 
-
-
+#LLOWED_HOSTS = ['localhost', '127.0.0.1'] 
