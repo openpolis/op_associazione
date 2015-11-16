@@ -47,6 +47,8 @@
           <li{% is_active "subscribe" "dropdown active" "dropdown" %}>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-heart icon-white"></i> Sostienici <b class="caret"></b></a>
             <ul class="dropdown-menu">
+
+              {% comment %}
               {% if current_route_name == 'subscribe'%}
                 <li class="active"><a>Diventa socio</a></li>
               {% else %}
@@ -58,7 +60,8 @@
               {% else %}
                 <li><a href="{% url subscribe-renewal-request %}">Rinnova la tua iscrizione</a></li>
               {% endif %}
-              
+              {% endcomment %}
+
               {% if page_slug == 'dona' %}
                 <li class="active"><a>Fai una donazione</a></li>
               {% else %}

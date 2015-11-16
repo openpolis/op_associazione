@@ -13,12 +13,12 @@ urlpatterns = patterns('',
     url(r'^5xmille/$', 'op_associazione.views.cinquexmille', name="5xmille"),
 
     # Subscribe urls
-    url(r'^sostienici/(?P<member_type>politico|cittadino|organizzazione)/$', 'op_associazione.views.subscribe_module', {}, name="subscribe-module"),
-    url(r'^sostienici/completa-associazione/$', 'op_associazione.views.payment', {}, name="subscribe-pay"),
-    url(r'^sostienici/$', 'op_associazione.views.subscribe', {}, name="subscribe"),
+    # url(r'^sostienici/(?P<member_type>politico|cittadino|organizzazione)/$', 'op_associazione.views.subscribe_module', {}, name="subscribe-module"),
+    # url(r'^sostienici/completa-associazione/$', 'op_associazione.views.payment', {}, name="subscribe-pay"),
+    # url(r'^sostienici/$', 'op_associazione.views.subscribe', {}, name="subscribe"),
     url(r'^sostienici/(?P<page_slug>dona|collabora)/$','op_associazione.views.static_page', name='subscribe-other'),
-    url(r'^rinnovo-iscrizione/(?P<user_hash>[-\w]+)/$', 'op_associazione.views.renewal', {}, name="subscribe-renewal"),
-    url(r'^rinnovo-iscrizione/', 'op_associazione.views.renewal_request', {}, name="subscribe-renewal-request"),
+    # url(r'^rinnovo-iscrizione/(?P<user_hash>[-\w]+)/$', 'op_associazione.views.renewal', {}, name="subscribe-renewal"),
+    # url(r'^rinnovo-iscrizione/', 'op_associazione.views.renewal_request', {}, name="subscribe-renewal-request"),
 
     (r'^qrcode/$', lambda x: HttpResponseRedirect('http://www.openpolis.it')),
 
