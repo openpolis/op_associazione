@@ -87,8 +87,13 @@ def dossier( request, page_slug=None ):
 
 def project( request, page_slug ):
     page = get_object_or_404(Project, title_slug=page_slug)
+
     # feeds are extracted and cached for one hour (memcached)
-    feed = cache.get('op_associazione_buzz_feed')
+    try:
+       feed = cache.get('op_associazione_buzz_feed')
+    except TypeException:
+       feed = None
+
     if feed is None:
         feed = feedparser.parse(settings.BUZZ_FEED)
         cache.set('op_associazione_buzz_feed', feed, 3600)
