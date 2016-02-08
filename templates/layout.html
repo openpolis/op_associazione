@@ -149,6 +149,7 @@
 
         {% endblock %}
 
+      {% comment %}
       <!-- 5xmille  -->
       <script src="https://s3.eu-central-1.amazonaws.com/op-5xmille/5xmille.js"></script>
       <script type="text/javascript">
@@ -159,6 +160,7 @@
           });
       </script>
       <!-- end5xmille  -->
+      {% endcomment %}
 
       <script type="text/javascript">
           jQuery('.email-nascosta').each(function(){ jQuery(this).text(jQuery(this).text().replace('[chioccia]', '@').replace('[punto]','.')); });
