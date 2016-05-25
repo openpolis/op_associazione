@@ -1,0 +1,347 @@
+{% extends "layout.html" %}
+
+{% block title %} - Campagna 5 x mille {% endblock %}
+
+{% block html_fixtures %} itemscope itemtype="http://schema.org/Article"{% endblock %}
+
+{% block js_custom %}
+{# include for facebook like button #}
+    <script>
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.carousel').carousel('pause');
+
+            $('#cxm6_prossimipassi_carousel').on('slid.bs.carousel', function () {
+                $('.carousel-label', this).html($('.item.active', this).data('label'));
+            }).trigger('slid.bs.carousel');
+        });
+    </script>
+{% endblock %}
+
+{% block social_tags %}
+{# facebook #}
+    <meta property="og:title" content="Il mio #5xmille ad @openpolis per la trasparenza che si vede. Codice fiscale 97532050586"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="http://www.openpolis.it/static/img/5xmille_2016/social.png"/>
+    <meta property="og:description" content="Tutte le informazioni per donarci il tuo 5 x mille."/>
+    <meta property="og:url" content="http://www.openpolis.it/5xmille/"/>
+
+{# twitter #}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@openpolis">
+    <meta name="twitter:title" content="Il mio #5xmille ad @openpolis per la trasparenza che si vede. Codice fiscale 97532050586">
+    <meta name="twitter:description" content="Tutte le informazioni per donarci il tuo 5 x mille.">
+    <meta name="twitter:creator" content="@openpolis">
+    <meta name="twitter:image:src" content="http://www.openpolis.it/static/img/5xmille_2016/social.png">
+    <meta name="twitter:domain" content="www.openpolis.com/5xmille">
+
+{# gplus #}
+    <meta itemprop="name" content="Il mio #5xmille ad @openpolis per la trasparenza che si vede. Codice fiscale 97532050586">
+    <meta itemprop="image" content="http://www.openpolis.it/static/img/5xmille_2016/social.png">
+{% endblock %}
+
+{% block header_image %}
+{# hidden img for ADDTHIS facebook share #}
+    <div><img class="hidden" src="http://www.openpolis.it/static/img/5xmille_2016/social.png"/></div>
+
+    <div id="cxm6_header">
+        <div class="container"{% comment %} style="position: relative"{% endcomment %}>
+            <div class="row">
+                <div class="cxm6_header_container span4">
+                    <div class="top">
+                        La trasparenza
+                    </div>
+                    <div class="bottom">
+                        che si vede
+                    </div>
+                </div>
+                <div class="cxm6_header_container span2">
+                    <div class="top">
+                        <div class="site">openpolitici.it</div>
+                        260.000
+                    </div>
+                    <div class="bottom">
+                        Schede di politici
+                    </div>
+                </div>
+                <div class="cxm6_header_container span2">
+                    <div class="top">
+                        <div class="site">openparlamento.it</div>
+                        140.043
+                    </div>
+                    <div class="bottom">
+                        Atti parlamentari
+                    </div>
+                </div>
+                <div class="cxm6_header_container span2">
+                    <div class="top">
+                        <div class="site">openbilanci.it</div>
+                        168.210
+                    </div>
+                    <div class="bottom">
+                        Bilanci comunali
+                    </div>
+                </div>
+                <div class="cxm6_header_container span2">
+                    <div class="top">
+                        <div class="site">patrimonitrasparenti.it</div>
+                        1.888
+                    </div>
+                    <div class="bottom">
+                        Dichiarazioni patrimoniali
+                    </div>
+                </div>
+            </div>
+            <div{% comment %} style="position: absolute; top: 25px; right: 0"{% endcomment %}>
+                {% comment %}
+                <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                    <a class="addthis_button_twitter"
+                       addthis:url="http://www.openpolis.it/5xmille/"
+                       addthis:title="Il mio #5xmille ad @openpolis per la trasparenza che si vede. Codice fiscale 97532050586"
+                       addthis:description="Tutte le informazioni per donarci il tuo 5 x mille."></a>
+                    <a class="addthis_button_facebook"
+                       addthis:url="http://www.openpolis.it/5xmille/"
+                       addthis:title="Il mio #5xmille ad @openpolis per la trasparenza che si vede. Codice fiscale 97532050586"
+                       addthis:description="Tutte le informazioni per donarci il tuo 5 x mille."></a>
+                    <a class="addthis_button_google_plusone_share"
+                       addthis:url="http://www.openpolis.it/5xmille/"
+                       addthis:title="Il mio #5xmille ad @openpolis per la trasparenza che si vede. Codice fiscale 97532050586"
+                       addthis:description="Tutte le informazioni per donarci il tuo 5 x mille."></a>
+                    <a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+                </div>
+                {% endcomment %}
+                <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-516c0e78663ccbd3">
+                    var addthis_share = {
+                        templates: {
+                            twitter: 'Il mio #5xmille ad @openpolis per la trasparenza che si vede. Codice fiscale 97532050586 {{url}}'
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="cxm6_intro">
+        <p>
+            Nella dichiarazione dei redditi scegli di donare<br/><strong>il tuo <span class="cxm6">5xmille</span> a openpolis</strong>.
+        </p>
+        <p>
+            Un’azione che a te non costa nulla ma che è un importante contributo per dare continuità e portare avanti progetti per la trasparenza della politica e la partecipazione dei cittadini.
+        </p>
+    </div>
+
+    <div id="cxm6_progetti">
+        <h2 class="cxm6">I progetti</h2>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span4">
+                    <div class="cxm6 title"><span class="num">6</span> piattaforme</div>
+                    Strumenti per conoscere, monitorare ed informarsi in modo libero e gratuito
+                </div>
+                <div class="span4">
+                    <div class="cxm6 title"><span class="num">12</span> minidossier</div>
+                    Collana annuale di datajournalism per capire e porre questioni
+                </div>
+                <div class="span4">
+                    <div class="cxm6 title"><span class="num">3</span> campagne</div>
+                    Richieste semplici e concrete dal grande impatto per cittadini e politici
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cxm6_prossimipassi">
+        <h2 class="cxm6">I prossimi passi</h2>
+
+        <div id="cxm6_prossimipassi_carousel" class="carousel slide">
+            <div class="carousel-header">
+                <p><strong>Donando il 5xmille</strong> contribuirai all'evoluzione e al miglioramento dei progetti openpolis.</p>
+                <div class="carousel-label"></div>
+                <div class="carousel-navigator">
+                    <a href="#cxm6_prossimipassi_carousel" class="carousel-prev" data-slide="prev">‹</a>
+                    I prossimi passi
+                    <a href="#cxm6_prossimipassi_carousel" class="carousel-next" data-slide="next">›</a>
+                </div>
+            </div>
+            <div class="carousel-inner">
+                <div class="item active" data-label="voiseitequi.it">
+                    <img src="../static/img/5xmille_2016/prossimipassi/voisietequi.png"/>
+                </div>
+                <div class="item" data-label="openpolitici.it">
+                    <img src="../static/img/5xmille_2016/prossimipassi/openpolitici.png"/>
+                </div>
+                <div class="item" data-label="openparlamento.it">
+                    <img src="../static/img/5xmille_2016/prossimipassi/openparlamento.png"/>
+                </div>
+                <div class="item" data-label="openmunicipio.it">
+                    <img src="../static/img/5xmille_2016/prossimipassi/openmunicipio.png"/>
+                </div>
+                <div class="item" data-label="openbilanci.it">
+                    <img src="../static/img/5xmille_2016/prossimipassi/openbilanci.png"/>
+                </div>
+                <div class="item" data-label="patrimonitrasparenti.it">
+                    <img src="../static/img/5xmille_2016/prossimipassi/patrimonitrasparenti.png"/>
+                </div>
+                <div class="item" data-label="minidossier">
+                    <img src="../static/img/5xmille_2016/prossimipassi/minidossier.png"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cxm6_dona">
+        <p><strong>Dona il tuo <span class="cxm6">5XMILLE</span> a openpolis<br/>per la trasparenza che si vede</strong></p>
+
+        <div class="cxm6_main_cf container-fluid">
+            <div class="row-fluid number_row">
+                <div class="span12">
+                    <img src="http://www.openpolis.it/static/img/5xmille_2016/cf.png"/>
+                    <span class="number">97532050586</span>
+                </div>
+            </div>
+            <div class="row-fluid subtitle_row">
+                <div class="span7 offset1 subtitle">
+                    Il nostro codice fiscale da inserire nel modello per la dichiarazione dei redditi.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cxm6_comefare">
+        <h2 class="cxm6">Come fare</h2>
+
+        <p>
+            Nel tuo modello per la dichiarazione dei redditi (CUD, 730 o UNICO – qui sotto trovi i fac simile)
+            troverai uno spazio dedicato alla “SCELTA PER LA DESTINAZIONE DEL CINQUE PER MILLE DELL’IRPEF”.
+        </p>
+        <p>
+            Scegli l'area dedicata al "Sostegno del volontariato e delle altre organizzazioni non lucrative di
+            utilità sociale, delle associazioni di promozione sociale e delle associazioni e fondazioni
+            riconosciute che operano nei settori di cui all’art. 10, c. 1, lett a), del D.Lgs. n. 460 del 1997"
+            Inserisci <b>la tua firma</b> e il numero del Codice fiscale dell’Associazione openpolis: 97532050586.
+        </p>
+
+        <div id="cxm6_comefare_carousel" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item">
+                    <img src="../static/img/5xmille_2016/comefare/730.png"/>
+                    <div class="carousel-caption">
+                        <h4>730 2016</h4>
+                        <p>Questo spazio da compilare e firmare si trova a pagina 5 del Modello 730 2016, (per la dichiarazione dei redditi dei lavoratori dipendenti e pensionati).</p>
+                    </div>
+                </div>
+                <div class="item active">
+                    <img src="../static/img/5xmille_2016/comefare/cud.png"/>
+                    <div class="carousel-caption">
+                        <h4>CUD 2016</h4>
+                        <p>Questo spazio da compilare e firmare due volte si trova a pagina 3 del Certificato Unico Dipendente (CUD, certificazione unica dei redditi di lavoro dipendente).</p>
+                    </div>
+
+                </div>
+                <div class="item">
+                    <img src="../static/img/5xmille_2016/comefare/pf.png"/>
+                    <div class="carousel-caption">
+                        <h4>Unico P/F 2016</h4>
+                        <p>Questo spazio da compilare e firmare si trova a pagina 2 del Modello Unico Persone fisiche (Unico P/F 2016 è un modello unificato che permette di presentare più dichiarazioni fiscali).</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control left" href="#cxm6_comefare_carousel" data-slide="prev">‹</a>
+            <a class="carousel-control right" href="#cxm6_comefare_carousel" data-slide="next">›</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="cxm6_sidebar_container cxm6_side_cf container-fluid">
+        <div class="top row-fluid">
+            <div class="span6">
+                <div class="left">
+                    Per continuare a donarti trasparenza donaci il tuo
+                </div>
+            </div>
+            <div class="span6">
+                <div class="right">
+                    5XMILLE
+                </div>
+            </div>
+        </div>
+        <div class="bottom row-fluid">
+            <div class="span12">
+                <div>
+                    97532050586
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cxm6_sidebar_container container-fluid">
+        <div class="row-fluid">
+            <h3 class="cxm6 span12">Condividi</h3>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="cxm6_well">
+                    Il mio #5xmille ad @openpolis per la trasparenza che si vede. Codice fiscale 97532050586<br/><span class="cxm6">http://www.openpolis.it/5xmille</span>
+
+                    <div class="social-share">
+                        <div id="fb-root"></div>
+                        <div class="fb-share-button" data-href="http://www.openpolis.it/5xmille/" data-type="button"></div>
+                        {# <div class="fb-like" data-href="http://www.openpolis.it/5xmille" data-send="false" data-width="300" data-show-faces="false"></div> #}
+
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-dnt="true" data-count="none" data-url="http://www.openpolis.it/5xmille" data-lang="it" data-counturl="http://www.openpolis.it/5xmille" data-hashtags="#5xmille" data-text="Il mio #5xmille ad @openpolis per la trasparenza che si vede. Codice fiscale 97532050586">Tweet</a>
+                        <script>
+                            !function(d,s,id){
+                                var js,fjs=d.getElementsByTagName(s)[0];
+                                if(!d.getElementById(id)){
+                                    js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";
+                                    fjs.parentNode.insertBefore(js,fjs);
+                                }
+                            } (document,"script","twitter-wjs");
+                        </script>
+
+                        <div class="g-plus" data-action="share" data-annotation="none" data-height="24" data-href="http://www.openpolis.it/5xmille/"></div>
+                        <script type="text/javascript">
+                            window.___gcfg = {lang: 'it'};
+
+                            (function() {
+                                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                po.src = 'https://apis.google.com/js/plusone.js';
+                                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                            })();
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cxm6_sidebar_container container-fluid">
+        <div class="row-fluid">
+            <h3 class="cxm6 span12">Promemoria</h3>
+        </div>
+        <div class="row-fluid">
+            <div class="span12"><a href="http://openpolis.it/static/doc/5xmille-PromemoriaA4.pdf" target="_blank"><img src="../static/img/5xmille_2016/promemoria.png"/></a></div>
+        </div>
+        <div class="row-fluid">
+            <div class="cxm_promemoria span12">
+                Un promemoria da portare al tuo commercialista e da distribuire ai tuoi amici.<br/>
+                <a href="http://openpolis.it/static/doc/5xmille-PromemoriaA4.pdf" target="_blank">Scarica e stampa</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
